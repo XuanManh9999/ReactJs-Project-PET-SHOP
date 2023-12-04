@@ -7,7 +7,7 @@ const getData = async () => {
             "https://jsonplaceholder.typicode.com/posts",
             {
                 params: {
-                    userId: 1,
+                    userId: 2,
                 },
             }
         );

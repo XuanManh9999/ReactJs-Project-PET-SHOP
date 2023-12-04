@@ -1,8 +1,8 @@
-import Home from "../components/Home/Home";
+import Header from "../components/Header/Header";
 const publicRoutes = [
     {
         path: "/",
-        component: Home,
+        component: Header,
     },
 ];
 // Cần đăng nhập
