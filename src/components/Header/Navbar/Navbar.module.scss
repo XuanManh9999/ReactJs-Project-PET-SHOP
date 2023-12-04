@@ -1,0 +1,20 @@
+.container {
+    margin: 20px 50px 0 50px;
+    .header_top {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+    .header_main {
+        .nav_list_items {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            .nav_item {
+                .icon {
+                    font-size: 30px;
+                }
+            }
+        }
+    }
+}
