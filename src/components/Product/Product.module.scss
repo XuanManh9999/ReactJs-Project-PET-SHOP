@@ -1,0 +1,95 @@
+.product-buy {
+    padding-top: 60px;
+    padding-bottom: 80px;
+    background-color: #fcf8ee; 
+}
+
+.intro-product-buy {
+    text-align: center;
+}
+  
+.title {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    font-size: 40px;
+    color: #f4b915;
+    font-weight: 700;
+}
+
+.img-hero {
+    display: block;
+    margin-top: 20px;
+}
+
+.product-buy .product-buy-navigation ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.product-buy-products {
+    margin-top: 30px;
+}
+.product-buy .product-buy-navigation ul li {
+    list-style-type: none;
+    height: 40px;
+    min-width: 150px;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    color: var(--text-color);
+}
+
+.action-navigation {
+    background: #fff;
+    box-shadow: 0px 0px 18px 0px rgba(206,137,0,0.12);
+}
+.action-navigation-a {
+    color: var(--primary-color) !important;
+}
+
+.product-buy .product-buy-navigation ul li:hover{
+    background: #fff;
+    box-shadow: 0px 0px 18px 0px rgba(206,137,0,0.12);
+}
+.product-buy .product-buy-navigation ul li:hover a {
+    color: var(--primary-color);
+}
+.product-buy .product-buy-navigation > ul > li > a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+:root {
+    --primary-color: #f9a529 !important;
+    --text-color: #363025;
+    --back-color: #fcf8ee;
+}
+
+.product-buy-list {
+    margin-top: 15px;
+    position: relative;
+    overflow: hidden;
+    min-height: 400px;
+    border: 3px solid var(--primary-color);
+    background: #fff;
+    border-radius: 10px;
+}
+
+.block {
+    display: flex !important;
+}
+
+.all_products .all_products__content_list_products .producitem,
+.product-buy .product-buy-list .producitem {
+    padding: 10px;
+    width: 19%;
+    flex-shrink: 0;
+    overflow: hidden;
+    border-radius: 8px;
+}

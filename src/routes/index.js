@@ -1,8 +1,10 @@
-import Header from "../components/Header/Header";
+// import Header from "../components/Header/Header";
+
+import Product from "../components/Product/Product";
 const publicRoutes = [
     {
         path: "/",
-        component: Header,
+        component: Product,
     },
 ];
 // Cần đăng nhập
