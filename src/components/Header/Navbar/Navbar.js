@@ -6,6 +6,7 @@ import {
     FaUser,
     FaCartPlus,
     FaChevronDown,
+    FaChevronRight,
 } from "react-icons/fa";
 
 import styles from "./Navbar.module.scss";
@@ -22,14 +23,24 @@ function Navbar() {
                             />
                         </i>
                     </Link>
-                    <Link to={""}>
+                    <div className={clsx(styles.container_login_logout)}>
                         <i>
                             <FaUser className={clsx(styles.icon_header_top)} />
                             <FaChevronDown
                                 className={clsx(styles.sub_icon_header_top)}
                             />
                         </i>
-                    </Link>
+                        <ul className={clsx(styles.hendle_login_logout)}>
+                            <li>
+                                <Link to={""}>Đăng nhập</Link>
+                            </li>
+
+                            <li>
+                                <Link to={""}>Đăng Ký</Link>
+                            </li>
+                        </ul>
+                    </div>
+
                     <Link to={""}>
                         <i>
                             <FaCartPlus
@@ -47,10 +58,60 @@ function Navbar() {
                             <i className={clsx(styles.icon_nav_body)}>
                                 <FaPaw />
                             </i>
-                            <Link to={""}>Sản phẩm</Link>
+                            <Link to={"/product/1"}>Sản phẩm</Link>
                             <FaChevronDown
                                 className={clsx(styles.icon_nav_body)}
                             />
+                            <ul className={clsx(styles.sub_nav_lv1)}>
+                                <li>
+                                    <Link to={"/product/1"}>
+                                        Thức ăn cho chó
+                                    </Link>
+                                    <i>
+                                        <FaChevronRight />
+                                    </i>
+                                    <ul className={clsx(styles.sub_nav_lv2)}>
+                                        <li>
+                                            <Link to={"/product/1"}>
+                                                Thức ăn khô
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to={"/product/1"}>
+                                                Thức ăn ướt
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to={"/product/1"}>
+                                                Thức ăn dặm
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to={"/product/1"}>
+                                                Thức ăn tươi sống
+                                            </Link>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <Link to={"/product/1"}>
+                                        Thức ăn cho mèo
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to={"/product/1"}>
+                                        Thức ăn cho Hamster
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to={"/product/1"}>
+                                        Thức ăn cho chim
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to={"/product/1"}>Phụ kiện</Link>
+                                </li>
+                            </ul>
                         </li>
                         <li className={clsx(styles.nav_item)}>
                             <i className={clsx(styles.icon_nav_body)}>
@@ -60,7 +121,11 @@ function Navbar() {
                         </li>
                         <li className={clsx(styles.nav_item)}>
                             <Link to={""}>
-                                <img className={clsx(styles.logo)} src="images/logo (2).png" alt="logo" />
+                                <img
+                                    className={clsx(styles.logo)}
+                                    src="images/logo (2).png"
+                                    alt="logo"
+                                />
                             </Link>
                         </li>
                         <li className={clsx(styles.nav_item)}>
