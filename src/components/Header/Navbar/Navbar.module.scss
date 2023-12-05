@@ -47,6 +47,23 @@
                     text-decoration: none;
                     color: #fff;
                     font-size: 18px;
+                    position: relative;
+                    &::after {
+                        content: "";
+                        display: block;
+                        width: 0;
+                        height: 4px;
+                        background-color: var(--primary-color);
+                        transition: width 1.25s ease;
+                        position: absolute;
+                        bottom: -1; 
+                    }
+
+                    &:hover {
+                        &::after {
+                            width: 100%;
+                        }
+                    }
                 }
                 .logo {
                     width: 180px;
@@ -60,8 +77,8 @@
                 &:nth-child(3) {
                     margin-right: 25px;
                 }
-                &:nth-child(4) {
-                    margin-right: 25px;
+                &:nth-child(5) {
+                    margin-left: 50px;
                 }
             }
         }
