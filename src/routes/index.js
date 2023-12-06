@@ -1,13 +1,8 @@
-import Header from "../components/Header/Header";
 import Detail from "../components/Demo_detail/Detail";
-import Home from "../components/Demo_detail/Home";
+import Home from "../pages/Home/Home";
 const publicRoutes = [
     {
         path: "/",
-        component: <Header />,
-    },
-    {
-        path: `/product`,
         component: <Home />,
     },
     {
