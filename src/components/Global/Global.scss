@@ -9,6 +9,7 @@
 :root {
     --primary-color: #f9a529;
     --text-color: #363025;
+    --bg-color: #fcf8ee;
 }
 html,
 body,
@@ -138,4 +139,6 @@ body {
     font-family: "Poppins", sans-serif;
 }
 // Conmon
-
+.rule_web {
+    margin: 0 50px;
+}
