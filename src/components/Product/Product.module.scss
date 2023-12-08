@@ -1,9 +1,21 @@
 .product-buy {
     padding-top: 60px;
-    padding-bottom: 80px;
+    padding-bottom: 15px;
     background-color: #fcf8ee; 
 }
 
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    /* user-select: none; */
+}
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+}
 .intro-product-buy {
     text-align: center;
 }
@@ -72,63 +84,14 @@
 }
 
 .product-buy-list {
-    margin-top: 15px;
+
+    width: 1170px;
+    margin: 15px auto 0;
     position: relative;
     overflow: hidden;
     min-height: 400px;
     border: 3px solid var(--primary-color);
     background: #fff;
     border-radius: 10px;
-}
-
-.product-cat{
-    min-height: auto;
-    padding: 25px 25px 5px 25px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 13px;
-}
-
-.producitem, .product-buy .product-buy-list .producitem {
-    padding: 10px;
-    width: 19%;
-    flex-shrink: 0;
-    overflow: hidden;
-    border-radius: 8px;
-}
-.product-buy .producitem .img-item-hero img {
-    width: 210px;
-    height: 210px;
-    object-fit: cover;
-}
-.all_products .all_products__content_list_products .producitem, .product-buy .product-buy-list .producitem {
-    padding: 10px;
-    width: 19%;
-    flex-shrink: 0;
-    overflow: hidden;
-    border-radius: 8px;
-}
-.product-buy .product-buy-list .producitem .price > div > a, .hero .hero-list-product .producitem-featured .price div > a {
-    text-decoration: none;
-    color: var(--text-color);
-    font-size: 16px;
-    display: block;
-    text-align: center;
-}
-.line-clamp-2 {
-    width: 164px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -webkit-line-clamp: 2; /* Số dòng tối đa muốn hiển thị */
-    /* Cung cấp chiều cao tối đa cho div chứa thẻ a để đảm bảo nội dung vượt quá 2 dòng sẽ bị ẩn */
-}
-
-.price-new{
-    color: #ef1515;
-    display: block;
-    font-size: 18px;
-    font-weight: 700;
 }
 

@@ -1,0 +1,198 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    /* user-select: none; */
+}
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+}
+
+
+:root {
+    --primary-color: #f9a529 !important;
+    --text-color: #363025;
+    --back-color: #fcf8ee;
+}
+
+.pet-news{
+    
+    padding: 90px 0 120px 0;
+    text-align: center;
+    background-color: #fcf8ee;
+}
+
+.main-content{
+    width: 1170px;
+    margin: 0 auto;
+}
+.intro-pet-news {
+    text-align: center;
+}
+  
+.title {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    font-size: 40px;
+    color: #f4b915;
+    font-weight: 700;
+}
+
+.img-hero {
+    display: block;
+    margin-top: 20px;
+}
+
+.pet-news .pet-news-list-items {
+    margin-top: 35px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.pet-news .pet-news-item  {
+    position: relative;
+}
+.pet-news .pet-news-item .pet-news-img img{
+    width: 580px;
+    height: 334px;
+    object-fit: cover;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.pet-news .pet-news-item .pet-news-content {
+    position: absolute;
+    padding: 25px;
+    width: 510px;
+    height: 230px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0px 0px 26px 0px rgba(109,73,0,0.08);
+    overflow: hidden;
+    text-align: justify;
+    bottom: 0;
+    top: 80%;
+    left: 6%;
+}
+.pet-news .pet-news-item .pet-news-content .pet-news-title {
+    text-align: justify;
+}
+.pet-news .pet-news-item .pet-news-content .pet-news-title a{
+    display: block;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-color);
+    text-decoration: none;
+    line-height: 1.4;
+    margin-bottom: 17px;
+}
+.pet-news .pet-news-item .pet-news-content .pet-news-title a:hover {
+    color: var(--primary-color);
+    cursor: pointer;
+}
+.pet-news .pet-news-item .pet-news-content .pet-news-desc {
+    font-size: 17px;
+    font-weight: 400;
+    word-break: break-word;
+    color: var(--text-color);
+    margin-bottom: 30px;   
+    line-height: 24px;
+}
+
+
+.pet-news .pet-news-item .pet-news-content .pet-news-date {
+    font-size: 15px;
+    color: #8b8b8b;
+    padding-right: 10px;
+    
+    position: relative;
+}
+.pet-news .pet-news-item .pet-news-content .pet-news-date::after {
+    content: '';
+    width: 1px;
+    height: 13px;
+    background-color: #8b8b8b;
+    position: absolute;
+    left: 100%;
+    top: 18%;
+}
+.pet-news .pet-news-item .pet-news-content .pet-news-date i {
+    font-size: 16px;
+    color: orange;
+    margin-right: 5px;
+}
+.pet-news .pet-news-item .pet-news-content .pet-new-more-watch_2,
+.pet-news .pet-news-item .pet-news-content .pet-new-more-watch_1 {
+    margin-left: 13px;
+    font-size: 16px;
+    color: var(--text-color);
+}
+.pet-news .pet-news-item .pet-news-content .pet-new-more-watch:hover {
+    color: var(--primary-color);
+}
+.pet-news .pet-news-more-items {
+    margin-top: 180px;
+}
+.pet-news .pet-news-more-items .pet-news-more-item {
+    text-align: right;
+}
+.pet-news .pet-news-more-items .pet-news-more-item .more-title {
+    text-decoration: none;
+    font-size: 1.8rem;
+    color: var(--text-color);
+}
+.pet-news .pet-news-more-items .pet-news-more-item  i {
+    font-size: 1.6rem;
+    color: var(--primary-color);
+}
+.pet-news .pet-news-more-items .pet-news-more-item .more-title:hover {
+    color: var(--primary-color);
+}
+.pet-news .pet-news-more-items .pet-news-more-item .more-title:hover + i {
+    color: var(--text-color);
+}
+.pet-news .pet-news-more-items .pet-news-logo-items {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.pet-news .pet-news-more-items .pet-news-logo-items img {
+    object-fit: cover;
+    max-width: 200px;
+    max-height: 200px;
+}
+
+.more-buy-products{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-top: 200px;
+    
+}
+.more-buy-products i{
+    color: orange;
+    margin-left: 3px;
+}
+.more-buy-products a {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    padding: 0 5px;
+}
+.more-buy-products a:hover{
+    color: orange;
+}
+
+.pet-news-logo-items {
+    margin-top: 70px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}

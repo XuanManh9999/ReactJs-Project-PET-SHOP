@@ -1,0 +1,107 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    /* user-select: none; */
+}
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+}
+
+
+:root {
+    --primary-color: #f9a529 !important;
+    --text-color: #363025;
+    --back-color: #fcf8ee;
+}
+
+.footer{
+    background-image: url("https://xuanmanh9999.github.io/Project-Two-One/asset/img/bg-footer.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+    text-align: center;
+    padding-bottom: 20px;
+
+}
+
+footer .footer-logo {
+    padding: 60px 0 30px 0;
+}
+footer .footer-logo img {
+    max-width: 300px;
+    max-height: 200px;
+    object-fit: cover;
+}
+footer .footer-list-nav {
+    margin-top: 10px;
+}
+footer .footer-list-nav .footer-list-item{
+    display: flex;
+    justify-content: center;
+    gap: 70px;
+    align-items: center;
+}
+footer .footer-list-nav .footer-list-item .footer-item {
+    list-style-type: none;
+}
+footer .footer-list-nav .footer-list-item .footer-item a {
+    text-decoration: none;
+    font-size: 20px;
+    color: #fff;
+    font-weight: 500;
+}
+footer .footer-list-nav .footer-list-item .footer-item a:hover {
+    color: var(--text-color);
+}
+footer .footer-social {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+footer .footer-social a {
+    text-decoration: none;
+}
+footer .footer-social a i {
+    font-size: 20px;
+    color: #ffffff;
+}
+footer .footer-social a:hover {
+    opacity: 0.8;
+}
+footer .footer-license {
+    margin-top: 40px;
+    font-size: 16px;
+    
+    color: #fff;
+}
+footer .footer-license span strong{
+    font-weight: 600;
+    margin-left: 5px;
+}
+footer .footer-license span strong a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+}
+footer .footer-license span:first-child {
+    position: relative;
+}
+footer .footer-license span:last-child {
+    margin-left: 15px;
+}
+footer .footer-license span:first-child::after {
+    position: absolute;
+    content: '';
+    display: block;
+    width: 2px;
+    height: 15px;
+    right: -7px;
+    top: 3px;
+    background-color: #fff;
+}
