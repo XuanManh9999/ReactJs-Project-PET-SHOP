@@ -1,0 +1,26 @@
+.container_cart {
+    position: absolute;
+    width: 440px;
+    min-height: 234px;
+    max-height: 465px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 20px 0px rgba(186, 137, 0, 0.2);
+    z-index: 99999;
+    top: 70px;
+    right: 70px;
+    overflow: auto;
+    animation: buy_card 0.4s ease;
+}
+
+@keyframes buy_card {
+    0% {
+        opacity: 0;
+        transform: translateY(-20%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+}
