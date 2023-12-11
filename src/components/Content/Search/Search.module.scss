@@ -1,0 +1,28 @@
+.container_search {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: flex-end;
+    z-index: 10;
+    cursor: pointer;
+    .main_content {
+        padding: 50px 15px 15px 15px;
+        width: 400px;
+        background-color: #fff;
+        position: relative;
+        overflow: auto;
+        animation: transform_serach ease 0.35s;
+    }
+}
+@keyframes transform_serach {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
