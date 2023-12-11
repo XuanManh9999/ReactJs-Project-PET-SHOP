@@ -1,17 +1,36 @@
 
 // import Header from "../components/Header/Header";
-import Product from "../components/Product/Product";
-import ProductList from "../components/Product/Product-List";
+
+import Home from "../pages/Home/Home"
+import LoginPage from "../pages/Form/Login"
+import RegisterPage from "../pages/Form/Rigister"
+import PricePage from "../pages/PricePage"
+import QuestionsPage from "../pages/QuestionsPage"
 
 const publicRoutes = [
     {
         path: "/",
-        component: <Product />,
+        component: <Home />,
 
     },
     {
-        path: `/product/:productId`,
-        component: <ProductList />,
+        path: "/Register",
+        component: <RegisterPage />,
+
+    },
+    {
+        path: "/Login",
+        component: <LoginPage />,
+
+    },
+    {
+        path: "/Price",
+        component: <PricePage />,
+
+    },
+    {
+        path: "/Questions",
+        component: <QuestionsPage />,
 
     },
 ]

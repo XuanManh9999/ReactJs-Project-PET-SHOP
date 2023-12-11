@@ -1,0 +1,75 @@
+.container {
+    padding: 60px 0;
+    text-align: center;
+    .infor {
+        .title {
+            font-family: "Montserrat", sans-serif;
+            font-size: 40px;
+            color: #f4b915;
+            font-weight: 700;
+        }
+        .img_infor {
+            margin-top: 20px;
+            text-align: center;
+            img {
+                width: 102px;
+                height: 21px;
+                object-fit: cover;
+            }
+        }
+    }
+    .list_content_hero {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: 30px;
+        .item_hero {
+            width: calc(25% - 30px);
+            min-height: 330px;
+            padding: 0 15px;
+            .img_hero {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                img {
+                    width: 180px;
+                    height: 180px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+            }
+            .title_item_hero {
+                font-size: 20px;
+                font-weight: 500;
+                a {
+                    color: var(--text-color);
+                    text-decoration: none;
+                    position: relative;
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        width: 0;
+                        height: 4px;
+                        background-color: var(--primary-color);
+                        bottom: -2px;
+                        left: 0;
+                        transition: width 1.25s;
+                    }
+                    &:hover {
+                        &::after {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+            .desc_hero {
+                margin-top: 15px;
+                color: var(--text-color);
+                font-size: 17px;
+                font-weight: 400;
+                line-height: 1.41;
+            }
+        }
+    }
+}

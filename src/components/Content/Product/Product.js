@@ -1,11 +1,6 @@
 
 import styles from "./Product.module.scss";
-import ProductList from "./Product-List";
-import Service from "../Servicess/Service";
-import Accessoire from "../Accessoire/Accessoire"
-import News from "../News/News";
-import Footer from "../Footer/Footer"
-import Login from "../Forms/Login"
+
 
 function Product() {
     return (
@@ -41,12 +36,8 @@ function Product() {
                     </div>
                 </div>
             </div>
-            <ProductList />
-            <Service />
-            <Accessoire />
-            <News />
-            <Footer />
-            {/* <Login /> */}
+
+
         </section>
     );
 }

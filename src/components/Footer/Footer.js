@@ -2,7 +2,7 @@ import styles from "./Footer.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFaceFrown, faCopyright, } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { FaFacebookF, } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaTwitter, FaTiktok, FaYoutube } from "react-icons/fa";
 
 
 
@@ -55,22 +55,22 @@ function Footer() {
                     </Link>
                     <Link to={""} title="instagram" >
                         <i>
-                            <FontAwesomeIcon icon={faFaceFrown} />
+                            <FaInstagram />
                         </i>
                     </Link>
                     <Link to={""} title="twitter" >
                         <i>
-                            <FontAwesomeIcon icon={faFaceFrown} />
+                            <FaTwitter />
                         </i>
                     </Link>
                     <Link to={""} title="tiktok" >
                         <i>
-                            <FontAwesomeIcon icon={faFaceFrown} />
+                            <FaTiktok />
                         </i>
                     </Link>
                     <Link to={""} title="youtube" >
                         <i>
-                            <FontAwesomeIcon icon={faFaceFrown} />
+                            <FaYoutube />
                         </i>
                     </Link>
                 </div>

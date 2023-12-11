@@ -1,0 +1,30 @@
+.Carousel_main {
+    .slick-prev {
+        left: 3px !important;
+        z-index: 1;
+        &::before {
+            font-size: 50px;
+            color: #fff;
+        }
+    }
+
+    .slick-next {
+        right: 32px;
+        z-index: 1;
+        &::before {
+            font-size: 50px;
+            color: #fff;
+        }
+    }
+    .slick-dots {
+        bottom: 10px;
+    }
+    .slick-dots li button:before {
+        font-size: 18px;
+        color: #999;
+        cursor: pointer;
+    }
+    .slick-dots li.slick-active button:before {
+        color: #fff;
+    }
+}

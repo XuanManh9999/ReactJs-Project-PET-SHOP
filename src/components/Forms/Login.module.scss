@@ -13,16 +13,16 @@
 }
 .register .container_register .title,
 .log_in .container_log_in .title {
-    font-size: 1.9rem;
+    font-size: 19px;
     line-height: 1.87;
-    font-weight: 400;
+    font-weight: 600;
     color: #212B25;
     text-transform: uppercase;
     margin-bottom: 27px;
 }
 .log_in .container_log_in .desc {
     font-weight: 500;
-    font-size: 1.4rem;
+    font-size: 14px;
     margin-bottom: 40px;
 }
 .register .container_register  .title_form_group,
@@ -30,7 +30,7 @@
     display: block;
     font-weight: 600;
     color: #363025;
-    font-size: 1.4rem;
+    font-size: 15px;
     margin-bottom: 5px;
 }
 .register .container_register input,
@@ -52,8 +52,9 @@
     color: #fff;
     background: #f4b915;
     border: solid 1px #f4b915;
-    font-size: 1.6rem;
+    font-size: 17px;
     line-height: 2.2;
+    cursor: pointer;
     margin-bottom: 15px;
     width: 100%;
     padding: 0 20px;
@@ -72,13 +73,14 @@
 .log_in .container_log_in .registet_log_in {
     text-align: justify;
     margin-bottom: 15px;
-    font-size: 1.6rem;
+    font-size: 16px;
     color: var(--text-color);
 }
 .register .container_register  p a,
 .log_in .container_log_in .forget_login_password a,
 .log_in .container_log_in .registet_log_in a {
     color: #ff0000;
+    margin-left: 5px;
 }
 .register .application,
 .log_in .application {
@@ -127,6 +129,7 @@
 }
 .form_group.eye {
     position: relative;
+    margin-top: 10px;
 }
 .form_group.eye > i {
     position: absolute;

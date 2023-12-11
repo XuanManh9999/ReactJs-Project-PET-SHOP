@@ -139,9 +139,27 @@ table {
     border-spacing: 0;
 }
 body {
+    font-family: "Montserrat", sans-serif;
     font-family: "Poppins", sans-serif;
 }
 // Conmon
 .rule_web {
     margin: 0 50px;
+}
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: var(--line-clamp, 3);
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: var(--line-clamp, 2);
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }

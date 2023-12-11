@@ -32,11 +32,11 @@ function Navbar() {
                         </i>
                         <ul className={clsx(styles.hendle_login_logout)}>
                             <li>
-                                <Link to={""}>Đăng nhập</Link>
+                                <Link to={"/Login"}>Đăng nhập</Link>
                             </li>
 
                             <li>
-                                <Link to={""}>Đăng Ký</Link>
+                                <Link to={"/Register"}>Đăng Ký</Link>
                             </li>
                         </ul>
                     </div>
@@ -52,7 +52,7 @@ function Navbar() {
                 <div className={clsx(styles.header_main)}>
                     <ul className={clsx(styles.nav_list_items)}>
                         <li className={clsx(styles.nav_item)}>
-                            <Link to={""}>Trang chủ</Link>
+                            <Link to={"/"}>Trang chủ</Link>
                         </li>
                         <li className={clsx(styles.nav_item)}>
                             <i className={clsx(styles.icon_nav_body)}>
@@ -117,10 +117,10 @@ function Navbar() {
                             <i className={clsx(styles.icon_nav_body)}>
                                 <FaPaw />
                             </i>
-                            <Link to={""}>Bảng giá</Link>
+                            <Link to={"/Price"}>Bảng giá</Link>
                         </li>
                         <li className={clsx(styles.nav_item)}>
-                            <Link to={""}>
+                            <Link to={"/"}>
                                 <img
                                     className={clsx(styles.logo)}
                                     src="images/logo (2).png"
@@ -135,7 +135,7 @@ function Navbar() {
                             <i className={clsx(styles.icon_nav_body)}>
                                 <FaPaw />
                             </i>
-                            <Link to={""}>Hỏi đáp</Link>
+                            <Link to={"/Questions"}>Hỏi đáp</Link>
                         </li>
                         <li className={clsx(styles.nav_item)}>
                             <i className={clsx(styles.icon_nav_body)}>
