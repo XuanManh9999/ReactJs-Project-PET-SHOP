@@ -1,3 +1,4 @@
+import { useState } from "react";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
 import {
@@ -10,19 +11,38 @@ import {
 } from "react-icons/fa";
 
 import styles from "./Navbar.module.scss";
-
+import Cart from "../../Content/Cart/Cart";
+import Search from "../../Content/Search/Search";
 function Navbar() {
+    const [search, setSearch] = useState(false);
+    let hendle_click_search = () => {
+        setSearch((pre) => {
+            return setSearch(!pre);
+        });
+    };
+    console.log("re-render navbar");
     return (
         <>
             <div className={clsx(styles.container)}>
                 <div className={clsx(styles.header_top)}>
-                    <Link to={""}>
+                    <div
+                        onClick={() => {
+                            hendle_click_search();
+                        }}
+                        className={clsx(styles.header_top_icon_search)}
+                    >
                         <i>
                             <FaSearch
                                 className={clsx(styles.icon_header_top)}
                             />
                         </i>
-                    </Link>
+                    </div>
+                    {/* Search */}
+                    {search ? (
+                        <Search close_search={hendle_click_search} />
+                    ) : (
+                        ""
+                    )}
                     <div className={clsx(styles.container_login_logout)}>
                         <i>
                             <FaUser className={clsx(styles.icon_header_top)} />
@@ -41,12 +61,15 @@ function Navbar() {
                         </ul>
                     </div>
 
-                    <Link to={""}>
+                    <Link to={""} className={clsx(styles.cart)}>
                         <i>
                             <FaCartPlus
                                 className={clsx(styles.icon_header_top)}
                             />
                         </i>
+                        <div className={clsx(styles.main_carts)}>
+                            <Cart />
+                        </div>
                     </Link>
                 </div>
                 <div className={clsx(styles.header_main)}>

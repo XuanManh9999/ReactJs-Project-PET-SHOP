@@ -19,10 +19,11 @@ function Slide({ data, title = "Sản phẩm nổi bật" }) {
         slidesToShow: 4,
         slidesToScroll: 1,
         autoplay: true,
-        speed: 1000,
+        speed: 800,
         autoplaySpeed: 4000,
         cssEase: "ease",
     };
+
     return (
         <>
             <div className={clsx(styles.slide_top)}>

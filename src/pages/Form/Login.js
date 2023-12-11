@@ -9,7 +9,7 @@ import Footer from "../../components/Footer/Footer";
 function LoginPage() {
     return (
         <>
-            <Header />
+            <Header urlImageBg={"images/bgheader2.png"} />
             <Login />
             <Footer />
 

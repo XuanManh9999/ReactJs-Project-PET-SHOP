@@ -6,6 +6,16 @@
         justify-content: flex-end;
         align-items: center;
         gap: 10px;
+        .header_top_icon_search {
+            padding: 0 5px;
+            text-decoration: none;
+            color: #fff;
+            font-size: 26px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
         a {
             padding: 0 5px;
             text-decoration: none;
@@ -221,6 +231,29 @@
     }
 }
 // Animation
+
+.main_carts {
+    display: none;
+    &::before {
+        position: absolute;
+        content: "";
+        display: block;
+        width: 90px;
+        height: 50px;
+        top: 40px;
+        bottom: 0;
+        right: 50px;
+        background-color: transparent;
+        z-index: 999999;
+    }
+}
+.cart {
+    &:hover {
+        .main_carts {
+            display: block !important;
+        }
+    }
+}
 @keyframes sub_nav {
     0% {
         opacity: 0;
