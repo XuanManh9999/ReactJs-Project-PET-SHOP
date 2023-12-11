@@ -4,13 +4,13 @@ import styles from "./Header.module.scss";
 import Navbar from "./Navbar/Navbar";
 function Header({ urlImageBg = "" }) {
     let urlBg = "images/bgheader.png";
-    if (urlImageBg) {
-        urlBg = urlImageBg;
+    if (urlImageBg === "") {
+        urlImageBg = urlBg;
     }
     return (
         <header
             style={{
-                backgroundImage: `url(${urlBg})`,
+                backgroundImage: `url(${urlImageBg})`,
             }}
             className={clsx(styles.header)}
         >

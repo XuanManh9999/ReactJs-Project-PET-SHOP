@@ -8,7 +8,7 @@ import {
     faPlus,
     faTrash,
 } from "@fortawesome/free-solid-svg-icons";
-function Item({ data = [1, 2, 3] }) {
+function Item({ data = [] }) {
     return (
         <>
             {data && data.length > 0 ? (
