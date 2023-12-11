@@ -1,0 +1,142 @@
+.register,
+.log_in {
+    margin-top: 30px;
+    background-color: var(--back-color);
+    padding-bottom: 50px;
+    display: block;
+}
+.register .container_register,
+.log_in .container_log_in {
+    max-width: 370px;
+    margin: 0 auto;
+    transform: translateX(10px);
+}
+.register .container_register .title,
+.log_in .container_log_in .title {
+    font-size: 19px;
+    line-height: 1.87;
+    font-weight: 600;
+    color: #212B25;
+    text-transform: uppercase;
+    margin-bottom: 27px;
+}
+.log_in .container_log_in .desc {
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 40px;
+}
+.register .container_register  .title_form_group,
+.log_in .container_log_in .title_form_group {
+    display: block;
+    font-weight: 600;
+    color: #363025;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+.register .container_register input,
+.log_in .container_log_in input {
+    width: 100%;
+    padding: 0 20px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid #b3b3b3;
+    color: var(--text-color);
+    border: 1px solid #EAEBF3;
+    outline: none;
+    margin-bottom: 5px;
+}
+.register .container_register .btn_register,
+.log_in .container_log_in .btn_log_in {
+    margin-top: 5px;
+    display: block;
+    color: #fff;
+    background: #f4b915;
+    border: solid 1px #f4b915;
+    font-size: 17px;
+    line-height: 2.2;
+    cursor: pointer;
+    margin-bottom: 15px;
+    width: 100%;
+    padding: 0 20px;
+    border-radius: 8px;
+    height: 40px;
+}
+.register .container_register .btn_register:hover,
+.log_in .container_log_in .btn_log_in:hover {
+    background: #363025;
+    color: #fff;
+    border-color: #363025;
+    cursor: pointer;
+}
+.register .container_register .btn_register p,
+.log_in .container_log_in .forget_login_password,
+.log_in .container_log_in .registet_log_in {
+    text-align: justify;
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: var(--text-color);
+}
+.register .container_register  p a,
+.log_in .container_log_in .forget_login_password a,
+.log_in .container_log_in .registet_log_in a {
+    color: #ff0000;
+    margin-left: 5px;
+}
+.register .application,
+.log_in .application {
+    margin-top: 30px;
+    text-align: center;
+}
+.application .application__desc {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: var(--text-color);
+}
+.application img{
+    width: 129px;
+    height: 36px;
+    object-fit: cover;
+} 
+.application .application_element {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.application a {
+    text-decoration: none;
+}
+.form_group .form-message {
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+    margin-top: 5px;
+    font-weight: 400;
+  }
+.form_group.invalid .form-message {
+    color: #f33a58;
+}  
+.form-message span {
+    margin-bottom: 10px;
+}
+.form_group.invalid input {
+    border-color: #f33a58;
+}
+.form_group input:hover {
+    border-color: #1dbfaf;
+}
+.form_group.invalid input:hover {
+    border-color: #1dbfaf;
+}
+.form_group.eye {
+    position: relative;
+    margin-top: 10px;
+}
+.form_group.eye > i {
+    position: absolute;
+    right: 13px;
+    top: 33px;
+    cursor: pointer;
+}
+.none_eye {
+    display: none !important;
+}

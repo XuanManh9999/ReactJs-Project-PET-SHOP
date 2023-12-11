@@ -1,0 +1,76 @@
+.service-animal{
+    padding-top: 60px;
+    padding-bottom: 80px;
+    background-color: #fcf8ee; 
+}
+.main-content{
+    width: 1170px;
+    margin: 0 auto;
+}
+
+.info{
+    text-align: center;
+}
+.title{
+    font-family: 'Montserrat', sans-serif;
+    margin: 15px 0 18px;
+    font-size: 40px;
+    color: #f4b915;
+    font-weight: 700;
+}
+
+.img-service-animal img {
+    height: 500px;
+    object-fit: cover;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.service-contents {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.take-animal {
+    background-image: url("https://xuanmanh9999.github.io/Project-Two-One/asset/img/bgtake_animal.webp");
+    height: 500px;
+    padding: 55px 35px 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    
+}
+.exam-animal{
+    height: 500px;
+    padding: 55px 35px 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    background-image: url("https://xuanmanh9999.github.io/Project-Two-One/asset/img/bg_exam_service.webp");
+}
+
+.title-service{
+    text-align: center;
+    font-weight: 700;
+    font-size: 21px;
+    color: var(--text-color);
+    padding-bottom: 35px;
+}
+
+.service-animal .service-contents .exam-animal ul li, .service-animal .service-contents .take-animal ul li {
+    list-style-type: none;
+    font-weight: 400;
+    text-align: justify;
+    font-size: 18px;
+    line-height: 1.7;
+    margin-bottom: 10px;
+}
+
+.service-animal .service-contents .exam-animal ul li i, .service-animal .service-contents .take-animal ul li i{
+    margin-right: 15px;
+}
