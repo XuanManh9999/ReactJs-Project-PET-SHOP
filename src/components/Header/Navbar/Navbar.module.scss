@@ -241,3 +241,25 @@
         transform: translateY(0%);
     }
 }
+.main_carts {
+    display: none;
+    &::before {
+        position: absolute;
+        content: "";
+        display: block;
+        width: 90px;
+        height: 50px;
+        top: 40px;
+        bottom: 0;
+        right: 50px;
+        background-color: transparent;
+        z-index: 999999;
+    }
+}
+.cart {
+    &:hover {
+        .main_carts {
+            display: block !important;
+        }
+    }
+}

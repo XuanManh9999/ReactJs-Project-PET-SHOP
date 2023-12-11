@@ -10,6 +10,7 @@ import {
 } from "react-icons/fa";
 
 import styles from "./Navbar.module.scss";
+import Cart from "../../Content/Cart/Cart";
 
 function Navbar() {
     return (
@@ -41,12 +42,15 @@ function Navbar() {
                         </ul>
                     </div>
 
-                    <Link to={""}>
+                    <Link to={""} className={clsx(styles.cart)}>
                         <i>
                             <FaCartPlus
                                 className={clsx(styles.icon_header_top)}
                             />
                         </i>
+                        <div className={clsx(styles.main_carts)}>
+                            <Cart />
+                        </div>
                     </Link>
                 </div>
                 <div className={clsx(styles.header_main)}>
