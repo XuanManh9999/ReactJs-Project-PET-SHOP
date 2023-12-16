@@ -1,16 +1,16 @@
 import Header from "../components/Header/Header";
-import Questions from "../components/Content/Questions/Question";
+import Contact from "../components/Content/Contact/Contact"
 import Footer from "../components/Footer/Footer";
 
-function QuestionsPage() {
+function ContactPage() {
     return (
         <>
             <Header urlImageBg={"images/bgheader2.png"} imageHeight={"300px"} />
-            <Questions />
+            <Contact />
             <Footer />
 
         </>
     );
 }
 
-export default QuestionsPage;
+export default ContactPage;

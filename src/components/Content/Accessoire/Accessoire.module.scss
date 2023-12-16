@@ -1,15 +1,4 @@
-* {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-    /* user-select: none; */
-}
-html {
-    font-size: 62.5%;
-    scroll-behavior: smooth;
-    line-height: 1.15;
-    -webkit-text-size-adjust: 100%;
-}
+
 .intro-accessoire-buy {
     
     text-align: center;
@@ -32,7 +21,6 @@ body{
 
 .accessoire{
     padding: 80px;
-    width: 100%;
     
     background-size: cover;
     background-repeat: no-repeat;
