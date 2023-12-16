@@ -17,10 +17,13 @@ function ProductList() {
                     <div className={styles["product-buy-list"]}>
                         <div className={styles["product-cat"]}>
                             {/* Item 1 */}
-                            <div className={styles['producitem']}>
-                                <picture className={styles['img-item-hero']}>
+                            <div className={styles["producitem"]}>
+                                <picture className={styles["img-item-hero"]}>
                                     <Link to={"/ProductDetail"}>
-                                        <img src="Images/food-cat-thuc-an-hat-mem.webp" alt="Thức ăn hạt mềm cho mèo" />
+                                        <img
+                                            src="Images/food-cat-thuc-an-hat-mem.webp"
+                                            alt="Thức ăn hạt mềm cho mèo"
+                                        />
                                     </Link>
                                 </picture>
                                 <div className={styles.price}>

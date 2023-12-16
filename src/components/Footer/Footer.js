@@ -1,6 +1,6 @@
 import styles from "./Footer.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFaceFrown, faCopyright, } from "@fortawesome/free-solid-svg-icons";
+import { faCopyright } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import {
     FaFacebookF,

@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
 import {
     FaPaw,
     FaSearch,
@@ -13,14 +14,46 @@ import {
 import styles from "./Navbar.module.scss";
 import Cart from "../../Content/Cart/Cart";
 import Search from "../../Content/Search/Search";
+import { checkToken } from "../../../services/hendleLogin";
 function Navbar() {
     const [search, setSearch] = useState(false);
+    const [user, setUser] = useState({
+        title1: "Đăng nhập",
+        title2: "Đăng ký",
+        link1: "/Login",
+        link2: "/Register",
+    });
+    useEffect(() => {
+        let token = Cookies.get("token_login");
+        if (token) {
+            let hendleCheck = async () => {
+                let result = await checkToken(token);
+                if (result && result.status === 200 && result.data.length > 0) {
+                    setUser({
+                        title1:
+                            result.data[0].firstName.split(" ")[1] +
+                            " " +
+                            result.data[0].lastName,
+                        title2: "Đăng xuất",
+                        link1: "",
+                        link2: "/Login",
+                    });
+                }
+            };
+            hendleCheck();
+        }
+    }, []);
     let hendle_click_search = () => {
         setSearch((pre) => {
             return setSearch(!pre);
         });
     };
-    console.log("re-render navbar");
+
+    const hendleUser = (event) => {
+        if (event.target.innerText === "Đăng xuất") {
+            Cookies.remove("token_login");
+        }
+    };
     return (
         <>
             <div className={clsx(styles.container)}>
@@ -41,8 +74,8 @@ function Navbar() {
                     {search ? (
                         <Search close_search={hendle_click_search} />
                     ) : (
-                            ""
-                        )}
+                        ""
+                    )}
                     <div className={clsx(styles.container_login_logout)}>
                         <i>
                             <FaUser className={clsx(styles.icon_header_top)} />
@@ -52,11 +85,18 @@ function Navbar() {
                         </i>
                         <ul className={clsx(styles.hendle_login_logout)}>
                             <li>
-                                <Link to={"/Login"}>Đăng nhập</Link>
+                                <Link to={user.link1}>{user.title1}</Link>
                             </li>
 
                             <li>
-                                <Link to={"/Register"}>Đăng Ký</Link>
+                                <Link
+                                    onClick={(event) => {
+                                        hendleUser(event);
+                                    }}
+                                    to={user.link2}
+                                >
+                                    {user.title2}
+                                </Link>
                             </li>
                         </ul>
                     </div>
