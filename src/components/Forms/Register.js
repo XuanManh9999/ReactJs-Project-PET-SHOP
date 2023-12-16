@@ -1,57 +1,181 @@
+import { useState } from "react";
 import styles from "./Login.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
-import { Link, Form } from "react-router-dom";
+import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { hendleRegister } from "../../services/hendleLogin";
 
 function Rigister() {
+    const [inputValues, setInputValues] = useState({
+        firstName: "",
+        lastName: "",
+        phone: "",
+        email: "",
+        password: "",
+    });
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setInputValues((prevValues) => ({
+            ...prevValues,
+            [name]: value,
+        }));
+    };
+    const handleSubmit = async (event) => {
+        // Kiểm tra xem tất cả các input có giá trị không rỗng
+        const allInputsFilled = Object.values(inputValues).every(
+            (value) => value.trim() !== ""
+        );
+
+        if (allInputsFilled) {
+            try {
+                let data = await hendleRegister(inputValues);
+                if (data && data.status === 200) {
+                    toast.success("Đăng ký thành công.");
+                } else if (
+                    (data && data.status === 404) ||
+                    (data && data.status === 500)
+                ) {
+                    toast.error("Đăng ký không thành công.");
+                }
+            } catch (e) {
+                toast.error(
+                    "Email này đã tồn tại trong hệ thống, vui lòng chọn emali khác."
+                );
+            }
+        } else {
+            toast.warning("Các trường không được rỗng.");
+        }
+    };
     return (
-        <form action="#!" id="form_1" className={styles['register']}>
-            <div className={styles['container_register']}>
-                <h1 className={styles['title']}>Thông tin cá nhân</h1>
-                <div className={styles['form_group']}>
-                    <span className={styles['title_form_group']}>Họ:</span>
-                    <input type="text" placeholder="Họ" className={styles['surname']} />
-                    <span className={styles['form-message']}></span>
+        <>
+            <div className={styles["register"]}>
+                <div className={styles["container_register"]}>
+                    <h1 className={styles["title"]}>Thông tin cá nhân</h1>
+                    <div className={styles["form_group"]}>
+                        <span className={styles["title_form_group"]}>Họ:</span>
+                        <input
+                            type="text"
+                            placeholder="Họ"
+                            className={styles["surname"]}
+                            value={inputValues.firstName}
+                            name="firstName"
+                            onChange={handleInputChange}
+                        />
+                        <span className={styles["form-message"]}></span>
+                    </div>
+                    <div className={styles["form_group"]}>
+                        <span className={styles["title_form_group"]}>Tên:</span>
+                        <input
+                            type="text"
+                            placeholder="Tên"
+                            className={styles["name"]}
+                            value={inputValues.lastName}
+                            name="lastName"
+                            onChange={handleInputChange}
+                        />
+                        <span className={styles["form-message"]}></span>
+                    </div>
+                    <div className={styles["form_group"]}>
+                        <span className={styles["title_form_group"]}>
+                            Số điện thoại:
+                        </span>
+                        <input
+                            type="text"
+                            placeholder="Số điện thoại"
+                            className={styles["phone"]}
+                            value={inputValues.phone}
+                            name="phone"
+                            onChange={handleInputChange}
+                        />
+                        <span className={styles["form-message"]}></span>
+                    </div>
+                    <div className={styles["form_group"]}>
+                        <span className={styles["title_form_group"]}>
+                            Email:
+                        </span>
+                        <input
+                            type="text"
+                            placeholder="Email"
+                            className={styles["email"]}
+                            value={inputValues.email}
+                            name="email"
+                            onChange={handleInputChange}
+                        />
+                        <span className={styles["form-message"]}></span>
+                    </div>
+                    <div className={`${styles["form_group"]} ${styles["eye"]}`}>
+                        <span className={styles["title_form_group"]}>
+                            Mật khẩu:
+                        </span>
+                        <input
+                            type="password"
+                            placeholder="Mật khẩu"
+                            className={styles["password"]}
+                            value={inputValues.password}
+                            name="password"
+                            onChange={handleInputChange}
+                        />
+                        <i
+                            className={`fa-solid fa-eye-slash ${styles["eye_close"]}`}
+                        >
+                            <FontAwesomeIcon icon={faEyeSlash} />
+                        </i>
+                        <i
+                            className={`fa-solid fa-eye ${styles["none_eye"]} ${styles["eye_open"]}`}
+                        ></i>
+                        <span className={styles["form-message"]}></span>
+                    </div>
+                    <button
+                        onClick={(event) => {
+                            handleSubmit(event);
+                        }}
+                        type="submid"
+                        className={styles["btn_register"]}
+                    >
+                        Đăng Ký
+                    </button>
+                    <p className={styles["log_in_now"]}>
+                        Bạn đã có tài khoản? Đăng nhập{" "}
+                        <Link to={"/login"}>tại đây</Link>
+                    </p>
                 </div>
-                <div className={styles['form_group']}>
-                    <span className={styles['title_form_group']}>Tên:</span>
-                    <input type="text" placeholder="Tên" className={styles['name']} />
-                    <span className={styles['form-message']}></span>
+                <div className={styles["application"]}>
+                    <p className={styles["application__desc"]}>
+                        Hoặc đăng nhập bằng
+                    </p>
+                    <div className={styles["application_element"]}>
+                        <Link
+                            target="_blank"
+                            to={""}
+                            className={styles["face_book"]}
+                        >
+                            <img src="Images/fb-btn.svg" alt="facebook" />
+                        </Link>
+                        <Link
+                            target="_blank"
+                            to={""}
+                            className={styles["google"]}
+                        >
+                            <img src="Images/gp-btn.svg" alt="google" />
+                        </Link>
+                    </div>
                 </div>
-                <div className={styles['form_group']}>
-                    <span className={styles['title_form_group']}>Số điện thoại:</span>
-                    <input type="text" placeholder="Số điện thoại" className={styles['phone']} />
-                    <span className={styles['form-message']}></span>
-                </div>
-                <div className={styles['form_group']}>
-                    <span className={styles['title_form_group']}>Email:</span>
-                    <input type="text" placeholder="Email" className={styles['email']} />
-                    <span className={styles['form-message']}></span>
-                </div>
-                <div className={`${styles['form_group']} ${styles['eye']}`}>
-                    <span className={styles['title_form_group']}>Mật khẩu:</span>
-                    <input type="password" placeholder="Mật khẩu" className={styles['password']} />
-                    <i className={`fa-solid fa-eye-slash ${styles['eye_close']}`}>
-                        <FontAwesomeIcon icon={faEyeSlash} />
-                    </i>
-                    <i className={`fa-solid fa-eye ${styles['none_eye']} ${styles['eye_open']}`}></i>
-                    <span className={styles['form-message']}></span>
-                </div>
-                <button type="submit" className={styles['btn_register']}>Đăng Ký</button>
-                <p className={styles['log_in_now']}>Bạn đã có tài khoản? Đăng nhập <Link to={"/login"}>tại đây</Link></p>
             </div>
-            <div className={styles['application']}>
-                <p className={styles['application__desc']}>Hoặc đăng nhập bằng</p>
-                <div className={styles['application_element']}>
-                    <Link target="_blank" to={""} className={styles['face_book']}>
-                        <img src="Images/fb-btn.svg" alt="facebook" />
-                    </Link>
-                    <Link target="_blank" to={""} className={styles['google']}>
-                        <img src="Images/gp-btn.svg" alt="google" />
-                    </Link>
-                </div>
-            </div>
-        </form>
+            <ToastContainer
+                position="bottom-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+            />
+        </>
     );
 }
 

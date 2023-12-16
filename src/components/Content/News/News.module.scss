@@ -11,30 +11,28 @@ html {
     -webkit-text-size-adjust: 100%;
 }
 
-
 :root {
     --primary-color: #f9a529 !important;
     --text-color: #363025;
     --back-color: #fcf8ee;
 }
 
-.pet-news{
-    
+.pet-news {
     padding: 90px 0 120px 0;
     text-align: center;
     background-color: #fcf8ee;
 }
 
-.main-content{
+.main-content {
     width: 1170px;
     margin: 0 auto;
 }
 .intro-pet-news {
     text-align: center;
 }
-  
+
 .title {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     margin: 0;
     font-size: 40px;
     color: #f4b915;
@@ -52,10 +50,10 @@ html {
     justify-content: space-between;
 }
 
-.pet-news .pet-news-item  {
+.pet-news .pet-news-item {
     position: relative;
 }
-.pet-news .pet-news-item .pet-news-img img{
+.pet-news .pet-news-item .pet-news-img img {
     width: 580px;
     height: 334px;
     object-fit: cover;
@@ -69,7 +67,7 @@ html {
     height: 230px;
     border-radius: 8px;
     background-color: #fff;
-    box-shadow: 0px 0px 26px 0px rgba(109,73,0,0.08);
+    box-shadow: 0px 0px 26px 0px rgba(109, 73, 0, 0.08);
     overflow: hidden;
     text-align: justify;
     bottom: 0;
@@ -79,7 +77,7 @@ html {
 .pet-news .pet-news-item .pet-news-content .pet-news-title {
     text-align: justify;
 }
-.pet-news .pet-news-item .pet-news-content .pet-news-title a{
+.pet-news .pet-news-item .pet-news-content .pet-news-title a {
     display: block;
     font-size: 20px;
     font-weight: 600;
@@ -97,20 +95,19 @@ html {
     font-weight: 400;
     word-break: break-word;
     color: var(--text-color);
-    margin-bottom: 30px;   
+    margin-bottom: 30px;
     line-height: 24px;
 }
-
 
 .pet-news .pet-news-item .pet-news-content .pet-news-date {
     font-size: 15px;
     color: #8b8b8b;
     padding-right: 10px;
-    
+
     position: relative;
 }
 .pet-news .pet-news-item .pet-news-content .pet-news-date::after {
-    content: '';
+    content: "";
     width: 1px;
     height: 13px;
     background-color: #8b8b8b;
@@ -143,7 +140,7 @@ html {
     font-size: 1.8rem;
     color: var(--text-color);
 }
-.pet-news .pet-news-more-items .pet-news-more-item  i {
+.pet-news .pet-news-more-items .pet-news-more-item i {
     font-size: 1.6rem;
     color: var(--primary-color);
 }
@@ -166,14 +163,13 @@ html {
     max-height: 200px;
 }
 
-.more-buy-products{
+.more-buy-products {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     margin-top: 200px;
-    
 }
-.more-buy-products i{
+.more-buy-products i {
     color: orange;
     margin-left: 3px;
 }
@@ -185,7 +181,7 @@ html {
     color: rgb(0, 0, 0);
     padding: 0 5px;
 }
-.more-buy-products a:hover{
+.more-buy-products a:hover {
     color: orange;
 }
 

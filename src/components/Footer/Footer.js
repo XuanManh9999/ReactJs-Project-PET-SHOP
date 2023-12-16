@@ -1,94 +1,105 @@
 import styles from "./Footer.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCopyright, } from "@fortawesome/free-solid-svg-icons";
+import { faCopyright } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { FaFacebookF, FaInstagram, FaTwitter, FaTiktok, FaYoutube } from "react-icons/fa";
-
-
+import {
+    FaFacebookF,
+    FaInstagram,
+    FaTwitter,
+    FaTiktok,
+    FaYoutube,
+} from "react-icons/fa";
 
 function Footer() {
     return (
         <footer>
             <div className={styles.footer}>
-                <div className={styles['footer-logo']}>
+                <div className={styles["footer-logo"]}>
                     <Link href="#header">
                         <img src="Images/logo (2).png" alt="Logo footer" />
                     </Link>
                 </div>
 
-                <div className={styles['footer-list-nav']}>
-                    <ul className={styles['footer-list-item']}>
-                        <li className={styles['footer-item']}>
+                <div className={styles["footer-list-nav"]}>
+                    <ul className={styles["footer-list-item"]}>
+                        <li className={styles["footer-item"]}>
                             <Link href="#header">Trang chủ</Link>
                         </li>
-                        <li className={styles['footer-item']}>
+                        <li className={styles["footer-item"]}>
                             <Link href="#product">Sản phẩm</Link>
                         </li>
-                        <li className={styles['footer-item']}>
-                            <Link href="#!" className={styles['price_products_aplication']}>
+                        <li className={styles["footer-item"]}>
+                            <Link
+                                href="#!"
+                                className={styles["price_products_aplication"]}
+                            >
                                 Bảng giá
-                        </Link>
+                            </Link>
                         </li>
-                        <li className={styles['footer-item']}>
-                            <Link href="#!" className={styles['pet-new-more-watch_2']}>
+                        <li className={styles["footer-item"]}>
+                            <Link
+                                href="#!"
+                                className={styles["pet-new-more-watch_2"]}
+                            >
                                 Tin thú cưng
-                        </Link>
+                            </Link>
                         </li>
-                        <li className={styles['footer-item']}>
-                            <Link href="#!" className={styles['QA']}>
+                        <li className={styles["footer-item"]}>
+                            <Link href="#!" className={styles["QA"]}>
                                 Hỏi đáp
-                        </Link>
+                            </Link>
                         </li>
-                        <li className={styles['footer-item']}>
-                            <Link href="#!" className={styles['user_contact']}>
+                        <li className={styles["footer-item"]}>
+                            <Link href="#!" className={styles["user_contact"]}>
                                 Liên hệ
-                        </Link>
+                            </Link>
                         </li>
                     </ul>
                 </div>
 
-                <div className={styles['footer-social']}>
-                    <Link to={""} title="Facebook" >
+                <div className={styles["footer-social"]}>
+                    <Link to={""} title="Facebook">
                         <i>
                             <FaFacebookF />
                         </i>
                     </Link>
-                    <Link to={""} title="instagram" >
+                    <Link to={""} title="instagram">
                         <i>
                             <FaInstagram />
                         </i>
                     </Link>
-                    <Link to={""} title="twitter" >
+                    <Link to={""} title="twitter">
                         <i>
                             <FaTwitter />
                         </i>
                     </Link>
-                    <Link to={""} title="tiktok" >
+                    <Link to={""} title="tiktok">
                         <i>
                             <FaTiktok />
                         </i>
                     </Link>
-                    <Link to={""} title="youtube" >
+                    <Link to={""} title="youtube">
                         <i>
                             <FaYoutube />
                         </i>
                     </Link>
                 </div>
 
-                <div className={styles['footer-license']}>
+                <div className={styles["footer-license"]}>
                     <span>
                         <FontAwesomeIcon icon={faCopyright} />
                         Bản quyền thuộc về
-                        <strong>
-                            Nguyễn Xuân Mạnh
-                        </strong>
+                        <strong>Nguyễn Xuân Mạnh</strong>
                     </span>
                     <span>
-                        Cung cấp bởi <strong><Link href="#!">Xuân Mạnh</Link></strong>
+                        Cung cấp bởi{" "}
+                        <strong>
+                            <Link href="#!">Xuân Mạnh</Link>
+                        </strong>
                     </span>
                 </div>
             </div>
-        </footer >
+        </footer>
     );
 }
 
