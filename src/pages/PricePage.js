@@ -5,7 +5,7 @@ import Footer from "../components/Footer/Footer";
 function PricePage() {
     return (
         <>
-            <Header />
+            <Header urlImageBg={"images/bgheader2.png"} imageHeight={"300px"} />
             <Price />
             <Footer />
 

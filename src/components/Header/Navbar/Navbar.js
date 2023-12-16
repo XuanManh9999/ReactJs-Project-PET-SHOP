@@ -41,8 +41,8 @@ function Navbar() {
                     {search ? (
                         <Search close_search={hendle_click_search} />
                     ) : (
-                        ""
-                    )}
+                            ""
+                        )}
                     <div className={clsx(styles.container_login_logout)}>
                         <i>
                             <FaUser className={clsx(styles.icon_header_top)} />
@@ -152,7 +152,7 @@ function Navbar() {
                             </Link>
                         </li>
                         <li className={clsx(styles.nav_item)}>
-                            <Link to={""}>Tin thú cưng</Link>
+                            <Link to={"/Blog"}>Tin thú cưng</Link>
                         </li>
                         <li className={clsx(styles.nav_item)}>
                             <i className={clsx(styles.icon_nav_body)}>
@@ -164,7 +164,7 @@ function Navbar() {
                             <i className={clsx(styles.icon_nav_body)}>
                                 <FaPaw />
                             </i>
-                            <Link to={""}>Liên hệ</Link>
+                            <Link to={"/Contact"}>Liên hệ</Link>
                         </li>
                     </ul>
                 </div>
