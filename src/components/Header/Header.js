@@ -2,15 +2,17 @@ import clsx from "clsx";
 import styles from "./Header.module.scss";
 
 import Navbar from "./Navbar/Navbar";
-function Header({ urlImageBg = "" }) {
+
+function Header({ urlImageBg = "", imageHeight = "" }) {
     let urlBg = "images/bgheader.png";
-    if (urlImageBg === "") {
+    if(urlImageBg === "") {
         urlImageBg = urlBg;
     }
     return (
         <header
             style={{
                 backgroundImage: `url(${urlImageBg})`,
+                height: imageHeight,
             }}
             className={clsx(styles.header)}
         >
@@ -18,5 +20,6 @@ function Header({ urlImageBg = "" }) {
         </header>
     );
 }
+
 
 export default Header;

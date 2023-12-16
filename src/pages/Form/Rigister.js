@@ -7,7 +7,7 @@ import Footer from "../../components/Footer/Footer";
 function RegisterPage() {
     return (
         <>
-            <Header />
+            <Header urlImageBg={"images/bgheader2.png"} imageHeight={"300px"} />
             <Register />
             <Footer />
 

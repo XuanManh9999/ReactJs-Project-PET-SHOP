@@ -14,7 +14,7 @@ function ProductList() {
                             {/* Item 1 */}
                             <div className={styles['producitem']}>
                                 <picture className={styles['img-item-hero']}>
-                                    <Link to={""}>
+                                    <Link to={"/ProductDetail"}>
                                         <img src="Images/food-cat-thuc-an-hat-mem.webp" alt="Thức ăn hạt mềm cho mèo" />
                                     </Link>
 

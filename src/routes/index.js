@@ -6,6 +6,9 @@ import LoginPage from "../pages/Form/Login"
 import RegisterPage from "../pages/Form/Rigister"
 import PricePage from "../pages/PricePage"
 import QuestionsPage from "../pages/QuestionsPage"
+import BlogPage from "../pages/BlogPage"
+import ContactPage from "../pages/ContactPage"
+import ProductDetailPage from "../pages/ProductDetailPage"
 
 const publicRoutes = [
     {
@@ -31,6 +34,21 @@ const publicRoutes = [
     {
         path: "/Questions",
         component: <QuestionsPage />,
+
+    },
+    {
+        path: "/Blog",
+        component: <BlogPage />,
+
+    },
+    {
+        path: "/Contact",
+        component: <ContactPage />,
+
+    },
+    {
+        path: "/ProductDetail",
+        component: <ProductDetailPage />,
 
     },
 ]
