@@ -35,5 +35,7 @@ const publicRoutes = [
     },
 ]
 // Cần đăng nhập
-const privateRoutes = [];
+const privateRoutes = [
+    
+];
 export { publicRoutes, privateRoutes };
