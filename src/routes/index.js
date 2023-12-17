@@ -39,13 +39,16 @@ const publicRoutes = [
         component: <ContactPage />,
     },
     {
-        path: "/ProductDetail",
+        path: "/ProductDetail/:id/:role",
         component: <ProductDetailPage />,
     },
     {
         path: "/manage",
         component: <HomeManage />,
     },
+    {
+
+    }
 ];
 // Cần đăng nhập
 const privateRoutes = [];

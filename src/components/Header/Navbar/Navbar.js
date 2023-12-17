@@ -186,7 +186,7 @@ function Navbar() {
                             <Link to={"/"}>
                                 <img
                                     className={clsx(styles.logo)}
-                                    src="images/logo (2).png"
+                                    src="https://i.ibb.co/3pCnKn8/logo-2.png"
                                     alt="logo"
                                 />
                             </Link>
