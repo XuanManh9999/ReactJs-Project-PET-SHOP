@@ -66,7 +66,7 @@ function Item({ data = [] }) {
             ) : (
                 <div className={clsx(styles.cart_empty)}>
                     <picture className={clsx(styles.img_empty)}>
-                        <img src="images/empty_cart.png" alt="cart_empty" />
+                        <img src="https://i.ibb.co/C7CmWTT/empty-cart.png" alt="cart_empty" />
                     </picture>
                     <p>Không có sản phẩm nào trong giỏ hàng.</p>
                 </div>

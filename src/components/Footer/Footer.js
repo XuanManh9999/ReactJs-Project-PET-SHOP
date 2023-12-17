@@ -15,8 +15,8 @@ function Footer() {
         <footer>
             <div className={styles.footer}>
                 <div className={styles["footer-logo"]}>
-                    <Link href="#header">
-                        <img src="Images/logo (2).png" alt="Logo footer" />
+                    <Link to="#header">
+                        <img src="https://i.ibb.co/3pCnKn8/logo-2.png" alt="Logo footer" />
                     </Link>
                 </div>
 
