@@ -8,6 +8,7 @@
 }
 .product-detail-left {
     display: flex;
+    margin-top: 20px;
 }
 .product-detail{
     margin-top: 20px;
@@ -23,15 +24,14 @@
     object-fit: cover;
     border: 1px solid rgb(192, 192, 192);
     margin-bottom: 20px;
-    
+    cursor: pointer;
 }
 .product-left-img{   
-    margin-top: 20px;
     margin-left: 20px;
 }
 .product-left-img img{
-    width: 410px;
-    height: 500px;
+    width: 450px;
+    height: 547px;
     object-fit: cover;
 }
 

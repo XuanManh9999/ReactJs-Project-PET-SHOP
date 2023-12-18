@@ -17,6 +17,7 @@ function Login() {
         let token = Cookies.get("token_login");
         if(token) {
             let hendleToken = async () => {
+
                 let result = await checkToken(token);
                 if(
                     result &&
@@ -32,6 +33,25 @@ function Login() {
                 ) {
                     navigate("/");
                 }
+
+                try {
+                    let result = await checkToken(token);
+                    if (
+                        result &&
+                        result.status === 200 &&
+                        result.data.length > 0 &&
+                        result.data[0].role === "R0"
+                    ) {
+                        navigate("/manage");
+                    } else if (
+                        result &&
+                        result.data.length > 0 &&
+                        result.data[0].role === "R1"
+                    ) {
+                        navigate("/");
+                    }
+                } catch (e) {}
+
             };
             hendleToken();
         } else {
@@ -53,6 +73,7 @@ function Login() {
         const allInputsFilled = Object.values(inputValues).every(
             (value) => value.trim() !== ""
         );
+
         if(allInputsFilled) {
             let data = await postLogin(inputValues);
             if(data && data.status === 200) {
@@ -67,11 +88,31 @@ function Login() {
                     setTimeout(() => {
                         navigate("/manage");
                     }, 1500);
+
+        if (allInputsFilled) {
+            try {
+                let data = await postLogin(inputValues);
+                if (data && data.status === 200) {
+                    Cookies.set("token_login", data.data.token);
+                    if (data.data.role === "user") {
+                        toast.success("Đăng nhập thành công");
+                        setTimeout(() => {
+                            navigate("/");
+                        }, 1500);
+                    } else if (data.data.role === "admin") {
+                        toast.success("Đăng nhập thành công");
+                        setTimeout(() => {
+                            navigate("/manage");
+                        }, 1500);
+                    }
+                } else {
+                    toast.error(
+                        "Đăng nhập thất bại, vui lòng kiểm tra và thử lại."
+                    );
+
                 }
-            } else {
-                toast.error(
-                    "Đăng nhập thất bại, vui lòng kiểm tra và thử lại."
-                );
+            } catch (e) {
+                toast.error("Đã xảy ra lỗi phía server.");
             }
         } else {
             toast.warning("Vui lòng nhập đầy đủ thông tin để tiếp tục");

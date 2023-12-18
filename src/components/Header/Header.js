@@ -4,7 +4,7 @@ import styles from "./Header.module.scss";
 import Navbar from "./Navbar/Navbar";
 
 function Header({ urlImageBg = "", imageHeight = "" }) {
-    let urlBg = "images/bgheader.png";
+    let urlBg = "https://i.ibb.co/QbsN2bk/bgheader.png";
     if(urlImageBg === "") {
         urlImageBg = urlBg;
     }

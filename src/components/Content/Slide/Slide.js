@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
+import { animateScroll as scroll } from "react-scroll";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faDongSign,
@@ -12,7 +13,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import styles from "./Slide.module.scss";
 import "./overwrite.scss";
-function Slide({ data, title = "Sản phẩm nổi bật" }) {
+function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
     const settings = {
         dots: true,
         infinite: true,
@@ -23,457 +24,124 @@ function Slide({ data, title = "Sản phẩm nổi bật" }) {
         autoplaySpeed: 4000,
         cssEase: "ease",
     };
-
+    const handleClick = () => {
+        scroll.scrollToTop({ duration: 100 });
+    };
     return (
-            <div className={clsx(styles.container)}>
-                <div className={clsx(styles.slide_top)}>
-                    <h1 className={clsx(styles.title)}>{title}</h1>
-                </div>
-                <div className={clsx(styles.container_slider)}>
-                    <div className={clsx(styles.list_item)}>
-                        <Slider className="slide_main" {...settings}>
-                            {/* Item 1 */}
-                            <Link to={""}>
-                                <div className={clsx(styles.item)}>
-                                    <figure>
-                                        <img
-                                            className={clsx(styles.image)}
-                                            src="images/precaten-milk.webp"
-                                            alt=""
-                                        />
-                                    </figure>
-                                    <div className={clsx(styles.content)}>
-                                        <p
+        <div className={clsx(styles.container)}>
+            <div className={clsx(styles.slide_top)}>
+                <h1 className={clsx(styles.title)}>{title}</h1>
+            </div>
+            <div className={clsx(styles.container_slider)}>
+                <div className={clsx(styles.list_item)}>
+                    <Slider className="slide_main" {...settings}>
+                        {/* Item 1 */}
+                        {data &&
+                            data.length > 0 &&
+                            data.map((item, index) => {
+                                return (
+                                    <div
+                                        key={index}
+                                        className={clsx(styles.item)}
+                                    >
+                                        <Link
+                                            onClick={handleClick}
+                                            to={`/ProductDetail/${item.id}/${item.role}`}
+                                        >
+                                            <figure>
+                                                <img
+                                                    className={clsx(
+                                                        styles.image
+                                                    )}
+                                                    src={item.image}
+                                                    alt={item.name}
+                                                />
+                                            </figure>
+                                            <div
+                                                className={clsx(styles.content)}
+                                            >
+                                                <p
+                                                    className={clsx(
+                                                        styles.desc,
+                                                        "line-clamp-2"
+                                                    )}
+                                                >
+                                                    {item.name}
+                                                </p>
+                                                <div
+                                                    className={clsx(
+                                                        styles.price
+                                                    )}
+                                                >
+                                                    <p
+                                                        className={clsx(
+                                                            styles.price_new
+                                                        )}
+                                                    >
+                                                        {item.price}
+                                                        <FontAwesomeIcon
+                                                            className={clsx(
+                                                                styles.icon_price_new
+                                                            )}
+                                                            icon={faDongSign}
+                                                        />
+                                                    </p>
+                                                    <p
+                                                        className={clsx(
+                                                            styles.price_old
+                                                        )}
+                                                    >
+                                                        {item.salePrice}
+                                                        <FontAwesomeIcon
+                                                            className={clsx(
+                                                                styles.icon_price_old
+                                                            )}
+                                                            icon={faDongSign}
+                                                        />
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </Link>
+
+                                        <div
                                             className={clsx(
-                                                styles.desc,
-                                                "line-clamp-2"
+                                                styles.box_modal_buy
                                             )}
                                         >
-                                            Sữa bột cho chó mèo 110g Dr.Kyan
-                                            Precanten
-                                        </p>
-                                        <div className={clsx(styles.price)}>
-                                            <p
+                                            <button
                                                 className={clsx(
-                                                    styles.price_new
+                                                    styles.btn_view
                                                 )}
                                             >
-                                                50.000
-                                                <FontAwesomeIcon
-                                                    className={clsx(
-                                                        styles.icon_price_new
-                                                    )}
-                                                    icon={faDongSign}
-                                                />
-                                            </p>
-                                            <p
+                                                <i>
+                                                    <FontAwesomeIcon
+                                                        icon={
+                                                            faMagnifyingGlassPlus
+                                                        }
+                                                    />
+                                                </i>
+                                                <span>Xem nhanh</span>
+                                            </button>
+                                            <button
                                                 className={clsx(
-                                                    styles.price_old
+                                                    styles.btn_buy_now
                                                 )}
                                             >
-                                                100.000
-                                                <FontAwesomeIcon
-                                                    className={clsx(
-                                                        styles.icon_price_old
-                                                    )}
-                                                    icon={faDongSign}
-                                                />
-                                            </p>
+                                                <i>
+                                                    <FontAwesomeIcon
+                                                        icon={faCartPlus}
+                                                    />
+                                                </i>
+                                                <span>Mua ngay</span>
+                                            </button>
                                         </div>
                                     </div>
-                                    <div className={clsx(styles.box_modal_buy)}>
-                                        <button
-                                            className={clsx(styles.btn_view)}
-                                        >
-                                            <i>
-                                                <FontAwesomeIcon
-                                                    icon={faMagnifyingGlassPlus}
-                                                />
-                                            </i>
-                                            <span>Xem nhanh</span>
-                                        </button>
-                                        <button
-                                            className={clsx(styles.btn_buy_now)}
-                                        >
-                                            <i>
-                                                <FontAwesomeIcon
-                                                    icon={faCartPlus}
-                                                />
-                                            </i>
-                                            <span>Mua ngay</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </Link>
-                            {/* Item 2 */}
-                            <Link to={""}>
-                                <div className={clsx(styles.item)}>
-                                    <figure>
-                                        <img
-                                            className={clsx(styles.image)}
-                                            src="images/precaten-milk.webp"
-                                            alt=""
-                                        />
-                                    </figure>
-                                    <div className={clsx(styles.content)}>
-                                        <p
-                                            className={clsx(
-                                                styles.desc,
-                                                "line-clamp-2"
-                                            )}
-                                        >
-                                            Sữa bột cho chó mèo 110g Dr.Kyan
-                                            Precanten
-                                        </p>
-                                        <div className={clsx(styles.price)}>
-                                            <p
-                                                className={clsx(
-                                                    styles.price_new
-                                                )}
-                                            >
-                                                50.000
-                                                <FontAwesomeIcon
-                                                    className={clsx(
-                                                        styles.icon_price_new
-                                                    )}
-                                                    icon={faDongSign}
-                                                />
-                                            </p>
-                                            <p
-                                                className={clsx(
-                                                    styles.price_old
-                                                )}
-                                            >
-                                                100.000
-                                                <FontAwesomeIcon
-                                                    className={clsx(
-                                                        styles.icon_price_old
-                                                    )}
-                                                    icon={faDongSign}
-                                                />
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div className={clsx(styles.box_modal_buy)}>
-                                        <button
-                                            className={clsx(styles.btn_view)}
-                                        >
-                                            <i>
-                                                <FontAwesomeIcon
-                                                    icon={faMagnifyingGlassPlus}
-                                                />
-                                            </i>
-                                            <span>Xem nhanh</span>
-                                        </button>
-                                        <button
-                                            className={clsx(styles.btn_buy_now)}
-                                        >
-                                            <i>
-                                                <FontAwesomeIcon
-                                                    icon={faCartPlus}
-                                                />
-                                            </i>
-                                            <span>Mua ngay</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </Link>
-                            {/* Item 3 */}
-                            <Link to={""}>
-                                <div className={clsx(styles.item)}>
-                                    <figure>
-                                        <img
-                                            className={clsx(styles.image)}
-                                            src="images/precaten-milk.webp"
-                                            alt=""
-                                        />
-                                    </figure>
-                                    <div className={clsx(styles.content)}>
-                                        <p
-                                            className={clsx(
-                                                styles.desc,
-                                                "line-clamp-2"
-                                            )}
-                                        >
-                                            Sữa bột cho chó mèo 110g Dr.Kyan
-                                            Precanten
-                                        </p>
-                                        <div className={clsx(styles.price)}>
-                                            <p
-                                                className={clsx(
-                                                    styles.price_new
-                                                )}
-                                            >
-                                                50.000
-                                                <FontAwesomeIcon
-                                                    className={clsx(
-                                                        styles.icon_price_new
-                                                    )}
-                                                    icon={faDongSign}
-                                                />
-                                            </p>
-                                            <p
-                                                className={clsx(
-                                                    styles.price_old
-                                                )}
-                                            >
-                                                100.000
-                                                <FontAwesomeIcon
-                                                    className={clsx(
-                                                        styles.icon_price_old
-                                                    )}
-                                                    icon={faDongSign}
-                                                />
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div className={clsx(styles.box_modal_buy)}>
-                                        <button
-                                            className={clsx(styles.btn_view)}
-                                        >
-                                            <i>
-                                                <FontAwesomeIcon
-                                                    icon={faMagnifyingGlassPlus}
-                                                />
-                                            </i>
-                                            <span>Xem nhanh</span>
-                                        </button>
-                                        <button
-                                            className={clsx(styles.btn_buy_now)}
-                                        >
-                                            <i>
-                                                <FontAwesomeIcon
-                                                    icon={faCartPlus}
-                                                />
-                                            </i>
-                                            <span>Mua ngay</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </Link>
-                            {/* Item 4 */}
-                            <Link to={""}>
-                                <div className={clsx(styles.item)}>
-                                    <figure>
-                                        <img
-                                            className={clsx(styles.image)}
-                                            src="images/precaten-milk.webp"
-                                            alt=""
-                                        />
-                                    </figure>
-                                    <div className={clsx(styles.content)}>
-                                        <p
-                                            className={clsx(
-                                                styles.desc,
-                                                "line-clamp-2"
-                                            )}
-                                        >
-                                            Sữa bột cho chó mèo 110g Dr.Kyan
-                                            Precanten
-                                        </p>
-                                        <div className={clsx(styles.price)}>
-                                            <p
-                                                className={clsx(
-                                                    styles.price_new
-                                                )}
-                                            >
-                                                50.000
-                                                <FontAwesomeIcon
-                                                    className={clsx(
-                                                        styles.icon_price_new
-                                                    )}
-                                                    icon={faDongSign}
-                                                />
-                                            </p>
-                                            <p
-                                                className={clsx(
-                                                    styles.price_old
-                                                )}
-                                            >
-                                                100.000
-                                                <FontAwesomeIcon
-                                                    className={clsx(
-                                                        styles.icon_price_old
-                                                    )}
-                                                    icon={faDongSign}
-                                                />
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div className={clsx(styles.box_modal_buy)}>
-                                        <button
-                                            className={clsx(styles.btn_view)}
-                                        >
-                                            <i>
-                                                <FontAwesomeIcon
-                                                    icon={faMagnifyingGlassPlus}
-                                                />
-                                            </i>
-                                            <span>Xem nhanh</span>
-                                        </button>
-                                        <button
-                                            className={clsx(styles.btn_buy_now)}
-                                        >
-                                            <i>
-                                                <FontAwesomeIcon
-                                                    icon={faCartPlus}
-                                                />
-                                            </i>
-                                            <span>Mua ngay</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </Link>
-                            {/* Item 5 */}
-                            <Link to={""}>
-                                <div className={clsx(styles.item)}>
-                                    <figure>
-                                        <img
-                                            className={clsx(styles.image)}
-                                            src="images/precaten-milk.webp"
-                                            alt=""
-                                        />
-                                    </figure>
-                                    <div className={clsx(styles.content)}>
-                                        <p
-                                            className={clsx(
-                                                styles.desc,
-                                                "line-clamp-2"
-                                            )}
-                                        >
-                                            Sữa bột cho chó mèo 110g Dr.Kyan
-                                            Precanten
-                                        </p>
-                                        <div className={clsx(styles.price)}>
-                                            <p
-                                                className={clsx(
-                                                    styles.price_new
-                                                )}
-                                            >
-                                                50.000
-                                                <FontAwesomeIcon
-                                                    className={clsx(
-                                                        styles.icon_price_new
-                                                    )}
-                                                    icon={faDongSign}
-                                                />
-                                            </p>
-                                            <p
-                                                className={clsx(
-                                                    styles.price_old
-                                                )}
-                                            >
-                                                100.000
-                                                <FontAwesomeIcon
-                                                    className={clsx(
-                                                        styles.icon_price_old
-                                                    )}
-                                                    icon={faDongSign}
-                                                />
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div className={clsx(styles.box_modal_buy)}>
-                                        <button
-                                            className={clsx(styles.btn_view)}
-                                        >
-                                            <i>
-                                                <FontAwesomeIcon
-                                                    icon={faMagnifyingGlassPlus}
-                                                />
-                                            </i>
-                                            <span>Xem nhanh</span>
-                                        </button>
-                                        <button
-                                            className={clsx(styles.btn_buy_now)}
-                                        >
-                                            <i>
-                                                <FontAwesomeIcon
-                                                    icon={faCartPlus}
-                                                />
-                                            </i>
-                                            <span>Mua ngay</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </Link>
-                            {/* Item 6 */}
-                            <Link to={""}>
-                                <div className={clsx(styles.item)}>
-                                    <figure>
-                                        <img
-                                            className={clsx(styles.image)}
-                                            src="images/precaten-milk.webp"
-                                            alt=""
-                                        />
-                                    </figure>
-                                    <div className={clsx(styles.content)}>
-                                        <p
-                                            className={clsx(
-                                                styles.desc,
-                                                "line-clamp-2"
-                                            )}
-                                        >
-                                            Sữa bột cho chó mèo 110g Dr.Kyan
-                                            Precanten
-                                        </p>
-                                        <div className={clsx(styles.price)}>
-                                            <p
-                                                className={clsx(
-                                                    styles.price_new
-                                                )}
-                                            >
-                                                50.000
-                                                <FontAwesomeIcon
-                                                    className={clsx(
-                                                        styles.icon_price_new
-                                                    )}
-                                                    icon={faDongSign}
-                                                />
-                                            </p>
-                                            <p
-                                                className={clsx(
-                                                    styles.price_old
-                                                )}
-                                            >
-                                                100.000
-                                                <FontAwesomeIcon
-                                                    className={clsx(
-                                                        styles.icon_price_old
-                                                    )}
-                                                    icon={faDongSign}
-                                                />
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div className={clsx(styles.box_modal_buy)}>
-                                        <button
-                                            className={clsx(styles.btn_view)}
-                                        >
-                                            <i>
-                                                <FontAwesomeIcon
-                                                    icon={faMagnifyingGlassPlus}
-                                                />
-                                            </i>
-                                            <span>Xem nhanh</span>
-                                        </button>
-                                        <button
-                                            className={clsx(styles.btn_buy_now)}
-                                        >
-                                            <i>
-                                                <FontAwesomeIcon
-                                                    icon={faCartPlus}
-                                                />
-                                            </i>
-                                            <span>Mua ngay</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </Link>
-                        </Slider>
-                    </div>
+                                );
+                            })}
+                    </Slider>
                 </div>
             </div>
+        </div>
     );
 }
 
