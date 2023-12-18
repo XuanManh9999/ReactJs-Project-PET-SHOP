@@ -58,6 +58,7 @@ function Login() {
         if (allInputsFilled) {
             try {
                 let data = await postLogin(inputValues);
+                console.log("Xuan manh check data: ", data);
                 if (data && data.status === 200) {
                     Cookies.set("token_login", data.data.token);
                     if (data.data.role === "user") {
@@ -71,6 +72,10 @@ function Login() {
                             navigate("/manage");
                         }, 1500);
                     }
+                } else if (data.status === 404) {
+                    toast.warning(
+                        "Tên tài khoản hoặc mật khẩu chưa đúng, vui lòng thử lại"
+                    );
                 } else {
                     toast.error(
                         "Đăng nhập thất bại, vui lòng kiểm tra và thử lại."

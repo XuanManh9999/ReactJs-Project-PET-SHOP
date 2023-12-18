@@ -1,6 +1,8 @@
 import styles from "./Footer.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopyright } from "@fortawesome/free-solid-svg-icons";
+import { animateScroll as scroll } from "react-scroll";
+
 import { Link } from "react-router-dom";
 import {
     FaFacebookF,
@@ -15,8 +17,16 @@ function Footer() {
         <footer>
             <div className={styles.footer}>
                 <div className={styles["footer-logo"]}>
-                    <Link to="#header">
-                        <img src="https://i.ibb.co/3pCnKn8/logo-2.png" alt="Logo footer" />
+                    <Link
+                        onClick={() => {
+                            scroll.scrollToTop({ duration: 100 });
+                        }}
+                        to=""
+                    >
+                        <img
+                            src="https://i.ibb.co/3pCnKn8/logo-2.png"
+                            alt="Logo footer"
+                        />
                     </Link>
                 </div>
 
