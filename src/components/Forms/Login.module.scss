@@ -1,6 +1,5 @@
 .register,
 .log_in {
-   
     max-width: 470px;
     margin: 50px auto 50px;
     transform: translateX(10px);
@@ -8,10 +7,9 @@
     border-radius: 20px;
     padding: 10px 50px 50px 50px;
     box-shadow: 0px 0px 55px 17px rgba(255, 188, 188, 0.5);
- 
 }
 .register .container_register,
-.log_in .container_log_in {  
+.log_in .container_log_in {
     margin-top: 20px;
 }
 .register .container_register .title,
@@ -19,7 +17,7 @@
     font-size: 20px;
     line-height: 1.87;
     font-weight: 600;
-    color: #212B25;
+    color: #212b25;
     text-transform: uppercase;
     margin-bottom: 15px;
     text-align: center;
@@ -30,7 +28,7 @@
     margin-bottom: 40px;
     text-align: center;
 }
-.register .container_register  .title_form_group,
+.register .container_register .title_form_group,
 .log_in .container_log_in .title_form_group {
     display: block;
     font-weight: 600;
@@ -46,7 +44,7 @@
     border-radius: 10px;
     border: 1px solid #b3b3b3;
     color: var(--text-color);
-    border: 1px solid #EAEBF3;
+    border: 1px solid #eaebf3;
     outline: none;
     margin-bottom: 5px;
 }
@@ -81,7 +79,7 @@
     font-size: 16px;
     color: var(--text-color);
 }
-.register .container_register  p a,
+.register .container_register p a,
 .log_in .container_log_in .forget_login_password a,
 .log_in .container_log_in .registet_log_in a {
     color: #ff0000;
@@ -97,11 +95,11 @@
     margin-bottom: 15px;
     color: var(--text-color);
 }
-.application img{
+.application img {
     width: 129px;
     height: 36px;
     object-fit: cover;
-} 
+}
 .application .application_element {
     display: flex;
     justify-content: center;
@@ -116,10 +114,10 @@
     line-height: 1.6rem;
     margin-top: 5px;
     font-weight: 400;
-  }
+}
 .form_group.invalid .form-message {
     color: #f33a58;
-}  
+}
 .form-message span {
     margin-bottom: 10px;
 }
@@ -139,13 +137,13 @@
 .form_group.eye > i {
     position: absolute;
     right: 13px;
-    top: 33px;
+    top: 38px;
     cursor: pointer;
 }
 .none_eye {
     display: none !important;
 }
 
-.form_group{
+.form_group {
     margin-top: 5px;
 }
