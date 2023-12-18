@@ -27,7 +27,8 @@
 .log_in .container_log_in .desc {
     font-weight: 500;
     font-size: 14px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
+    line-height: 1.5;
     text-align: center;
 }
 .register .container_register  .title_form_group,
@@ -50,7 +51,12 @@
     outline: none;
     margin-bottom: 5px;
 }
-.register .container_register .btn_register,
+
+.btn{
+    display: flex;
+    gap: 40px;
+}
+
 .log_in .container_log_in .btn_log_in {
     margin-top: 15px;
     display: block;
@@ -66,6 +72,12 @@
     border-radius: 8px;
     height: 40px;
 }
+
+.log_in .container_log_in .btn_log_in:nth-of-type(2){
+    background: #585454;
+}
+
+
 .register .container_register .btn_register:hover,
 .log_in .container_log_in .btn_log_in:hover {
     background: #363025;
@@ -123,29 +135,9 @@
 .form-message span {
     margin-bottom: 10px;
 }
-.form_group.invalid input {
-    border-color: #f33a58;
-}
-.form_group input:hover {
-    border-color: #1dbfaf;
-}
-.form_group.invalid input:hover {
-    border-color: #1dbfaf;
-}
-.form_group.eye {
-    position: relative;
-    margin-top: 15px;
-}
-.form_group.eye > i {
-    position: absolute;
-    right: 13px;
-    top: 33px;
-    cursor: pointer;
-}
-.none_eye {
-    display: none !important;
-}
+
 
 .form_group{
     margin-top: 5px;
 }
+
