@@ -15,39 +15,33 @@ function ProductDetailPage() {
     const [dataProdutDetail, setDataProdutDetail] = useState([]);
     const [dataImagesDetail, setDataImagesDetail] = useState([]);
     const [dataRelateProduct, setDataRelateProduct] = useState([]);
+
     useEffect(() => {
-        const getDataRelate = async () => {
+        const fetchData = async () => {
             try {
-                const response = await getDataProductsEqualId(id);
-                setDataProdutDetail(response.data);
+                const promises = [
+                    getDataProductsEqualId(id),
+                    getDataImageDetail(id),
+                    getProductsRelate(role),
+                ];
+
+                const [
+                    produtDetailResponse,
+                    imagesResponse,
+                    relateProductResponse,
+                ] = await Promise.all(promises);
+
+                setDataProdutDetail(produtDetailResponse.data);
+                setDataImagesDetail(imagesResponse.data);
+                setDataRelateProduct(relateProductResponse.data);
             } catch (error) {
-                console.error(
-                    "Lỗi khi gọi API getDataProductsEqualId: ",
-                    error
-                );
+                console.error("Có lỗi khi gọi API: ", error);
             }
         };
-        const getImages = async () => {
-            try {
-                const response = await getDataImageDetail(id);
-                setDataImagesDetail(response.data);
-            } catch (error) {
-                console.error("Lỗi khi gọi API getDataImageDetail: ", error);
-            }
-        };
-        const getDataRelare = async () => {
-            try {
-                const response = await getProductsRelate(role);
-                setDataRelateProduct(response.data);
-            } catch (error) {
-                console.error("Lỗi khi gọi API getProductsRelate: ", error);
-            }
-        };
-        getImages();
-        getDataRelate();
-        getDataRelare();
+
+        fetchData();
     }, [id, role]);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    
     return (
         <>
             <Header

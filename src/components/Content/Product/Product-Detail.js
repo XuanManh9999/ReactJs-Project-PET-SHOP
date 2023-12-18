@@ -12,6 +12,7 @@ import Slide from "../Slide/Slide";
 function ProductDetail({ data = [], imageDetail = [], dataRelare = [] }) {
     const [detailProduct] = data;
     const [imageDetail1, imageDetail2, imageDetail3] = imageDetail;
+
     return (
         <>
             {data.length > 0 ? (
@@ -292,15 +293,9 @@ function ProductDetail({ data = [], imageDetail = [], dataRelare = [] }) {
                     </div>
                 </>
             ) : (
-                <h1
-                    style={{
-                        textAlign: "center",
-                        padding: "20px",
-                        fontWeight: 700,
-                    }}
-                >
+                <strong className={styles["Detail_empty"]}>
                     Sản phẩm chưa có trang Detail. Vui lòng chọn sản phẩm khác.
-                </h1>
+                </strong>
             )}
         </>
     );

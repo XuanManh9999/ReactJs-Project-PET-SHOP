@@ -22,21 +22,21 @@ function Carousel() {
                     <div>
                         <img
                             className={clsx(styles.image)}
-                            src="images/slider_1.png"
+                            src="https://i.ibb.co/SvmdQzr/slider-show-3.png"
                             alt="Ảnh slider 1 PET SHOP"
                         />
                     </div>
                     <div>
                         <img
                             className={clsx(styles.image)}
-                            src="images/slider_2.png"
+                            src="https://i.ibb.co/nQ2PfCs/slider-1.png"
                             alt="Ảnh slider 2 PET SHOP"
                         />
                     </div>
                     <div>
                         <img
                             className={clsx(styles.image)}
-                            src="images/slider-show-3.png"
+                            src="https://i.ibb.co/VBPjJH4/slider-2.png"
                             alt="Ảnh slider 3 PET SHOP"
                         />
                     </div>
