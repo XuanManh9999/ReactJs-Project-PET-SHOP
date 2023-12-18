@@ -89,12 +89,12 @@ function Footer() {
                     <span>
                         <FontAwesomeIcon icon={faCopyright} />
                         Bản quyền thuộc về
-                        <strong>Nguyễn Xuân Mạnh</strong>
+                        <strong>PET SHOP</strong>
                     </span>
                     <span>
                         Cung cấp bởi{" "}
                         <strong>
-                            <Link href="#!">Xuân Mạnh</Link>
+                            <Link href="#!">TEAM</Link>
                         </strong>
                     </span>
                 </div>

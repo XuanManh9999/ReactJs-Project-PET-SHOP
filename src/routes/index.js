@@ -9,6 +9,7 @@ import BlogPage from "../pages/BlogPage";
 import ContactPage from "../pages/ContactPage";
 import ProductDetailPage from "../pages/ProductDetailPage";
 import HomeManage from "../pages/Manage/HomeManage";
+import ForgotPassPage from "../pages/Form/ForgotPass";
 const publicRoutes = [
     {
         path: "/",
@@ -21,6 +22,10 @@ const publicRoutes = [
     {
         path: "/Login",
         component: <LoginPage />,
+    },
+    {
+        path: "/ForgotPass",
+        component: <ForgotPassPage />,
     },
     {
         path: "/Price",

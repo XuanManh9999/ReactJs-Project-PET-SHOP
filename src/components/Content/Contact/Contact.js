@@ -1,7 +1,7 @@
 import styles from "./Contact.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
-import { FaPhone, FaEnvelope, FaUser, FaComment } from "react-icons/fa";
+import { FaPhone, FaEnvelope, FaUser, FaComment, FaFacebook, FaTwitch, FaTelegram, FaLinkedin } from "react-icons/fa";
 
 function Contact() {
     return (
@@ -80,7 +80,7 @@ function Contact() {
                             <div className={styles["container_form"]}>
                                 <h1 className={styles["title"]}>
                                     Chúng tôi luôn sẵn sàng tiếp nhận mọi ý kiến
-                                    ​đóng góp và giải đáp những yêu cầu của bạn.
+                                    đóng góp và giải đáp những yêu cầu của bạn.
                                     Hãy liên hệ ngay với chúng tôi.
                                 </h1>
                                 <div className={styles["container_form_group"]}>
@@ -150,6 +150,117 @@ function Contact() {
                         </form>
                     </div>
                 </div>
+                <h1 className={styles['contact-title']}>Thông Tin Chi Tiết</h1>
+                <div className={styles['contact-info']}>
+
+                    <div className={styles['card-client']}>
+                        <div className={styles['user-picture']}>
+                            <img src="Images/manh.jpg" alt="" />
+                        </div>
+                        <p className={styles['name-client']}>
+                            Mr. Xuân Mạnh
+                            <span>CEO Pet Shop</span>
+                        </p>
+                        <div className={styles['social-media']}>
+                            <a href="#">
+                                <i>
+                                    <FaTwitch />
+                                </i>
+                                <span className={styles['tooltip-social']}>twitter</span>
+                            </a>
+                            <a href="#">
+                                <i>
+                                    <FaTelegram />
+                                </i>
+                                <span className={styles['tooltip-social']}>instagram</span>
+                            </a>
+                            <a href="#">
+                                <i>
+                                    <FaFacebook />
+                                </i>
+                                <span className={styles['tooltip-social']}>facebook</span>
+                            </a>
+                            <a href="#">
+                                <i>
+                                    <FaLinkedin />
+                                </i>
+                                <span className={styles['tooltip-social']}>linkedin</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div className={styles['card-client']}>
+                        <div className={styles['user-picture']}>
+                            <img src="Images/duy.jpg" alt="" />
+                        </div>
+                        <p className={styles['name-client']}>
+                            Mr. Văn Duy
+                            <span>Dev Developer</span>
+                        </p>
+                        <div className={styles['social-media']}>
+                            <a href="#">
+                                <i>
+                                    <FaTwitch />
+                                </i>
+                                <span className={styles['tooltip-social']}>twitter</span>
+                            </a>
+                            <a href="#">
+                                <i>
+                                    <FaTelegram />
+                                </i>
+                                <span className={styles['tooltip-social']}>instagram</span>
+                            </a>
+                            <a href="#">
+                                <i>
+                                    <FaFacebook />
+                                </i>
+                                <span className={styles['tooltip-social']}>facebook</span>
+                            </a>
+                            <a href="#">
+                                <i>
+                                    <FaLinkedin />
+                                </i>
+                                <span className={styles['tooltip-social']}>linkedin</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div className={styles['card-client']}>
+                        <div className={styles['user-picture']}>
+                            <img src="Images/img-hero-dog.webp" alt="" />
+                        </div>
+                        <p className={styles['name-client']}>
+                            Mr. Madam Dog
+                            <span>Dev Developer</span>
+                        </p>
+                        <div className={styles['social-media']}>
+                            <a href="#">
+                                <i>
+                                    <FaTwitch />
+                                </i>
+                                <span className={styles['tooltip-social']}>twitter</span>
+                            </a>
+                            <a href="#">
+                                <i>
+                                    <FaTelegram />
+                                </i>
+                                <span className={styles['tooltip-social']}>instagram</span>
+                            </a>
+                            <a href="#">
+                                <i>
+                                    <FaFacebook />
+                                </i>
+                                <span className={styles['tooltip-social']}>facebook</span>
+                            </a>
+                            <a href="#">
+                                <i>
+                                    <FaLinkedin />
+                                </i>
+                                <span className={styles['tooltip-social']}>linkedin</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
     );

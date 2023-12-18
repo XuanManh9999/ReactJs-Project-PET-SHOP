@@ -15,17 +15,17 @@ function Login() {
 
     useEffect(() => {
         let token = Cookies.get("token_login");
-        if (token) {
+        if(token) {
             let hendleToken = async () => {
                 let result = await checkToken(token);
-                if (
+                if(
                     result &&
                     result.status === 200 &&
                     result.data.length > 0 &&
                     result.data[0].role === "R0"
                 ) {
                     navigate("/manage");
-                } else if (
+                } else if(
                     result &&
                     result.data.length > 0 &&
                     result.data[0].role === "R1"
@@ -53,16 +53,16 @@ function Login() {
         const allInputsFilled = Object.values(inputValues).every(
             (value) => value.trim() !== ""
         );
-        if (allInputsFilled) {
+        if(allInputsFilled) {
             let data = await postLogin(inputValues);
-            if (data && data.status === 200) {
+            if(data && data.status === 200) {
                 Cookies.set("token_login", data.data.token);
-                if (data.data.role === "user") {
+                if(data.data.role === "user") {
                     toast.success("Đăng nhập thành công");
                     setTimeout(() => {
                         navigate("/");
                     }, 1500);
-                } else if (data.data.role === "admin") {
+                } else if(data.data.role === "admin") {
                     toast.success("Đăng nhập thành công");
                     setTimeout(() => {
                         navigate("/manage");
@@ -134,7 +134,7 @@ function Login() {
                 </p>
                 <p className={styles["forget_login_password"]}>
                     Bạn quên mật khẩu lấy lại tại đây
-                    <Link href="#!">Lấy lại tại đây</Link>
+                    <Link to={"/ForgotPass"}>Lấy lại tại đây</Link>
                 </p>
             </div>
             <div className={styles["application"]}>
