@@ -1,4 +1,10 @@
 .content {
+    width: 400px;
+    background-color: #fff;
+    overflow: auto;
+    animation: transform_serach ease 0.35s;
+    padding: 50px 15px 15px 15px;
+
     .close_modal_search {
         position: absolute;
         top: 0;
@@ -120,5 +126,13 @@
     100% {
         width: 100%;
         opacity: 1;
+    }
+}
+@keyframes transform_serach {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0%);
     }
 }

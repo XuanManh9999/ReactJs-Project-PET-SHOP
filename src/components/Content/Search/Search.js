@@ -6,9 +6,13 @@ import styles from "./Search.module.scss";
 function Search({ close_search }) {
     return (
         <div className={clsx(styles.container_search)}>
-            <div className={clsx(styles.main_content)}>
-                <SearchItem close_search={close_search} />
-            </div>
+            <div
+                onClick={() => {
+                    close_search();
+                }}
+                className={clsx(styles.main_content)}
+            ></div>
+            <SearchItem close_search={close_search} />
         </div>
     );
 }
