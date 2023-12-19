@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import styles from "./Login.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { hendleRegister } from "../../services/hendleLogin";
 
 function Rigister() {
+    const [isShowPassWord, setIsShowPassWord] = useState(faEyeSlash);
+    const [stateShow, SetStateShow] = useState(false);
+    const input_password = useRef();
     const [inputValues, setInputValues] = useState({
         firstName: "",
         lastName: "",
@@ -81,6 +84,18 @@ function Rigister() {
             toast.error(`${check}`);
         }
     };
+
+    const hendleEyeInput = () => {
+        if (!stateShow) {
+            setIsShowPassWord(faEye);
+            input_password.current.type = "text";
+            SetStateShow(true);
+        } else {
+            setIsShowPassWord(faEyeSlash);
+            input_password.current.type = "password";
+            SetStateShow(false);
+        }
+    };
     return (
         <>
             <div className={styles["register"]}>
@@ -149,15 +164,16 @@ function Rigister() {
                             value={inputValues.password}
                             name="password"
                             onChange={handleInputChange}
+                            ref={input_password}
                         />
                         <i
+                            onClick={() => {
+                                hendleEyeInput();
+                            }}
                             className={`fa-solid fa-eye-slash ${styles["eye_close"]}`}
                         >
-                            <FontAwesomeIcon icon={faEyeSlash} />
+                            <FontAwesomeIcon icon={isShowPassWord} />
                         </i>
-                        <i
-                            className={`fa-solid fa-eye ${styles["none_eye"]} ${styles["eye_open"]}`}
-                        ></i>
                         <span className={styles["form-message"]}></span>
                     </div>
                     <button
