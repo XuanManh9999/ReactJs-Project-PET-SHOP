@@ -67,15 +67,23 @@ function Login() {
             [name]: value,
         }));
     };
-    const hendleLogin = async (e) => {
-        const allInputsFilled = Object.values(inputValues).every(
-            (value) => value.trim() !== ""
-        );
+    let validateForm = (email, password) => {
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email || !emailRegex.test(email)) {
+            return "Email không hợp lệ.";
+        }
+        if (!password || password.length < 6) {
+            return "Mật khẩu phải có ít nhất 6 kí tự.";
+        }
 
-        if (allInputsFilled) {
+        return null;
+    };
+    const hendleLogin = async () => {
+        const check = validateForm(inputValues.email, inputValues.password);
+
+        if (check === null) {
             try {
                 let data = await postLogin(inputValues);
-                console.log("Xuan manh check data: ", data);
                 if (data && data.status === 200) {
                     Cookies.set("token_login", data.data.token);
                     if (data.data.role === "user") {
@@ -102,7 +110,7 @@ function Login() {
                 toast.error("Đã xảy ra lỗi phía server.");
             }
         } else {
-            toast.warning("Vui lòng nhập đầy đủ thông tin để tiếp tục");
+            toast.warning(`${check}`);
         }
     };
     return (

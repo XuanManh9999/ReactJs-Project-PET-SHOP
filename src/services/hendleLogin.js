@@ -39,4 +39,19 @@ const checkToken = async (token) => {
     }
 };
 
-export { hendleRegister, hendleLogin, checkToken };
+const hendleForgot = async (email) => {
+    try {
+        const response = await axios.post(
+            "http://localhost:4000/api/v1/send-email-forgot",
+            {
+                email,
+            }
+        );
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        throw error;
+    }
+};
+
+export { hendleRegister, hendleLogin, checkToken, hendleForgot };
