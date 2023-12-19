@@ -15,6 +15,7 @@ import {
     getProductsHotSearch,
     userSearchProducts,
 } from "../../../../services/hendleUser";
+
 function SearchItem({ close_search }) {
     const [dataSearch, setDataSearch] = useState([]);
     const [inputSearch, setInputSearch] = useState("");
@@ -68,7 +69,11 @@ function SearchItem({ close_search }) {
             {dataSearch.data &&
                 dataSearch.data.map((item, index) => {
                     return (
-                        <Link key={index} className={clsx(styles.data_search)}>
+                        <Link
+                            key={index}
+                            to={`/ProductDetail/${item.id}/${item.role}`}
+                            className={clsx(styles.data_search)}
+                        >
                             <div className={clsx(styles.data_search_item)}>
                                 <picture>
                                     <img

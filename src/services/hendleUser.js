@@ -26,4 +26,5 @@ const userSearchProducts = async (content) => {
     }
 };
 
+
 export { getProductsHotSearch, userSearchProducts };
