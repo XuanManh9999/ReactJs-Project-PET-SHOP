@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { useState, useEffect } from "react";
+import "react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import styles from "./Item.module.scss";
@@ -14,15 +15,30 @@ import { getDataCardProducts } from "../../../../services/hendleProducts";
 
 function Item() {
     const [productDetails, setProductDetails] = useState([]);
-    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    const [cartItems, setCartItems] = useState(
+        JSON.parse(localStorage.getItem("cartItems")) || []
+    );
+    const [totalPrice, setTotalPrice] = useState(0);
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await getDataCardProducts(cartItems);
-                if (response && response.data.length > 0) {
-                    setProductDetails(response.data); // Dữ liệu chi tiết của sản phẩm
+                if (cartItems.length > 0) {
+                    const response = await getDataCardProducts(cartItems);
+                    if (response && response.data.length > 0) {
+                        setProductDetails(response.data);
+
+                        // Tính tổng giá trị khi có dữ liệu mới
+                        const total = response.data.reduce(
+                            (acc, item) => acc + parseFloat(item.price),
+                            0
+                        );
+                        setTotalPrice(total);
+                    } else {
+                        setProductDetails([]);
+                    }
                 } else {
                     setProductDetails([]);
+                    setTotalPrice(0);
                 }
             } catch (error) {
                 console.error("Error fetching product details:", error);
@@ -30,14 +46,31 @@ function Item() {
         };
 
         fetchData();
-    }, []);
-
+    }, [cartItems]);
     const hendleDeleteProduct = (id) => {
-        // if (id) {
-        //     let newArray = productDetails.filter((item) => item !== id);
-        //     localStorage.setItem("cartItems", JSON.stringify(newArray));
-        //     setProductDetails(newArray);
-        // }
+        if (id && cartItems.length > 0) {
+            const local = cartItems;
+            const newArr = local.filter((item) => item !== id);
+            localStorage.setItem("cartItems", JSON.stringify(newArr));
+            setCartItems(newArr);
+        } else {
+            setProductDetails([]);
+        }
+    };
+    // Hàm định dạng số thành giá trị tiền tệ
+    const formatCurrency = (value) => {
+        if (isNaN(value)) {
+            return "0";
+        }
+
+        return new Intl.NumberFormat("vi-VN", {
+            style: "currency",
+            currency: "VND",
+        }).format(value);
+    };
+
+    const deleteTextVND = (priceString) => {
+        return parseFloat(priceString.replace(/[^0-9]/g, ""));
     };
     return (
         <>
@@ -91,7 +124,7 @@ function Item() {
                         <div className={clsx(styles.header_pay)}>
                             <p>Tổng tiền thanh toán: </p>
                             <span className={clsx(styles.price)}>
-                                190.000
+                                {deleteTextVND(formatCurrency(totalPrice))}
                                 <FontAwesomeIcon icon={faDongSign} />
                             </span>
                         </div>

@@ -274,16 +274,13 @@ function ProductDetail({ data = [], imageDetail = [], dataRelare = [] }) {
                                         </span>
                                     </div>
                                     <p
+                                        dangerouslySetInnerHTML={{
+                                            __html: detailProduct.descHTML,
+                                        }}
                                         className={
                                             styles["product-describe-desc"]
                                         }
-                                    >
-                                        <div
-                                            dangerouslySetInnerHTML={{
-                                                __html: detailProduct.descHTML,
-                                            }}
-                                        ></div>
-                                    </p>
+                                    ></p>
                                 </div>
                             </div>
                         </div>
