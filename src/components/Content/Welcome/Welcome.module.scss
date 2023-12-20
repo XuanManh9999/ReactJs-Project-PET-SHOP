@@ -54,7 +54,7 @@
                         background-color: var(--primary-color);
                         bottom: -2px;
                         left: 0;
-                        transition: width 1.25s;
+                        transition: width 0.3s ease-in-out;
                     }
                     &:hover {
                         &::after {

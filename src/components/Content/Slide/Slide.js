@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -17,13 +17,13 @@ import "./overwrite.scss";
 import QuickProducts from "../QuickProducts/QuickProducts";
 function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
     const [quickView, setQuickView] = useState(false);
-
+    const getIdProduct = useRef();
     const settings = {
         dots: true,
         infinite: true,
         slidesToShow: 4,
         slidesToScroll: 1,
-        autoplay: true,
+        autoplay: false,
         speed: 800,
         autoplaySpeed: 4000,
         cssEase: "ease",
@@ -33,6 +33,7 @@ function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
     };
 
     const hendleQuickView = (id) => {
+        getIdProduct.current = id;
         setQuickView((pre) => !pre);
     };
 
@@ -164,7 +165,10 @@ function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
                 </div>
             </div>
             {quickView ? (
-                <QuickProducts hendleQuickViewProduct={hendleQuickView} />
+                <QuickProducts
+                    id={getIdProduct.current}
+                    hendleQuickViewProduct={hendleQuickView}
+                />
             ) : (
                 ""
             )}
