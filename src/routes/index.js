@@ -11,7 +11,7 @@ import ProductDetailPage from "../pages/ProductDetailPage";
 import HomeManage from "../pages/Manage/HomeManage";
 import ForgotPassPage from "../pages/Form/ForgotPass";
 import MoreProductPage from "../pages/MoreProductPage"
-import PayPage from "../pages/PayPage";
+
 
 const publicRoutes = [
     {
