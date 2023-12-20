@@ -1,9 +1,9 @@
+import { useEffect, useState, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate, Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import {
     hendleLogin as postLogin,
@@ -11,8 +11,10 @@ import {
 } from "../../services/hendleLogin";
 import styles from "./Login.module.scss";
 function Login() {
+    const [isShowPassWord, setIsShowPassWord] = useState(faEyeSlash);
+    const [stateShow, SetStateShow] = useState(false);
+    const input_password = useRef();
     const navigate = useNavigate();
-
     useEffect(() => {
         let token = Cookies.get("token_login");
         if(token) {
@@ -67,16 +69,32 @@ function Login() {
             [name]: value,
         }));
     };
-    const hendleLogin = async (e) => {
-        const allInputsFilled = Object.values(inputValues).every(
-            (value) => value.trim() !== ""
-        );
+    let validateForm = (email, password) => {
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email || !emailRegex.test(email)) {
+            return "Email không hợp lệ.";
+        }
+        if (!password || password.length < 6) {
+            return "Mật khẩu phải có ít nhất 6 kí tự.";
+        }
+
 
         if(allInputsFilled) {
             try {
                 let data = await postLogin(inputValues);
                 console.log("Xuan manh check data: ", data);
                 if(data && data.status === 200) {
+
+        return null;
+    };
+    const hendleLogin = async () => {
+        const check = validateForm(inputValues.email, inputValues.password);
+
+        if (check === null) {
+            try {
+                let data = await postLogin(inputValues);
+                if (data && data.status === 200) {
+
                     Cookies.set("token_login", data.data.token);
                     if(data.data.role === "user") {
                         toast.success("Đăng nhập thành công");
@@ -102,7 +120,19 @@ function Login() {
                 toast.error("Đã xảy ra lỗi phía server.");
             }
         } else {
-            toast.warning("Vui lòng nhập đầy đủ thông tin để tiếp tục");
+            toast.warning(`${check}`);
+        }
+    };
+
+    const hendleEyeInput = () => {
+        if (!stateShow) {
+            setIsShowPassWord(faEye);
+            input_password.current.type = "text";
+            SetStateShow(true);
+        } else {
+            setIsShowPassWord(faEyeSlash);
+            input_password.current.type = "password";
+            SetStateShow(false);
         }
     };
     return (
@@ -138,17 +168,17 @@ function Login() {
                             name="password"
                             value={inputValues.password}
                             onChange={handleInputChange}
+                            ref={input_password}
                         />
                         <i
+                            onClick={() => {
+                                hendleEyeInput();
+                            }}
                             className={`fa-solid fa-eye-slash ${styles["eye_close"]}`}
                         >
-                            <FontAwesomeIcon icon={faEyeSlash} />
+                            <FontAwesomeIcon icon={isShowPassWord} />
                         </i>
-                        <i
-                            className={`fa-solid fa-eye ${styles["none_eye"]} ${styles["eye_open"]}`}
-                        >
-                            <FontAwesomeIcon icon={faEye} />
-                        </i>
+
                         <span className={styles["form-message"]}></span>
                     </div>
                     <button

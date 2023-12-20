@@ -41,7 +41,7 @@ function ProductDetailPage() {
 
         fetchData();
     }, [id, role]);
-    
+
     return (
         <>
             <Header
