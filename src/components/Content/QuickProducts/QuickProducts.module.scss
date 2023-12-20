@@ -114,10 +114,9 @@
                 }
                 .desc {
                     margin-top: 20px;
-                    p {
-                        text-align: justify;
-                        color: var(--text-color);
-                    }
+                    text-align: justify;
+                    padding-right: 7px;
+                    line-height: 1.5;
                 }
                 .manyProduct {
                     margin-top: 30px;

@@ -88,13 +88,14 @@
                 .box_modal_buy {
                     display: none;
                     position: absolute;
-                    top: 40%;
-                    left: 25%;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);
                     display: flex;
                     flex-direction: column;
                     align-items: center;
                     gap: 8px;
-                    animation: box_modal 0.4s ease;
+                    animation: slideInFromBottom 0.5s ease;
                     .btn_view,
                     .btn_buy_now {
                         width: 145px;
@@ -160,13 +161,13 @@
     }
 }
 
-@keyframes box_modal {
+@keyframes slideInFromBottom {
     0% {
-        transform: translateY(30%);
         opacity: 0;
+        transform: translate(-50%, -30%);
     }
     100% {
-        transform: translateY(0%);
         opacity: 1;
+        transform: translate(-50%, -50%);
     }
 }
