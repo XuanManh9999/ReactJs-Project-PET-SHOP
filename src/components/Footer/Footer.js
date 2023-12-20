@@ -97,7 +97,7 @@ function Footer() {
 
                 <div className={styles["footer-license"]}>
                     <span>
-                        <FontAwesomeIcon icon={faCopyright} />
+                        <FontAwesomeIcon className={styles['icon-copy-right']} icon={faCopyright} />
                         Bản quyền thuộc về
                         <strong>PET SHOP</strong>
                     </span>

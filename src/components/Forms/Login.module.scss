@@ -133,12 +133,14 @@
 .form_group.eye {
     position: relative;
     margin-top: 15px;
+    user-select: none;
 }
 .form_group.eye > i {
     position: absolute;
     right: 13px;
     top: 38px;
     cursor: pointer;
+    user-select: none;
 }
 .none_eye {
     display: none !important;

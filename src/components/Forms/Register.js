@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import styles from "./Login.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { hendleRegister } from "../../services/hendleLogin";
 
 function Rigister() {
+    const [isShowPassWord, setIsShowPassWord] = useState(faEyeSlash);
+    const [stateShow, SetStateShow] = useState(false);
+    const input_password = useRef();
     const [inputValues, setInputValues] = useState({
         firstName: "",
         lastName: "",
@@ -22,13 +25,46 @@ function Rigister() {
             [name]: value,
         }));
     };
-    const handleSubmit = async (event) => {
-        // Kiểm tra xem tất cả các input có giá trị không rỗng
-        const allInputsFilled = Object.values(inputValues).every(
-            (value) => value.trim() !== ""
-        );
+    function validateForm(firstName, lastName, phoneNumber, email, password) {
+        // Kiểm tra first name
+        if (!firstName || firstName.trim().length < 6) {
+            return "First name phải có ít nhất 6 kí tự.";
+        }
 
-        if (allInputsFilled) {
+        // Kiểm tra last name
+        if (!lastName || lastName.trim().length < 2) {
+            return "Last name phải có ít nhất 2 kí tự.";
+        }
+
+        // Kiểm tra số điện thoại
+        var phoneRegex = /^\d{10}$/;
+        if (!phoneNumber || !phoneRegex.test(phoneNumber)) {
+            return "Số điện thoại không hợp lệ.";
+        }
+
+        // Kiểm tra email
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email || !emailRegex.test(email)) {
+            return "Email không hợp lệ.";
+        }
+
+        // Kiểm tra mật khẩu
+        if (!password || password.length < 6) {
+            return "Mật khẩu phải có ít nhất 6 kí tự.";
+        }
+
+        // Nếu không có lỗi
+        return null;
+    }
+    const handleSubmit = async () => {
+        let check = validateForm(
+            inputValues.firstName,
+            inputValues.lastName,
+            inputValues.phone,
+            inputValues.email,
+            inputValues.password
+        );
+        if (check === null) {
             try {
                 let data = await hendleRegister(inputValues);
                 if (data && data.status === 200) {
@@ -45,7 +81,19 @@ function Rigister() {
                 );
             }
         } else {
-            toast.warning("Các trường không được rỗng.");
+            toast.error(`${check}`);
+        }
+    };
+
+    const hendleEyeInput = () => {
+        if (!stateShow) {
+            setIsShowPassWord(faEye);
+            input_password.current.type = "text";
+            SetStateShow(true);
+        } else {
+            setIsShowPassWord(faEyeSlash);
+            input_password.current.type = "password";
+            SetStateShow(false);
         }
     };
     return (
@@ -116,15 +164,16 @@ function Rigister() {
                             value={inputValues.password}
                             name="password"
                             onChange={handleInputChange}
+                            ref={input_password}
                         />
                         <i
+                            onClick={() => {
+                                hendleEyeInput();
+                            }}
                             className={`fa-solid fa-eye-slash ${styles["eye_close"]}`}
                         >
-                            <FontAwesomeIcon icon={faEyeSlash} />
+                            <FontAwesomeIcon icon={isShowPassWord} />
                         </i>
-                        <i
-                            className={`fa-solid fa-eye ${styles["none_eye"]} ${styles["eye_open"]}`}
-                        ></i>
                         <span className={styles["form-message"]}></span>
                     </div>
                     <button
