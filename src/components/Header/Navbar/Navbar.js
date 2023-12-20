@@ -25,10 +25,10 @@ function Navbar() {
     });
     useEffect(() => {
         let token = Cookies.get("token_login");
-        if (token) {
+        if(token) {
             let hendleCheck = async () => {
                 let result = await checkToken(token);
-                if (result && result.status === 200 && result.data.length > 0) {
+                if(result && result.status === 200 && result.data.length > 0) {
                     setUser({
                         title1:
                             result.data[0].firstName.split(" ")[1] +
@@ -50,7 +50,7 @@ function Navbar() {
     };
 
     const hendleUser = (event) => {
-        if (event.target.innerText === "Đăng xuất") {
+        if(event.target.innerText === "Đăng xuất") {
             Cookies.remove("token_login");
         }
     };
@@ -74,8 +74,8 @@ function Navbar() {
                     {search ? (
                         <Search close_search={hendle_click_search} />
                     ) : (
-                        ""
-                    )}
+                            ""
+                        )}
                     <div className={clsx(styles.container_login_logout)}>
                         <i>
                             <FaUser className={clsx(styles.icon_header_top)} />
@@ -127,7 +127,7 @@ function Navbar() {
                             />
                             <ul className={clsx(styles.sub_nav_lv1)}>
                                 <li>
-                                    <Link to={"/product/1"}>
+                                    <Link to={"/MoreProduct"}>
                                         Thức ăn cho chó
                                     </Link>
                                     <i>

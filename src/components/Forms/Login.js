@@ -50,23 +50,6 @@ function Login() {
                         navigate("/");
                     }
                 } catch(e) { }
-=========
-                let result = await checkToken(token);
-                if(
-                    result &&
-                    result.status === 200 &&
-                    result.data.length > 0 &&
-                    result.data[0].role === "R0"
-                ) {
-                    navigate("/manage");
-                } else if(
-                    result &&
-                    result.data.length > 0 &&
-                    result.data[0].role === "R1"
-                ) {
-                    navigate("/");
-                }
->>>>>>>>> Temporary merge branch 2
             };
             hendleToken();
         } else {
@@ -88,11 +71,12 @@ function Login() {
         const allInputsFilled = Object.values(inputValues).every(
             (value) => value.trim() !== ""
         );
-<<<<<<<<< Temporary merge branch 1
-        if (allInputsFilled) {
+
+        if(allInputsFilled) {
             try {
                 let data = await postLogin(inputValues);
-                if (data && data.status === 200) {
+                console.log("Xuan manh check data: ", data);
+                if(data && data.status === 200) {
                     Cookies.set("token_login", data.data.token);
                     if(data.data.role === "user") {
                         toast.success("Đăng nhập thành công");
@@ -105,7 +89,7 @@ function Login() {
                             navigate("/manage");
                         }, 1500);
                     }
-                } else if (data.status === 404) {
+                } else if(data.status === 404) {
                     toast.warning(
                         "Tên tài khoản hoặc mật khẩu chưa đúng, vui lòng thử lại"
                     );
@@ -113,24 +97,8 @@ function Login() {
                     toast.error(
                         "Đăng nhập thất bại, vui lòng kiểm tra và thử lại."
                     );
-=========
-        if(allInputsFilled) {
-            let data = await postLogin(inputValues);
-            if(data && data.status === 200) {
-                Cookies.set("token_login", data.data.token);
-                if(data.data.role === "user") {
-                    toast.success("Đăng nhập thành công");
-                    setTimeout(() => {
-                        navigate("/");
-                    }, 1500);
-                } else if(data.data.role === "admin") {
-                    toast.success("Đăng nhập thành công");
-                    setTimeout(() => {
-                        navigate("/manage");
-                    }, 1500);
->>>>>>>>> Temporary merge branch 2
                 }
-            } catch (e) {
+            } catch(e) {
                 toast.error("Đã xảy ra lỗi phía server.");
             }
         } else {
