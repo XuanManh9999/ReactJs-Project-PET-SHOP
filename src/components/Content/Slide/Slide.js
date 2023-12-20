@@ -1,6 +1,8 @@
 import React from "react";
 import { useState, useRef } from "react";
 import Slider from "react-slick";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import clsx from "clsx";
@@ -37,6 +39,22 @@ function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
         setQuickView((pre) => !pre);
     };
 
+    // thêm vào giỏ hàng
+
+    const hendleAddToCart = (id) => {
+        let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+        // Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng hay chưa
+        if (!cartItems.includes(id)) {
+            // Thêm ID sản phẩm vào giỏ hàng
+            cartItems.push(id);
+
+            // Lưu giỏ hàng vào localStorage
+            localStorage.setItem("cartItems", JSON.stringify(cartItems));
+            toast.success("Thêm vào giỏ hàng thành công.");
+        } else {
+            toast.warn("Sản phẩm đã tồn tại trong giỏ hàng.");
+        }
+    };
     return (
         <>
             <div className={clsx(styles.container)}>
@@ -154,7 +172,15 @@ function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
                                                             icon={faCartPlus}
                                                         />
                                                     </i>
-                                                    <span>Mua ngay</span>
+                                                    <span
+                                                        onClick={() => {
+                                                            hendleAddToCart(
+                                                                item.id
+                                                            );
+                                                        }}
+                                                    >
+                                                        Mua ngay
+                                                    </span>
                                                 </button>
                                             </div>
                                         </div>
@@ -172,6 +198,18 @@ function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
             ) : (
                 ""
             )}
+            <ToastContainer
+                position="top-right"
+                autoClose={2500}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+            />
         </>
     );
 }

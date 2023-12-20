@@ -17,17 +17,17 @@ function Login() {
     const navigate = useNavigate();
     useEffect(() => {
         let token = Cookies.get("token_login");
-        if(token) {
+        if (token) {
             let hendleToken = async () => {
                 let result = await checkToken(token);
-                if(
+                if (
                     result &&
                     result.status === 200 &&
                     result.data.length > 0 &&
                     result.data[0].role === "R0"
                 ) {
                     navigate("/manage");
-                } else if(
+                } else if (
                     result &&
                     result.data.length > 0 &&
                     result.data[0].role === "R1"
@@ -37,21 +37,21 @@ function Login() {
 
                 try {
                     let result = await checkToken(token);
-                    if(
+                    if (
                         result &&
                         result.status === 200 &&
                         result.data.length > 0 &&
                         result.data[0].role === "R0"
                     ) {
                         navigate("/manage");
-                    } else if(
+                    } else if (
                         result &&
                         result.data.length > 0 &&
                         result.data[0].role === "R1"
                     ) {
                         navigate("/");
                     }
-                } catch(e) { }
+                } catch (e) {}
             };
             hendleToken();
         } else {
@@ -78,36 +78,27 @@ function Login() {
             return "Mật khẩu phải có ít nhất 6 kí tự.";
         }
 
-
-        if(allInputsFilled) {
-            try {
-                let data = await postLogin(inputValues);
-                console.log("Xuan manh check data: ", data);
-                if(data && data.status === 200) {
-
         return null;
     };
     const hendleLogin = async () => {
         const check = validateForm(inputValues.email, inputValues.password);
-
         if (check === null) {
             try {
                 let data = await postLogin(inputValues);
                 if (data && data.status === 200) {
-
                     Cookies.set("token_login", data.data.token);
-                    if(data.data.role === "user") {
+                    if (data.data.role === "user") {
                         toast.success("Đăng nhập thành công");
                         setTimeout(() => {
                             navigate("/");
                         }, 1500);
-                    } else if(data.data.role === "admin") {
+                    } else if (data.data.role === "admin") {
                         toast.success("Đăng nhập thành công");
                         setTimeout(() => {
                             navigate("/manage");
                         }, 1500);
                     }
-                } else if(data.status === 404) {
+                } else if (data.status === 404) {
                     toast.warning(
                         "Tên tài khoản hoặc mật khẩu chưa đúng, vui lòng thử lại"
                     );
@@ -116,7 +107,7 @@ function Login() {
                         "Đăng nhập thất bại, vui lòng kiểm tra và thử lại."
                     );
                 }
-            } catch(e) {
+            } catch (e) {
                 toast.error("Đã xảy ra lỗi phía server.");
             }
         } else {

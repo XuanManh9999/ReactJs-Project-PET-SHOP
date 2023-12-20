@@ -17,6 +17,7 @@ import Search from "../../Content/Search/Search";
 import { checkToken } from "../../../services/hendleLogin";
 function Navbar() {
     const [search, setSearch] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
     const [user, setUser] = useState({
         title1: "Đăng nhập",
         title2: "Đăng ký",
@@ -25,10 +26,10 @@ function Navbar() {
     });
     useEffect(() => {
         let token = Cookies.get("token_login");
-        if(token) {
+        if (token) {
             let hendleCheck = async () => {
                 let result = await checkToken(token);
-                if(result && result.status === 200 && result.data.length > 0) {
+                if (result && result.status === 200 && result.data.length > 0) {
                     setUser({
                         title1:
                             result.data[0].firstName.split(" ")[1] +
@@ -50,7 +51,7 @@ function Navbar() {
     };
 
     const hendleUser = (event) => {
-        if(event.target.innerText === "Đăng xuất") {
+        if (event.target.innerText === "Đăng xuất") {
             Cookies.remove("token_login");
         }
     };
@@ -71,11 +72,11 @@ function Navbar() {
                         </i>
                     </div>
                     {/* Search */}
-                    {search ? (
+                    {search === true ? (
                         <Search close_search={hendle_click_search} />
                     ) : (
-                            ""
-                        )}
+                        ""
+                    )}
                     <div className={clsx(styles.container_login_logout)}>
                         <i>
                             <FaUser className={clsx(styles.icon_header_top)} />
@@ -101,14 +102,19 @@ function Navbar() {
                         </ul>
                     </div>
 
-                    <Link to={""} className={clsx(styles.cart)}>
+                    <Link
+                        onMouseEnter={() => setIsHovered(true)}
+                        onMouseLeave={() => setIsHovered(false)}
+                        to={""}
+                        className={clsx(styles.cart)}
+                    >
                         <i>
                             <FaCartPlus
                                 className={clsx(styles.icon_header_top)}
                             />
                         </i>
                         <div className={clsx(styles.main_carts)}>
-                            <Cart />
+                            {isHovered ? <Cart /> : ""}
                         </div>
                     </Link>
                 </div>
