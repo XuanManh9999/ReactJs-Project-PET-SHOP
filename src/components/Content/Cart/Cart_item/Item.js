@@ -2,7 +2,6 @@ import clsx from "clsx";
 import { useState, useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import styles from "./Item.module.scss";
 import {
     faDongSign,
@@ -10,26 +9,31 @@ import {
     faPlus,
     faTrash,
 } from "@fortawesome/free-solid-svg-icons";
-
 import { getDataCardProducts } from "../../../../services/hendleProducts";
-
+import { useData } from "../../../Common/DataContext";
 function Item() {
     const [productDetails, setProductDetails] = useState([]);
     const [cartItems, setCartItems] = useState(
-        JSON.parse(localStorage.getItem("cartItems")) || []
+        JSON.parse(localStorage.getItem("cart")) || []
     );
     const [totalPrice, setTotalPrice] = useState(0);
+    const { updateData } = useData();
     useEffect(() => {
         const fetchData = async () => {
             try {
                 if (cartItems.length > 0) {
-                    const response = await getDataCardProducts(cartItems);
+                    const response = await getDataCardProducts(
+                        getIds(cartItems)
+                    );
                     if (response && response.data.length > 0) {
-                        setProductDetails(response.data);
+                        setProductDetails(
+                            updateArrayWithQuantity(response.data, cartItems)
+                        );
 
                         // Tính tổng giá trị khi có dữ liệu mới
                         const total = response.data.reduce(
-                            (acc, item) => acc + parseFloat(item.price),
+                            (acc, item) =>
+                                acc + parseFloat(item.price) * item.quantity,
                             0
                         );
                         setTotalPrice(total);
@@ -47,31 +51,72 @@ function Item() {
 
         fetchData();
     }, [cartItems]);
+    // get Ids
+    const getIds = (dataArray) => {
+        return dataArray.map((item) => item.id);
+    };
+    const updateArrayWithQuantity = (array1, array2) => {
+        // Tạo một bản sao của mảng thứ nhất để không thay đổi mảng gốc
+        const newArray = [...array1];
+
+        // Lặp qua mảng thứ hai để kiểm tra và cập nhật mảng thứ nhất
+        array2.forEach((item2) => {
+            const existingItemIndex = newArray.findIndex(
+                (item1) => item1.id === item2.id
+            );
+
+            if (existingItemIndex !== -1) {
+                // Nếu tìm thấy trùng khớp, thêm trường "quantity"
+                newArray[existingItemIndex].quantity = item2.quantity;
+            }
+        });
+
+        return newArray;
+    };
     const hendleDeleteProduct = (id) => {
         if (id && cartItems.length > 0) {
             const local = cartItems;
-            const newArr = local.filter((item) => item !== id);
-            localStorage.setItem("cartItems", JSON.stringify(newArr));
+            const newArr = local.filter((item) => item.id !== id);
+            localStorage.setItem("cart", JSON.stringify(newArr));
+            updateData(newArr);
             setCartItems(newArr);
         } else {
             setProductDetails([]);
         }
     };
     // Hàm định dạng số thành giá trị tiền tệ
-    const formatCurrency = (value) => {
-        if (isNaN(value)) {
-            return "0";
+    const formatCurrency = (amount) => {
+        return amount.toLocaleString("vi-VN");
+    };
+    const hendleMinusProduct = (id) => {
+        const newArr = [...cartItems];
+        if (newArr && newArr.length > 0) {
+            newArr.map((item) => {
+                return [
+                    { ...item },
+                    item.id === id && item.quantity > 1
+                        ? (item.quantity -= 1)
+                        : item.quantity,
+                ];
+            });
         }
-
-        return new Intl.NumberFormat("vi-VN", {
-            style: "currency",
-            currency: "VND",
-        }).format(value);
+        localStorage.setItem("cart", JSON.stringify(newArr));
+        setCartItems(newArr);
+    };
+    const hendlePlusProduct = (id) => {
+        const newArr = [...cartItems];
+        if (newArr && newArr.length > 0) {
+            newArr.map((item) => {
+                return [
+                    { ...item },
+                    item.id === id ? (item.quantity += 1) : item.quantity,
+                ];
+            });
+        }
+        localStorage.setItem("cart", JSON.stringify(newArr));
+        setCartItems(newArr);
     };
 
-    const deleteTextVND = (priceString) => {
-        return parseFloat(priceString.replace(/[^0-9]/g, ""));
-    };
     return (
         <>
             {productDetails && productDetails.length > 0 ? (
@@ -87,7 +132,9 @@ function Item() {
                                         {item.name}
                                     </p>
                                     <span className={clsx(styles.price)}>
-                                        {item.price}
+                                        {formatCurrency(
+                                            item.price * item.quantity
+                                        )}
                                         <FontAwesomeIcon icon={faDongSign} />
                                     </span>
                                     <div
@@ -96,14 +143,23 @@ function Item() {
                                         )}
                                     >
                                         <input
-                                            value={"1"}
-                                            alt="many"
+                                            value={item.quantity}
                                             className={clsx(styles.many)}
                                         />
-                                        <span className={clsx(styles.plus)}>
+                                        <span
+                                            onClick={() => {
+                                                hendlePlusProduct(item.id);
+                                            }}
+                                            className={clsx(styles.plus)}
+                                        >
                                             <FontAwesomeIcon icon={faPlus} />
                                         </span>
-                                        <span className={clsx(styles.minus)}>
+                                        <span
+                                            onClick={() => {
+                                                hendleMinusProduct(item.id);
+                                            }}
+                                            className={clsx(styles.minus)}
+                                        >
                                             <FontAwesomeIcon icon={faMinus} />
                                         </span>
                                     </div>
@@ -124,7 +180,7 @@ function Item() {
                         <div className={clsx(styles.header_pay)}>
                             <p>Tổng tiền thanh toán: </p>
                             <span className={clsx(styles.price)}>
-                                {deleteTextVND(formatCurrency(totalPrice))}
+                                {formatCurrency(totalPrice)}
                                 <FontAwesomeIcon icon={faDongSign} />
                             </span>
                         </div>
