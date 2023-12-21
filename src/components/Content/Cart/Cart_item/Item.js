@@ -11,6 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { getDataCardProducts } from "../../../../services/hendleProducts";
 import { useData } from "../../../Common/DataContext";
+import { Link } from "react-router-dom";
 function Item() {
     const [productDetails, setProductDetails] = useState([]);
     const [cartItems, setCartItems] = useState(
@@ -185,9 +186,9 @@ function Item() {
                             </span>
                         </div>
                         <div className={clsx(styles.pay_money)}>
-                            <button className={clsx(styles.btn_pay)}>
+                            <Link to={"/pay"} className={clsx(styles.btn_pay)}>
                                 Thanh toán
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </>
