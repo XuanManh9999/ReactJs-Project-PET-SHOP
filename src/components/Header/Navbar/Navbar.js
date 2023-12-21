@@ -15,15 +15,31 @@ import styles from "./Navbar.module.scss";
 import Cart from "../../Content/Cart/Cart";
 import Search from "../../Content/Search/Search";
 import { checkToken } from "../../../services/hendleLogin";
+import { useData } from "../../Common/DataContext";
 function Navbar() {
     const [search, setSearch] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
+    const { yourData, updateData } = useData();
     const [user, setUser] = useState({
         title1: "Đăng nhập",
         title2: "Đăng ký",
         link1: "/Login",
         link2: "/Register",
     });
+
+    useEffect(() => {
+        const handleLocalStorageChange = () => {
+            const storedData = JSON.parse(localStorage.getItem("cart")) || [];
+            updateData(storedData);
+        };
+
+        window.addEventListener("storage", handleLocalStorageChange);
+
+        return () => {
+            window.removeEventListener("storage", handleLocalStorageChange);
+        };
+    }, [updateData]);
+
     useEffect(() => {
         let token = Cookies.get("token_login");
         if (token) {
@@ -54,6 +70,9 @@ function Navbar() {
         if (event.target.innerText === "Đăng xuất") {
             Cookies.remove("token_login");
         }
+    };
+    const hendleManyProducts = () => {
+        return yourData.reduce((acc, item) => (acc += item.quantity), 0);
     };
     return (
         <>
@@ -115,6 +134,9 @@ function Navbar() {
                         </i>
                         <div className={clsx(styles.main_carts)}>
                             {isHovered ? <Cart /> : ""}
+                        </div>
+                        <div className={clsx(styles.manyProductsCart)}>
+                            <span>{hendleManyProducts()}</span>
                         </div>
                     </Link>
                 </div>

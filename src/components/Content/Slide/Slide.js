@@ -17,8 +17,12 @@ import {
 import styles from "./Slide.module.scss";
 import "./overwrite.scss";
 import QuickProducts from "../QuickProducts/QuickProducts";
+import { useData } from "../../Common/DataContext";
+
 function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
+    const { updateData } = useData();
     const [quickView, setQuickView] = useState(false);
+
     const getIdProduct = useRef();
     const settings = {
         dots: true,
@@ -42,18 +46,30 @@ function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
     // thêm vào giỏ hàng
 
     const hendleAddToCart = (id) => {
-        let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-        // Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng hay chưa
-        if (!cartItems.includes(id)) {
-            // Thêm ID sản phẩm vào giỏ hàng
-            cartItems.push(id);
+        // Kiểm tra xem có dữ liệu trong localStorage hay không
+        const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
 
-            // Lưu giỏ hàng vào localStorage
-            localStorage.setItem("cartItems", JSON.stringify(cartItems));
-            toast.success("Thêm vào giỏ hàng thành công.");
+        // Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng chưa
+        const existingProductIndex = existingCart.findIndex(
+            (item) => item.id === id
+        );
+
+        if (existingProductIndex !== -1) {
+            // Nếu sản phẩm đã tồn tại, cập nhật số lượng
+            toast.warn("Sản phẩm đã tồn tài trong giỏ hàng");
         } else {
-            toast.warn("Sản phẩm đã tồn tại trong giỏ hàng.");
+            // Nếu sản phẩm chưa tồn tại, thêm vào giỏ hàng
+            existingCart.push({ id, quantity: 1 });
+            updateData(existingCart);
+            toast.success("Thêm sản phẩm thành công");
         }
+
+        // Lưu giỏ hàng mới vào localStorage
+        localStorage.setItem("cart", JSON.stringify(existingCart));
+    };
+    const formatCurrency = (amount) => {
+        amount = parseFloat(amount);
+        return amount.toLocaleString("vi-VN");
     };
     return (
         <>
@@ -109,7 +125,9 @@ function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
                                                                 styles.price_new
                                                             )}
                                                         >
-                                                            {item.price}
+                                                            {formatCurrency(
+                                                                item.price
+                                                            )}
                                                             <FontAwesomeIcon
                                                                 className={clsx(
                                                                     styles.icon_price_new
@@ -124,7 +142,9 @@ function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
                                                                 styles.price_old
                                                             )}
                                                         >
-                                                            {item.salePrice}
+                                                            {formatCurrency(
+                                                                item.salePrice
+                                                            )}
                                                             <FontAwesomeIcon
                                                                 className={clsx(
                                                                     styles.icon_price_old
