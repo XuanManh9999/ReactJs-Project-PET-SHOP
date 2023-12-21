@@ -10,7 +10,7 @@ import ContactPage from "../pages/ContactPage";
 import ProductDetailPage from "../pages/ProductDetailPage";
 import HomeManage from "../pages/Manage/HomeManage";
 import ForgotPassPage from "../pages/Form/ForgotPass";
-import MoreProductPage from "../pages/MoreProductPage"
+import MoreProductPage from "../pages/MoreProductPage";
 import PayPage from "../pages/PayPage";
 
 const publicRoutes = [
@@ -57,7 +57,11 @@ const publicRoutes = [
     {
         path: "/MoreProduct",
         component: <MoreProductPage />,
-    }
+    },
+    {
+        path: "/pay",
+        component: <PayPage />,
+    },
 ];
 // Cần đăng nhập
 const privateRoutes = [];
