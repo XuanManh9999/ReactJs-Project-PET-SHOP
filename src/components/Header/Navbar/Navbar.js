@@ -15,20 +15,37 @@ import styles from "./Navbar.module.scss";
 import Cart from "../../Content/Cart/Cart";
 import Search from "../../Content/Search/Search";
 import { checkToken } from "../../../services/hendleLogin";
+import { useData } from "../../Common/DataContext";
 function Navbar() {
     const [search, setSearch] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
+    const { yourData, updateData } = useData();
     const [user, setUser] = useState({
         title1: "Đăng nhập",
         title2: "Đăng ký",
         link1: "/Login",
         link2: "/Register",
     });
+
+    useEffect(() => {
+        const handleLocalStorageChange = () => {
+            const storedData = JSON.parse(localStorage.getItem("cart")) || [];
+            updateData(storedData);
+        };
+
+        window.addEventListener("storage", handleLocalStorageChange);
+
+        return () => {
+            window.removeEventListener("storage", handleLocalStorageChange);
+        };
+    }, [updateData]);
+
     useEffect(() => {
         let token = Cookies.get("token_login");
-        if(token) {
+        if (token) {
             let hendleCheck = async () => {
                 let result = await checkToken(token);
-                if(result && result.status === 200 && result.data.length > 0) {
+                if (result && result.status === 200 && result.data.length > 0) {
                     setUser({
                         title1:
                             result.data[0].firstName.split(" ")[1] +
@@ -50,9 +67,12 @@ function Navbar() {
     };
 
     const hendleUser = (event) => {
-        if(event.target.innerText === "Đăng xuất") {
+        if (event.target.innerText === "Đăng xuất") {
             Cookies.remove("token_login");
         }
+    };
+    const hendleManyProducts = () => {
+        return yourData.reduce((acc, item) => (acc += item.quantity), 0);
     };
     return (
         <>
@@ -71,11 +91,11 @@ function Navbar() {
                         </i>
                     </div>
                     {/* Search */}
-                    {search ? (
+                    {search === true ? (
                         <Search close_search={hendle_click_search} />
                     ) : (
-                            ""
-                        )}
+                        ""
+                    )}
                     <div className={clsx(styles.container_login_logout)}>
                         <i>
                             <FaUser className={clsx(styles.icon_header_top)} />
@@ -101,14 +121,22 @@ function Navbar() {
                         </ul>
                     </div>
 
-                    <Link to={""} className={clsx(styles.cart)}>
+                    <Link
+                        onMouseEnter={() => setIsHovered(true)}
+                        onMouseLeave={() => setIsHovered(false)}
+                        to={""}
+                        className={clsx(styles.cart)}
+                    >
                         <i>
                             <FaCartPlus
                                 className={clsx(styles.icon_header_top)}
                             />
                         </i>
                         <div className={clsx(styles.main_carts)}>
-                            <Cart />
+                            {isHovered ? <Cart /> : ""}
+                        </div>
+                        <div className={clsx(styles.manyProductsCart)}>
+                            <span>{hendleManyProducts()}</span>
                         </div>
                     </Link>
                 </div>

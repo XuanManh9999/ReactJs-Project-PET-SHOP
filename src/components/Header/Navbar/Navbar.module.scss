@@ -253,6 +253,21 @@
             display: block !important;
         }
     }
+    .manyProductsCart {
+        top: 8px;
+        right: 44px;
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: #f71611;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        span {
+            font-size: 14px;
+        }
+    }
 }
 @keyframes sub_nav {
     0% {

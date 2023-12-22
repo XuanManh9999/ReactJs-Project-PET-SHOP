@@ -59,7 +59,11 @@ const publicRoutes = [
     {
         path: "/MoreProduct",
         component: <MoreProductPage />,
-    }
+    },
+    {
+        path: "/pay",
+        component: <PayPage />,
+    },
 ];
 // Cần đăng nhập
 const privateRoutes = [];

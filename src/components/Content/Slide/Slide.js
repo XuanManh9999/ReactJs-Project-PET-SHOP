@@ -1,6 +1,8 @@
 import React from "react";
 import { useState, useRef } from "react";
 import Slider from "react-slick";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import clsx from "clsx";
@@ -15,8 +17,12 @@ import {
 import styles from "./Slide.module.scss";
 import "./overwrite.scss";
 import QuickProducts from "../QuickProducts/QuickProducts";
+import { useData } from "../../Common/DataContext";
+
 function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
+    const { updateData } = useData();
     const [quickView, setQuickView] = useState(false);
+
     const getIdProduct = useRef();
     const settings = {
         dots: true,
@@ -37,6 +43,34 @@ function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
         setQuickView((pre) => !pre);
     };
 
+    // thêm vào giỏ hàng
+
+    const hendleAddToCart = (id) => {
+        // Kiểm tra xem có dữ liệu trong localStorage hay không
+        const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        // Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng chưa
+        const existingProductIndex = existingCart.findIndex(
+            (item) => item.id === id
+        );
+
+        if (existingProductIndex !== -1) {
+            // Nếu sản phẩm đã tồn tại, cập nhật số lượng
+            toast.warn("Sản phẩm đã tồn tài trong giỏ hàng");
+        } else {
+            // Nếu sản phẩm chưa tồn tại, thêm vào giỏ hàng
+            existingCart.push({ id, quantity: 1 });
+            updateData(existingCart);
+            toast.success("Thêm sản phẩm thành công");
+        }
+
+        // Lưu giỏ hàng mới vào localStorage
+        localStorage.setItem("cart", JSON.stringify(existingCart));
+    };
+    const formatCurrency = (amount) => {
+        amount = parseFloat(amount);
+        return amount.toLocaleString("vi-VN");
+    };
     return (
         <>
             <div className={clsx(styles.container)}>
@@ -91,7 +125,9 @@ function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
                                                                 styles.price_new
                                                             )}
                                                         >
-                                                            {item.price}
+                                                            {formatCurrency(
+                                                                item.price
+                                                            )}
                                                             <FontAwesomeIcon
                                                                 className={clsx(
                                                                     styles.icon_price_new
@@ -106,7 +142,9 @@ function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
                                                                 styles.price_old
                                                             )}
                                                         >
-                                                            {item.salePrice}
+                                                            {formatCurrency(
+                                                                item.salePrice
+                                                            )}
                                                             <FontAwesomeIcon
                                                                 className={clsx(
                                                                     styles.icon_price_old
@@ -154,7 +192,15 @@ function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
                                                             icon={faCartPlus}
                                                         />
                                                     </i>
-                                                    <span>Mua ngay</span>
+                                                    <span
+                                                        onClick={() => {
+                                                            hendleAddToCart(
+                                                                item.id
+                                                            );
+                                                        }}
+                                                    >
+                                                        Mua ngay
+                                                    </span>
                                                 </button>
                                             </div>
                                         </div>
@@ -172,6 +218,18 @@ function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
             ) : (
                 ""
             )}
+            <ToastContainer
+                position="top-right"
+                autoClose={2500}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+            />
         </>
     );
 }

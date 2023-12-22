@@ -2,11 +2,11 @@ import axios from "axios";
 const hendleRegister = async (data) => {
     try {
         const response = await axios.post(
-            "https://b8d4-113-185-55-90.ngrok-free.app/api/v1/register/data",
+            "http://localhost:4000/api/v1/register/data",
             data
         );
         return response.data;
-    } catch(error) {
+    } catch (error) {
         console.error("Error fetching data:", error);
         throw error;
     }
@@ -14,11 +14,11 @@ const hendleRegister = async (data) => {
 const hendleLogin = async (data) => {
     try {
         const response = await axios.post(
-            "https://b8d4-113-185-55-90.ngrok-free.app/api/v1/login/data",
+            "http://localhost:4000/api/v1/login/data",
             data
         );
         return response.data;
-    } catch(error) {
+    } catch (error) {
         console.error("Error fetching data:", error);
         throw error;
     }
@@ -27,13 +27,13 @@ const hendleLogin = async (data) => {
 const checkToken = async (token) => {
     try {
         const response = await axios.post(
-            "https://b8d4-113-185-55-90.ngrok-free.app/api/v1/check-token-user",
+            "http://localhost:4000/api/v1/check-token-user",
             {
                 token,
             }
         );
         return response.data;
-    } catch(error) {
+    } catch (error) {
         console.error("Error fetching data:", error);
         throw error;
     }

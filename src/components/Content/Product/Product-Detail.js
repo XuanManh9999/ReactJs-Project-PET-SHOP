@@ -12,7 +12,10 @@ import Slide from "../Slide/Slide";
 function ProductDetail({ data = [], imageDetail = [], dataRelare = [] }) {
     const [detailProduct] = data;
     const [imageDetail1, imageDetail2, imageDetail3] = imageDetail;
-
+    const formatCurrency = (amount) => {
+        amount = parseFloat(amount);
+        return amount.toLocaleString("vi-VN");
+    };
     return (
         <>
             {data.length > 0 ? (
@@ -152,7 +155,9 @@ function ProductDetail({ data = [], imageDetail = [], dataRelare = [] }) {
                                                             ]
                                                         }
                                                     >
-                                                        {detailProduct.price}
+                                                        {formatCurrency(
+                                                            detailProduct.price
+                                                        )}
                                                     </span>
                                                     <i>
                                                         <FontAwesomeIcon
@@ -174,9 +179,9 @@ function ProductDetail({ data = [], imageDetail = [], dataRelare = [] }) {
                                                             ]
                                                         }
                                                     >
-                                                        {
+                                                        {formatCurrency(
                                                             detailProduct.salePrice
-                                                        }
+                                                        )}
                                                     </span>
                                                     <i>
                                                         <FontAwesomeIcon
@@ -274,16 +279,13 @@ function ProductDetail({ data = [], imageDetail = [], dataRelare = [] }) {
                                         </span>
                                     </div>
                                     <p
+                                        dangerouslySetInnerHTML={{
+                                            __html: detailProduct.descHTML,
+                                        }}
                                         className={
                                             styles["product-describe-desc"]
                                         }
-                                    >
-                                        <div
-                                            dangerouslySetInnerHTML={{
-                                                __html: detailProduct.descHTML,
-                                            }}
-                                        ></div>
-                                    </p>
+                                    ></p>
                                 </div>
                             </div>
                         </div>

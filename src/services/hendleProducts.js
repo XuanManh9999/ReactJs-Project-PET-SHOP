@@ -5,7 +5,7 @@ const getDataProducts = async () => {
             "http://localhost:4000/api/v1/products/data"
         );
         return response.data;
-    } catch(error) {
+    } catch (error) {
         console.error("Error fetching data:", error);
         throw error;
     }
@@ -17,7 +17,7 @@ const getDataProductsEqualId = async (id) => {
             `http://localhost:4000/api/v1/products/data-equal-id?id=${id}`
         );
         return response.data;
-    } catch(error) {
+    } catch (error) {
         console.error("Error fetching data:", error);
         throw error;
     }
@@ -29,7 +29,7 @@ const getDataImageDetail = async (id) => {
             `http://localhost:4000/api/v1/products/images-detail-product?id=${id}`
         );
         return response.data;
-    } catch(error) {
+    } catch (error) {
         console.error("Error fetching data:", error);
         throw error;
     }
@@ -41,9 +41,31 @@ const getProductsRelate = async (role) => {
             `http://localhost:4000/api/v1/products/data-products-relate?role=${role}`
         );
         return response.data;
-    } catch(error) {
+    } catch (error) {
         console.error("Error fetching data:", error);
         throw error;
     }
 };
-export { getDataProducts, getDataProductsEqualId, getDataImageDetail, getProductsRelate };
+
+const getDataCardProducts = async (ids) => {
+    try {
+        const response = await axios.get(
+            `http://localhost:4000/api/v1/products/data-cart-products`,
+            {
+                params: { ids: ids },
+            }
+        );
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        throw error;
+    }
+};
+
+export {
+    getDataProducts,
+    getDataProductsEqualId,
+    getDataImageDetail,
+    getProductsRelate,
+    getDataCardProducts,
+};

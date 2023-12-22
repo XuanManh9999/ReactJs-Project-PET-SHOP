@@ -68,6 +68,13 @@ function Rigister() {
             try {
                 let data = await hendleRegister(inputValues);
                 if (data && data.status === 200) {
+                    setInputValues({
+                        firstName: "",
+                        lastName: "",
+                        phone: "",
+                        email: "",
+                        password: "",
+                    });
                     toast.success("Đăng ký thành công.");
                 } else if (
                     (data && data.status === 404) ||
