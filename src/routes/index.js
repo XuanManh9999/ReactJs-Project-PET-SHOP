@@ -13,10 +13,12 @@ import ForgotPassPage from "../pages/Form/ForgotPass";
 import MoreProductPage from "../pages/MoreProductPage";
 import PayPage from "../pages/PayPage";
 
+
+
 const publicRoutes = [
     {
         path: "/",
-        component: <Home />,
+        component: <PayPage />,
     },
     {
         path: "/Register",
