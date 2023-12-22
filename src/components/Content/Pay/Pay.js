@@ -110,6 +110,14 @@ function Pay() {
                             Đơn hàng (0 sản phẩm)
                         </h1>
                         <div className={styles['products_pay_list_products']}>
+                            <div className={styles['products_pay_list_item']}>
+                                <div className={styles['products_pay_list_item--img_pay']}>
+                                    <img src="Images/food-cat-thuc-an-dang-cung.webp" />
+                                    <span>1</span>
+                                </div>
+                                <p className={styles['products_pay_list_item--desc']}>Thức ăn hạt cho mèo Nutrience Original.</p>
+                                <span className={styles['price']}>130.000đ</span>
+                            </div>
                         </div>
                         {/* form_container */}
                         <div className={styles.products_pay_list_products_discount}>
