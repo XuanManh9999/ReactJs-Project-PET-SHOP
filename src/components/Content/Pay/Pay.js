@@ -151,10 +151,10 @@ function Pay() {
                                                     <FaAngleDown />
                                                 </i>
                                             ) : (
-                                                <i>
-                                                    <FaAngleRight />
-                                                </i>
-                                            )}
+                                                    <i>
+                                                        <FaAngleRight />
+                                                    </i>
+                                                )}
                                         </span>
                                     </div>
                                     <div
@@ -179,11 +179,21 @@ function Pay() {
                         <h1 className={styles["title"]}>
                             Đơn hàng (0 sản phẩm)
                         </h1>
+
+                        <div className={styles['products_pay_list_products']}>
+                            <div className={styles['products_pay_list_item']}>
+                                <div className={styles['products_pay_list_item--img_pay']}>
+                                    <img src="Images/food-cat-thuc-an-dang-cung.webp" />
+                                    <span>1</span>
+                                </div>
+                                <p className={styles['products_pay_list_item--desc']}>Thức ăn hạt cho mèo Nutrience Original.</p>
+                                <span className={styles['price']}>130.000đ</span>
+                            </div>
+                        </div>
+
                         <div
                             className={styles["products_pay_list_products"]}
-                        >
-                            123
-                        </div>
+                        ></div>
                         {/* form_container */}
                         <div
                             className={
