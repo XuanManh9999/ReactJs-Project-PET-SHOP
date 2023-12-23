@@ -2,10 +2,9 @@ import clsx from "clsx";
 import styles from "./Header.module.scss";
 
 import Navbar from "./Navbar/Navbar";
-
 function Header({ urlImageBg = "", imageHeight = "" }) {
     let urlBg = "https://i.ibb.co/QbsN2bk/bgheader.png";
-    if(urlImageBg === "") {
+    if (urlImageBg === "") {
         urlImageBg = urlBg;
     }
     return (
@@ -20,6 +19,5 @@ function Header({ urlImageBg = "", imageHeight = "" }) {
         </header>
     );
 }
-
 
 export default Header;
