@@ -103,6 +103,7 @@ function Item() {
         }
         localStorage.setItem("cart", JSON.stringify(newArr));
         setCartItems(newArr);
+        updateData(newArr);
     };
     const hendlePlusProduct = (id) => {
         const newArr = [...cartItems];
@@ -116,6 +117,7 @@ function Item() {
         }
         localStorage.setItem("cart", JSON.stringify(newArr));
         setCartItems(newArr);
+        updateData(newArr);
     };
 
     return (

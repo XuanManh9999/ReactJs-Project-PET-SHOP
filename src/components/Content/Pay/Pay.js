@@ -194,7 +194,6 @@ function Pay() {
                         <div
                             className={styles["products_pay_list_products"]}
                         ></div>
-
                         {/* form_container */}
                         <div
                             className={
