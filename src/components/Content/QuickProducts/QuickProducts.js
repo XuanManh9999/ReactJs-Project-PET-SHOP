@@ -31,7 +31,10 @@ function QuickProducts({ hendleQuickViewProduct, id }) {
     const handleContentClick = (e) => {
         e.stopPropagation(); // ngăn chặn hành vi mặc định
     };
-    console.log("Xuan manh check data Image: ", dataImage);
+    const formatCurrency = (amount) => {
+        amount = parseFloat(amount);
+        return amount.toLocaleString("vi-VN");
+    };
     return (
         <div
             onClick={hendleQuickViewProduct}
@@ -92,11 +95,11 @@ function QuickProducts({ hendleQuickViewProduct, id }) {
                                 <h2>{dataProduct.name}</h2>
                                 <div className={clsx(styles.price)}>
                                     <span className={clsx(styles.priceNew)}>
-                                        {dataProduct.price}
+                                        {formatCurrency(dataProduct.price)}
                                         <FontAwesomeIcon icon={faDongSign} />
                                     </span>
                                     <span className={clsx(styles.priceOld)}>
-                                        {dataProduct.salePrice}
+                                        {formatCurrency(dataProduct.salePrice)}
                                         <FontAwesomeIcon icon={faDongSign} />
                                     </span>
                                 </div>
