@@ -1,5 +1,3 @@
-// import Header from "../components/Header/Header";
-
 import Home from "../pages/Home/Home";
 import LoginPage from "../pages/Form/Login";
 import RegisterPage from "../pages/Form/Rigister";

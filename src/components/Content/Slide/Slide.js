@@ -98,7 +98,7 @@ function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
                                                         className={clsx(
                                                             styles.image
                                                         )}
-                                                        src={item.image}
+                                                        src={item.avatar}
                                                         alt={item.name}
                                                     />
                                                 </figure>
