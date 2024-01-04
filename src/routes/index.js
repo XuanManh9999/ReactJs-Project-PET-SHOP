@@ -10,11 +10,12 @@ import HomeManage from "../pages/Manage/HomeManage";
 import ForgotPassPage from "../pages/Form/ForgotPass";
 import MoreProductPage from "../pages/MoreProductPage";
 import PayPage from "../pages/PayPage";
+import ProductPayPage from "../pages/ProductPayPage";
 
 const publicRoutes = [
     {
         path: "/",
-        component: <Home />,
+        component: <ProductPayPage />,
     },
     {
         path: "/Register",
