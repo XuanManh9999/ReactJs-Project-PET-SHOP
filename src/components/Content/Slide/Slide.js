@@ -17,12 +17,13 @@ import {
 import styles from "./Slide.module.scss";
 import "./overwrite.scss";
 import QuickProducts from "../QuickProducts/QuickProducts";
+import { store } from "../../../redux/store.js";
+import { connect } from "react-redux";
+import { saveDataFromLocalstore } from "../../../redux/actions.js";
 import { useData } from "../../Common/DataContext";
-
 function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
-    const { updateData } = useData();
     const [quickView, setQuickView] = useState(false);
-
+    const { updateData } = useData();
     const getIdProduct = useRef();
     const settings = {
         dots: true,
@@ -43,29 +44,21 @@ function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
         setQuickView((pre) => !pre);
     };
 
-    // thêm vào giỏ hàng
-
     const hendleAddToCart = (id) => {
-        // Kiểm tra xem có dữ liệu trong localStorage hay không
         const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
 
-        // Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng chưa
         const existingProductIndex = existingCart.findIndex(
             (item) => item.id === id
         );
 
         if (existingProductIndex !== -1) {
-            // Nếu sản phẩm đã tồn tại, cập nhật số lượng
             toast.warn("Sản phẩm đã tồn tài trong giỏ hàng");
         } else {
-            // Nếu sản phẩm chưa tồn tại, thêm vào giỏ hàng
             existingCart.push({ id, quantity: 1 });
+            store.dispatch(saveDataFromLocalstore(existingCart));
             updateData(existingCart);
             toast.success("Thêm sản phẩm thành công");
         }
-
-        // Lưu giỏ hàng mới vào localStorage
-        localStorage.setItem("cart", JSON.stringify(existingCart));
     };
     const formatCurrency = (amount) => {
         amount = parseFloat(amount);
@@ -91,7 +84,7 @@ function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
                                         >
                                             <Link
                                                 onClick={handleClick}
-                                                to={`/ProductDetail/${item.id}/${item.role}`}
+                                                to={`/ProductDetail/${item.id}/${item.trademark}`}
                                             >
                                                 <figure>
                                                     <img
@@ -199,7 +192,7 @@ function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
                                                             );
                                                         }}
                                                     >
-                                                        Mua ngay
+                                                        Thêm ngay
                                                     </span>
                                                 </button>
                                             </div>
@@ -234,4 +227,4 @@ function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
     );
 }
 
-export default Slide;
+export default connect()(Slide);

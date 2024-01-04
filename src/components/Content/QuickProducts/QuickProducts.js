@@ -55,7 +55,7 @@ function QuickProducts({ hendleQuickViewProduct, id }) {
                             <div className={clsx(styles.imageHome)}>
                                 <picture>
                                     <img
-                                        src={dataProduct.image}
+                                        src={dataProduct.avatar}
                                         alt={dataProduct.name}
                                     />
                                 </picture>

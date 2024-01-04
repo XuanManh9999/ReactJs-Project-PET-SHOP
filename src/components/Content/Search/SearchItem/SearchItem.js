@@ -84,7 +84,7 @@ function SearchItem({ close_search }) {
                                         className={clsx(
                                             styles.img_data_search_item
                                         )}
-                                        src={item.image}
+                                        src={item.avatar}
                                         alt={item.name}
                                     />
                                 </picture>

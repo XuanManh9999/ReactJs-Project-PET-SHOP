@@ -15,7 +15,7 @@ import ProductPayPage from "../pages/ProductPayPage";
 const publicRoutes = [
     {
         path: "/",
-        component: <ProductPayPage />,
+        component: <Home />,
     },
     {
         path: "/Register",
@@ -46,7 +46,7 @@ const publicRoutes = [
         component: <ContactPage />,
     },
     {
-        path: "/ProductDetail/:id/:role",
+        path: "/ProductDetail/:id/:trademark",
         component: <ProductDetailPage />,
     },
     {
@@ -60,6 +60,10 @@ const publicRoutes = [
     {
         path: "/pay",
         component: <PayPage />,
+    },
+    {
+        path: "/payment-processing",
+        component: <ProductPayPage />,
     },
 ];
 // Cần đăng nhập

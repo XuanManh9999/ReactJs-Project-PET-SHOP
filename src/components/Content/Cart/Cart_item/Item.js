@@ -12,10 +12,14 @@ import {
 import { getDataCardProducts } from "../../../../services/hendleProducts";
 import { useData } from "../../../Common/DataContext";
 import { Link } from "react-router-dom";
+// import { connect } from "react-redux";
+// import { store } from "../../../../redux/store.js";
+// import { getDataLocastore } from "../../../../redux/actions";
+
 function Item() {
     const [productDetails, setProductDetails] = useState([]);
     const [cartItems, setCartItems] = useState(
-        JSON.parse(localStorage.getItem("cart")) || []
+        () => JSON.parse(localStorage.getItem("cart")) || []
     );
     const [totalPrice, setTotalPrice] = useState(0);
     const { updateData } = useData();
@@ -128,7 +132,7 @@ function Item() {
                         return (
                             <div key={index} className={clsx(styles.cart_item)}>
                                 <picture className={clsx(styles.img)}>
-                                    <img src={item.image} alt={item.name} />
+                                    <img src={item.avatar} alt={item.name} />
                                 </picture>
                                 <div className={clsx(styles.content)}>
                                     <p className={clsx(styles.title)}>
@@ -209,4 +213,4 @@ function Item() {
     );
 }
 
-export default Item;
+export default (Item);
