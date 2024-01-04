@@ -1,0 +1,186 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.heading {
+    color: #363025;
+    font-family: "Quicksand", sans-serif;
+    margin-top: 30px;
+    width: 1200px;
+    margin: 40px auto;
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 20px;
+
+}
+
+table {
+    width: 1200px;
+    margin: 30px auto !important;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+    background-color: white;
+}
+
+th,
+td {
+    border: 1px solid #ddd !important;
+    padding: 10px !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+th {
+    font-family: "Quicksand", sans-serif;
+    color: #363025;
+    text-align: center;
+    font-weight: 500;
+    padding: 10px 0px;
+    font-size: 14px;
+
+}
+
+.product-img {
+    width: 98px;
+    height: 98px;
+    cursor: pointer;
+}
+
+.product-images {
+    padding: 20px 10px;
+}
+
+.product-name {
+    font-family: "Quicksand", sans-serif;
+    margin: 0px;
+    padding-bottom: 5px;
+    font-size: 16px;
+    font-weight: 400;
+
+    line-height: 24px;
+    margin-left: 0px;
+
+    width: 100%;
+}
+
+.product-name a {
+    text-decoration: none;
+    color: #443f36;
+}
+
+.product-name a:hover {
+    color: #ffc107;
+}
+
+.cart-prices {
+    color: #ef1515;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 20px;
+}
+
+.number-quantity {
+    width: 40px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #9c6834;
+}
+
+.cart-price {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 7;
+    color: #ef1515;
+}
+
+
+
+
+.product-price {
+    width: 1200px;
+    margin: 0 auto 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cart-icon {
+    cursor: pointer;
+}
+
+.product-price-left button {
+    text-align: center;
+    font-family: "Quicksand", sans-serif;
+    white-space: nowrap;
+
+    font-weight: normal;
+    transition: all 0.3s linear;
+    -moz-transition: all 0.3s linear;
+    -webkit-transition: all 0.3s linear;
+    vertical-align: top;
+    cursor: pointer;
+    overflow: visible;
+    width: auto;
+    outline: none;
+    -webkit-border-fit: lines;
+    border: 1px solid #f3f3f3;
+    height: 45px;
+    line-height: 45px;
+    padding: 0px 40px;
+    background: #f3f3f3;
+    color: #333;
+    font-size: 16px;
+    text-transform: none;
+    font-weight: 400;
+    border-radius: 8px;
+}
+
+.product-price-left button:hover {
+    background-color: #f9a529;
+}
+
+.desc {
+    font-family: "Quicksand", sans-serif;
+    font-weight: 400;
+    padding-right: 5px;
+    font-size: 16px;
+    color: #363025;
+    line-height: 20px;
+    margin-bottom: 20px;
+}
+
+.desc span {
+    color: #ef1515;
+    font-weight: 700;
+    font-style: 16px;
+}
+
+.product-price-right button {
+    font-family: "Quicksand", sans-serif;
+
+    color: #fff;
+    text-align: center;
+    width: 100%;
+    text-decoration: none;
+
+    transition: all 0.3s linear;
+    -moz-transition: all 0.3s linear;
+    -webkit-transition: all 0.3s linear;
+    padding: 0 40px;
+    height: 45px;
+    font-size: 16px;
+    line-height: 45px;
+    background-color: #f4b915;
+    text-transform: none;
+    border: solid 1px #f4b915;
+    margin: 0 auto 20px;
+    font-weight: 400;
+    border-radius: 8px;
+}
+
+.product-price-right button:hover {
+    cursor: pointer;
+    background: #363025;
+    color: #fff;
+    border-color: #363025;
+}
