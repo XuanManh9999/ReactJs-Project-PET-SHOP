@@ -11,11 +11,11 @@ import ForgotPassPage from "../pages/Form/ForgotPass";
 import MoreProductPage from "../pages/MoreProductPage";
 import PayPage from "../pages/PayPage";
 import ProductPayPage from "../pages/ProductPayPage";
-
+import ADD from "../components/demo";
 const publicRoutes = [
     {
         path: "/",
-        component: <Home />,
+        component: <ADD />,
     },
     {
         path: "/Register",
