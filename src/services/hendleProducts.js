@@ -35,10 +35,10 @@ const getDataImageDetail = async (id) => {
     }
 };
 
-const getProductsRelate = async (role) => {
+const getProductsRelate = async (trademark) => {
     try {
         const response = await axios.get(
-            `http://localhost:4000/api/v1/products/data-products-relate?role=${role}`
+            `http://localhost:4000/api/v1/products/data-products-relate?trademark=${trademark}`
         );
         return response.data;
     } catch (error) {

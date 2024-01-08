@@ -34,6 +34,10 @@ function SearchItem({ close_search }) {
             getData();
         }
     }, [inputSearch]);
+    const formatCurrency = (amount) => {
+        amount = parseFloat(amount);
+        return amount.toLocaleString("vi-VN");
+    };
     return (
         <div className={clsx(styles.content)}>
             <i
@@ -80,7 +84,7 @@ function SearchItem({ close_search }) {
                                         className={clsx(
                                             styles.img_data_search_item
                                         )}
-                                        src={item.image}
+                                        src={item.avatar}
                                         alt={item.name}
                                     />
                                 </picture>
@@ -92,7 +96,7 @@ function SearchItem({ close_search }) {
                                         <span
                                             className={clsx(styles.price_new)}
                                         >
-                                            {item.price}
+                                            {formatCurrency(item.price)}
                                             <FontAwesomeIcon
                                                 icon={faDongSign}
                                             />
@@ -100,7 +104,7 @@ function SearchItem({ close_search }) {
                                         <span
                                             className={clsx(styles.price_old)}
                                         >
-                                            {item.salePrice}
+                                            {formatCurrency(item.salePrice)}
                                             <FontAwesomeIcon
                                                 icon={faDongSign}
                                             />

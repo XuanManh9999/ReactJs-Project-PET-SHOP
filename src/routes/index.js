@@ -1,5 +1,3 @@
-// import Header from "../components/Header/Header";
-
 import Home from "../pages/Home/Home";
 import LoginPage from "../pages/Form/Login";
 import RegisterPage from "../pages/Form/Rigister";
@@ -13,11 +11,11 @@ import ForgotPassPage from "../pages/Form/ForgotPass";
 import MoreProductPage from "../pages/MoreProductPage";
 import PayPage from "../pages/PayPage";
 import ProductPayPage from "../pages/ProductPayPage";
-
+import ADD from "../components/demo";
 const publicRoutes = [
     {
         path: "/",
-        component: <HomeManage />,
+        component: <Home />,
     },
     {
         path: "/Register",
@@ -48,7 +46,7 @@ const publicRoutes = [
         component: <ContactPage />,
     },
     {
-        path: "/ProductDetail/:id/:role",
+        path: "/ProductDetail/:id/:trademark",
         component: <ProductDetailPage />,
     },
     {
@@ -62,6 +60,10 @@ const publicRoutes = [
     {
         path: "/pay",
         component: <PayPage />,
+    },
+    {
+        path: "/payment-processing",
+        component: <ProductPayPage />,
     },
 ];
 // Cần đăng nhập

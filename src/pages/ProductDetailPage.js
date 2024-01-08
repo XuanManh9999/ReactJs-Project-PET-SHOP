@@ -11,7 +11,7 @@ import {
 } from "../services/hendleProducts";
 
 function ProductDetailPage() {
-    const { id, role } = useParams();
+    const { id, trademark } = useParams();
     const [dataProdutDetail, setDataProdutDetail] = useState([]);
     const [dataImagesDetail, setDataImagesDetail] = useState([]);
     const [dataRelateProduct, setDataRelateProduct] = useState([]);
@@ -22,7 +22,7 @@ function ProductDetailPage() {
                 const promises = [
                     getDataProductsEqualId(id),
                     getDataImageDetail(id),
-                    getProductsRelate(role),
+                    getProductsRelate(trademark),
                 ];
 
                 const [
@@ -40,8 +40,7 @@ function ProductDetailPage() {
         };
 
         fetchData();
-    }, [id, role]);
-
+    }, [id, trademark]);
     return (
         <>
             <Header

@@ -1,6 +1,8 @@
 import styles from "./Product-detail.module.scss";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDongSign, faTruckFast } from "@fortawesome/free-solid-svg-icons";
+
 import {
     FaCartPlus,
     FaShoppingBag,
@@ -16,6 +18,7 @@ function ProductDetail({ data = [], imageDetail = [], dataRelare = [] }) {
         amount = parseFloat(amount);
         return amount.toLocaleString("vi-VN");
     };
+    console.log("Xuan manh check data: ", data);
     return (
         <>
             {data.length > 0 ? (
@@ -98,7 +101,7 @@ function ProductDetail({ data = [], imageDetail = [], dataRelare = [] }) {
                                             }
                                         >
                                             <img
-                                                src={detailProduct.image}
+                                                src={detailProduct.avatar}
                                                 alt="Detail Products"
                                             />
                                         </div>
@@ -207,14 +210,15 @@ function ProductDetail({ data = [], imageDetail = [], dataRelare = [] }) {
                                                     styles["product-right-btn"]
                                                 }
                                             >
-                                                <button
+                                                <Link
+                                                    to={"/payment-processing"}
                                                     className={styles["btn"]}
                                                 >
                                                     <i>
                                                         <FaShoppingBag />
                                                     </i>
                                                     MUA NGAY
-                                                </button>
+                                                </Link>
                                                 <button
                                                     className={styles["btn"]}
                                                 >
