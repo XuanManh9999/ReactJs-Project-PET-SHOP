@@ -17,7 +17,7 @@ import ProductPayPage from "../pages/ProductPayPage";
 const publicRoutes = [
     {
         path: "/",
-        component: <ProductPayPage />,
+        component: <HomeManage />,
     },
     {
         path: "/Register",

@@ -1,5 +1,11 @@
+
+import './Home.module.scss';
 function Manage() {
-    return "Home";
+    return (
+        <section>
+            <div>asafa</div>
+        </section>
+    );
 }
 
 export default Manage;
