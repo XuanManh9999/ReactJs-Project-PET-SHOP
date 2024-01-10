@@ -15,7 +15,7 @@ import ADD from "../components/demo";
 const publicRoutes = [
     {
         path: "/",
-        component: <ADD />,
+        component: <Home />,
     },
     {
         path: "/Register",
