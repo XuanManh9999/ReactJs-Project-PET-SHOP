@@ -39,7 +39,7 @@ function AddProduct() {
                                             <div class="col-md-4 mb-3">
                                                 <label for="inputState" class="form-label">Danh mục</label>
                                                 <select id="inputState" name="id_cate" class="form-select">
-                                                    <option value=''>Chó</option>
+                                                    <option value=''>Con Chó</option>
                                                     <option value=''>Mèo</option>
                                                     <option value=''>Chim</option>
                                                     <option value=''>Súc vật</option>
