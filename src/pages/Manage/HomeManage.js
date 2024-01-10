@@ -1,6 +1,12 @@
-import Manage from "../../components/Manage/Home";
+import HeaderAdmin from "../../components/Manage/Header";
+
 function HomeManage() {
-    return <Manage />;
+    return (
+        <div>
+            <HeaderAdmin/>
+           
+        </div>
+    );
 }
 
 export default HomeManage;
