@@ -1,4 +1,4 @@
-import Home from "../pages/Home/Home";
+
 import LoginPage from "../pages/Form/Login";
 import RegisterPage from "../pages/Form/Rigister";
 import PricePage from "../pages/PricePage";
@@ -6,16 +6,31 @@ import QuestionsPage from "../pages/QuestionsPage";
 import BlogPage from "../pages/BlogPage";
 import ContactPage from "../pages/ContactPage";
 import ProductDetailPage from "../pages/ProductDetailPage";
-import HomeManage from "../pages/Manage/HomeManage";
+import OrderList from "../pages/Manage/OrderList";
 import ForgotPassPage from "../pages/Form/ForgotPass";
 import MoreProductPage from "../pages/MoreProductPage";
 import PayPage from "../pages/PayPage";
 import ProductPayPage from "../pages/ProductPayPage";
-import ADD from "../components/demo";
+import HomeManage from "../pages/Manage/HomeManage";
+import ProductManage from "../pages/Manage/ProductManage";
+import ProductAdd from "../pages/Manage/ProductAdd";
+
 const publicRoutes = [
     {
         path: "/",
-        component: <Home />,
+        component: <HomeManage />,
+    },
+    {
+        path: "/OrderList",
+        component: <OrderList />,
+    },
+    {
+        path: "/ProductManage",
+        component: <ProductManage />,
+    },
+    {
+        path: "/ProductAdd",
+        component: <ProductAdd />,
     },
     {
         path: "/Register",
@@ -49,10 +64,7 @@ const publicRoutes = [
         path: "/ProductDetail/:id/:trademark",
         component: <ProductDetailPage />,
     },
-    {
-        path: "/manage",
-        component: <HomeManage />,
-    },
+    
     {
         path: "/MoreProduct",
         component: <MoreProductPage />,
