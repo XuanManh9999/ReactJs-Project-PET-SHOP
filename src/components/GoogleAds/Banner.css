@@ -1,6 +1,6 @@
 /* BannerAd.css */
-.container {
-}
+.container {}
+
 .banner-ad {
     width: 100vw !important;
     height: 100vh !important;
@@ -29,11 +29,12 @@
 .ad-content img {
     width: 100%;
     height: auto;
-    max-height: 100%; /* Hình ảnh không vượt quá chiều cao tối đa */
+    max-height: 100%;
+    /* Hình ảnh không vượt quá chiều cao tối đa */
     object-fit: cover;
 }
+
 .btn {
-    position: absolute;
-    right: 0;
+
     cursor: pointer;
 }
