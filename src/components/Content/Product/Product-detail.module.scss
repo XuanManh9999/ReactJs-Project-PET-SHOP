@@ -105,8 +105,21 @@
 .btn:nth-of-type(2){
     background: #71cbe8;
 }
+.product-size label{
+    font-weight: 600;
+    font-size: 18px;
+    color: #363025;
+}
 
+.product-color .list-color {
 
+}
+.product-color label{
+    margin-top: 25px;
+    font-weight: 600;
+    font-size: 18px;
+    color: #363025;
+}
 
 .product-counter{
     display: flex;
@@ -204,4 +217,19 @@
     text-align: center;
     padding: 10px 0;
     font-weight: 600;
+}
+
+// Content 
+.detailProductContent {
+    font-size: 17px;
+    padding: 30px 15px;
+    line-height: 28px;
+    p {
+        color: #363025;
+        margin-left: 10px;
+    }
+    strong  {
+        font-weight: 600;
+        font-size: 20px;
+    }
 }

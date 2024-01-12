@@ -64,6 +64,7 @@ function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
         amount = parseFloat(amount);
         return amount.toLocaleString("vi-VN");
     };
+    console.log("Xuan Manh Check data", data);
     return (
         <>
             <div className={clsx(styles.container)}>
