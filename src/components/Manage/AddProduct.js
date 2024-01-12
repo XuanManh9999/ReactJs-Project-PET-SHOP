@@ -21,6 +21,7 @@ import MdEditor from "react-markdown-editor-lite";
 // import style manually
 import "react-markdown-editor-lite/lib/index.css";
 
+import { createProduct } from "../../services/hendleProducts";
 // Register plugins if required
 // MdEditor.use(YOUR_PLUGINS_HERE);
 
@@ -40,13 +41,10 @@ function AddProduct() {
     manyProducts: 0,
     comment: "",
     trademark: "",
-    detailImages: [
-      // { hrefImage: "link_to_detail_image_2.jpg" },
-    ],
+    detailImages: [],
     sizes: [],
     colors: [],
   });
-
   const [detailImages, setDetailImage] = useState("");
   const [saveImages, setSaveImages] = useState([]);
   const [detailColor, setDetailColor] = useState("");
@@ -139,36 +137,64 @@ function AddProduct() {
       toast.warn("Không thể lưu dữ liệu rỗng");
     }
   };
-  console.log("Xuan manh check data", productData);
+  console.log(productData);
+  const hendleAddProduct = async () => {
+    try {
+      const response = await createProduct(productData);
+      if (response && response.status === 200) {
+        toast.success("Thêm sản phẩm thành công");
+        setProductData({
+          name: "",
+          desc: "",
+          descHTML: "",
+          avatar: "",
+          price: 0,
+          salePrice: 0,
+          manyProducts: 0,
+          comment: "",
+          trademark: "",
+          detailImages: [],
+          sizes: [],
+          colors: [],
+        });
+      } else {
+        toast.warn(
+          "Thêm sản phẩm không thành công vui lòng kiểm tra lại dữ liệu"
+        );
+      }
+    } catch (e) {
+      toast.error("Thêm sản phẩm không thành công. Đã xảy ra lỗi");
+    }
+  };
   return (
-    <main id="main" class="main">
-      <div class="pagetitle">
+    <main id="main" className="main">
+      <div className="pagetitle">
         <h1>Thêm sản phẩm</h1>
       </div>
 
-      <section class="section">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="card">
-              <div class="col-12 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <p class="card-description"></p>
+      <section className="section">
+        <div className="row">
+          <div className="col-lg-12">
+            <div className="card">
+              <div className="col-12 grid-margin stretch-card">
+                <div className="card">
+                  <div className="card-body">
+                    <p className="card-description"></p>
                     <form
                       action="?act=save_add_product"
-                      class="forms-sample"
+                      className="forms-sample"
                       id="addsppp"
                       method="post"
                       enctype="multipart/form-data"
                     >
-                      <div class="col-md-4 mb-3">
-                        <label for="inputState" class="form-label">
+                      <div className="col-md-4 mb-3">
+                        <label for="inputState" className="form-label">
                           Danh mục
                         </label>
                         <select
                           id="inputState"
                           name="id_cate"
-                          class="form-select"
+                          className="form-select"
                         >
                           <option value="">Chó</option>
                           <option value="">Mèo</option>
@@ -176,11 +202,11 @@ function AddProduct() {
                           <option value="">Phụ kiện cho thú cưng</option>
                         </select>
                       </div>
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="exampleInputName1">Tên sản phẩm</label>
                         <input
                           type="text"
-                          class="form-control"
+                          className="form-control"
                           id="exampleInputName1"
                           placeholder="Name"
                           required
@@ -188,77 +214,89 @@ function AddProduct() {
                           onChange={handleInputChange}
                         />
                       </div>
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="exampleInputName1">Số lượng</label>
                         <input
                           type="text"
-                          class="form-control"
+                          className="form-control"
                           id="exampleInputName1"
                           required
                           name="manyProducts"
                           onChange={handleInputChange}
                         />
                       </div>
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="exampleInputName1">Giá</label>
                         <input
                           type="number"
-                          class="form-control"
+                          className="form-control"
                           id="exampleInputName1"
                           required
                           name="price"
                           onChange={handleInputChange}
                         />
                       </div>
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="exampleInputName1">Sale</label>
                         <input
                           type="text"
-                          class="form-control"
+                          className="form-control"
                           id="exampleInputName1"
                           required
                           name="salePrice"
                           onChange={handleInputChange}
                         />
                       </div>
-                      <div class="form-group">
+
+                      <div className="form-group">
+                        <label for="exampleInputName1">Avatar</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="exampleInputName1"
+                          required
+                          name="avatar"
+                          onChange={handleInputChange}
+                        />
+                      </div>
+                      <div className="form-group">
                         <label for="exampleInputName1">Trademark</label>
                         <input
                           type="text"
-                          class="form-control"
+                          className="form-control"
                           id="exampleInputName1"
                           required
                           name="trademark"
                           onChange={handleInputChange}
                         />
                       </div>
-                      <div class="form-group">
+                      <div className="form-group">
                         <label>Ảnh</label>
                         <input
                           type="file"
                           name="img"
-                          class="file-upload-default"
+                          className="file-upload-default"
                         />
-                        <div class="input-group col-xs-12 d-flex gap-2">
+                        <div className="input-group col-xs-12 d-flex gap-2">
                           <input
                             type="text"
-                            class="form-control file-upload-info"
+                            className="form-control file-upload-info"
                             placeholder="href Image"
                             value={detailImages}
                             onChange={(event) =>
                               setDetailImage(event.target.value)
                             }
                           />
-                          <span class="input-group-append d-flex gap-2">
+                          <span className="input-group-append d-flex gap-2">
                             <button
-                              class="file-upload-browse btn btn-gradient-primary"
+                              className="file-upload-browse btn btn-gradient-primary"
                               type="button"
                               onClick={hendleImageDetail}
                             >
                               Upload
                             </button>
                             <button
-                              class="file-upload-browse btn btn-primary"
+                              className="file-upload-browse btn btn-primary"
                               type="button"
                               onClick={hendleSaveDetailImage}
                             >
@@ -267,36 +305,36 @@ function AddProduct() {
                           </span>
                         </div>
 
-                        <div class="text-danger"></div>
+                        <div className="text-danger"></div>
                       </div>
 
-                      <div class="form-group">
+                      <div className="form-group">
                         <label>Màu sắc</label>
                         <input
                           type="file"
                           name="img"
-                          class="file-upload-default"
+                          className="file-upload-default"
                         />
-                        <div class="input-group col-xs-12 d-flex gap-2">
+                        <div className="input-group col-xs-12 d-flex gap-2">
                           <input
                             type="text"
-                            class="form-control file-upload-info"
+                            className="form-control file-upload-info"
                             placeholder="color product"
                             value={detailColor}
                             onChange={(event) =>
                               setDetailColor(event.target.value)
                             }
                           />
-                          <span class="input-group-append d-flex gap-2">
+                          <span className="input-group-append d-flex gap-2">
                             <button
-                              class="file-upload-browse btn btn-gradient-primary"
+                              className="file-upload-browse btn btn-gradient-primary"
                               type="button"
                               onClick={hendleColorDetail}
                             >
                               Upload
                             </button>
                             <button
-                              class="file-upload-browse btn btn-primary"
+                              className="file-upload-browse btn btn-primary"
                               type="button"
                               onClick={hendleSaveColor}
                             >
@@ -305,12 +343,12 @@ function AddProduct() {
                           </span>
                         </div>
 
-                        <div class="text-danger"></div>
+                        <div className="text-danger"></div>
                       </div>
-                      <div class="form-group">
+                      <div className="form-group">
                         <label for="exampleTextarea1">Mô tả</label>
                         <textarea
-                          class="form-control"
+                          className="form-control"
                           id="exampleTextarea1"
                           required
                           name="comment"
@@ -326,17 +364,17 @@ function AddProduct() {
                           onChange={handleEditorChange}
                         />
                       </div>
-                      <div class="image-previews"></div>
-                      <div class="form-group row" id="size-container">
+                      <div className="image-previews"></div>
+                      <div className="form-group row" id="size-container">
                         <label
                           for="size-select"
-                          class="col-sm-2 col-form-label"
+                          className="col-sm-2 col-form-label"
                         >
                           Size
                         </label>
-                        <div class="col-sm-6">
+                        <div className="col-sm-6">
                           <select
-                            class="form-control"
+                            className="form-control"
                             id="size-select"
                             value={detailSize}
                             onChange={(event) =>
@@ -351,10 +389,10 @@ function AddProduct() {
                             <option value="xl">Size XL</option>
                           </select>
                         </div>
-                        <div class="col-sm-4 d-flex gap-2">
+                        <div className="col-sm-4 d-flex gap-2">
                           <button
                             type="button"
-                            class="btn btn-gradient-primary"
+                            className="btn btn-gradient-primary"
                             id="add-size-btn"
                             onClick={hendleSizesProduct}
                           >
@@ -362,7 +400,7 @@ function AddProduct() {
                           </button>
                           <button
                             type="button"
-                            class="btn btn-primary"
+                            className="btn btn-primary"
                             id="add-size-btn"
                             onClick={hendleSaveSize}
                           >
@@ -371,7 +409,7 @@ function AddProduct() {
                         </div>
                       </div>
 
-                      <div class="form-group row" id="selected-sizes"></div>
+                      <div className="form-group row" id="selected-sizes"></div>
 
                       <input
                         type="hidden"
@@ -379,19 +417,37 @@ function AddProduct() {
                         id="selected-sizes-input"
                         value=""
                       />
-                      <input
-                        type="submit"
-                        class="btn btn-gradient-primary me-2"
-                        name="add"
-                        value="Thêm"
-                      />
                       <button
                         type="reset"
-                        class="btn btn-gradient-primary me-2"
+                        className="btn btn-primary me-2"
+                        onClick={hendleAddProduct}
+                      >
+                        Thêm
+                      </button>
+                      <button
+                        type="reset"
+                        className="btn btn-gradient-primary me-2"
+                        onClick={() => {
+                          toast.success("Reset thành công");
+                          setProductData({
+                            name: "",
+                            desc: "",
+                            descHTML: "",
+                            avatar: "",
+                            price: 0,
+                            salePrice: 0,
+                            manyProducts: 0,
+                            comment: "",
+                            trademark: "",
+                            detailImages: [],
+                            sizes: [],
+                            colors: [],
+                          });
+                        }}
                       >
                         Reset
                       </button>
-                      <button class="btn btn-secondary">Quay lại</button>
+                      <button className="btn btn-secondary">Quay lại</button>
                     </form>
                   </div>
                 </div>
