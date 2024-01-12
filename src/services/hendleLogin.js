@@ -1,8 +1,10 @@
 import axios from "axios";
+//http://127.0.0.1:8000/api/v2/user/new-user
+//http://localhost:4000/api/v1/register/data
 const hendleRegister = async (data) => {
     try {
         const response = await axios.post(
-            "http://localhost:4000/api/v1/register/data",
+            "http://127.0.0.1:8000/api/v2/user/new-user",
             data
         );
         return response.data;
@@ -48,7 +50,7 @@ const hendleForgot = async (email) => {
             }
         );
         return response.data;
-    } catch(error) {
+    } catch (error) {
         console.error("Error fetching data:", error);
         throw error;
     }
