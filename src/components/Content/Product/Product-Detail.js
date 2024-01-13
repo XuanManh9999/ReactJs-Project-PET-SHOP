@@ -105,7 +105,7 @@ function ProductDetail({ data = [], dataRelare = [] }) {
                       <div className={styles["product-right-price"]}>
                         <div className={styles["product-price-one"]}>
                           <span className={styles["product-pricesale"]}>
-                            {formatCurrency(getDetailProduct.price)}
+                            {formatCurrency(getDetailProduct.salePrice)}
                           </span>
                           <i>
                             <FontAwesomeIcon icon={faDongSign} />
@@ -113,21 +113,21 @@ function ProductDetail({ data = [], dataRelare = [] }) {
                         </div>
                         <div className={styles["product-price-two"]}>
                           <span className={styles["product-price"]}>
-                            {formatCurrency(getDetailProduct.salePrice)}
+                            {formatCurrency(getDetailProduct.price)}
                           </span>
                           <i>
                             <FontAwesomeIcon icon={faDongSign} />
                           </i>
                         </div>
                       </div>
-                      {getDetailProduct && getDetailProduct.sizes.length > 0 ? (
+                      {getDetailProduct && getDetailProduct?.sizes[0].size !== null && getDetailProduct.sizes.length > 0 ? (
                         <div className={styles["product-size"]}>
                           <label>Kích thước:</label>
                         </div>
                       ) : (
                         ""
                       )}
-                      {getDetailProduct &&
+                      {getDetailProduct && getDetailProduct?.colors[0].color !== null &&
                       getDetailProduct.colors.length > 0 ? (
                         <div className={styles["product-color"]}>
                           <label>Màu sắc:</label>

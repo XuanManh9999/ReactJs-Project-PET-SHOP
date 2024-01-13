@@ -49,7 +49,7 @@ function AddProduct() {
   const [saveImages, setSaveImages] = useState([]);
   const [detailColor, setDetailColor] = useState("");
   const [saveColor, setSaveColor] = useState([]);
-  const [detailSize, setDetailSize] = useState("xs");
+  const [detailSize, setDetailSize] = useState("");
   const [saveSize, setSaveSize] = useState([]);
 
   const handleInputChange = (e) => {
@@ -166,6 +166,7 @@ function AddProduct() {
       toast.error("Thêm sản phẩm không thành công. Đã xảy ra lỗi");
     }
   };
+  console.log("Xuan Manh Check dataProduct", productData);
   return (
     <main id="main" className="main">
       <div className="pagetitle">
