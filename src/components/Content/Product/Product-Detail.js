@@ -2,7 +2,11 @@ import styles from "./Product-detail.module.scss";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDongSign, faTruckFast } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheck,
+  faDongSign,
+  faTruckFast,
+} from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
@@ -10,19 +14,25 @@ import {
   FaShoppingBag,
   FaDiceD6,
   FaAudioDescription,
+  FaCheck,
 } from "react-icons/fa";
+
 import Slide from "../Slide/Slide";
 import { store } from "../../../redux/store.js";
 import { saveDataFromLocalstore } from "../../../redux/actions.js";
 import { useData } from "../../Common/DataContext";
 function ProductDetail({ data = [], dataRelare = [] }) {
+  const [getDetailProduct] = data;
   const [totalManyProduct, setTotalManyProduct] = useState(1);
+
+  const [selectedColorIndex, setSelectedColorIndex] = useState(null);
+
   const { updateData } = useData();
+  const [selectedColor, setSelectedColor] = useState(null);
   const formatCurrency = (amount) => {
     amount = parseFloat(amount);
     return amount.toLocaleString("vi-VN");
   };
-  const [getDetailProduct] = data;
 
   const hendleAddCart = (id) => {
     const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -55,7 +65,11 @@ function ProductDetail({ data = [], dataRelare = [] }) {
       updateData(existingCart);
     }
   };
-
+  const hendleClickChooseColor = (event, index) => {
+    const selectedValue = event.target.value;
+    setSelectedColor(selectedValue);
+    setSelectedColorIndex(index);
+  };
   return (
     <>
       {data && data.length > 0 ? (
@@ -177,11 +191,47 @@ function ProductDetail({ data = [], dataRelare = [] }) {
                       )}
                       {getDetailProduct &&
                       getDetailProduct?.colors[0].color !== null &&
-                      getDetailProduct.colors.length > 0 ? (
+                      getDetailProduct?.colors.length > 0 ? (
                         <div className={styles["product-color"]}>
-                          <label>Màu sắc:</label>
+                          <div className={styles["listColor"]}>
+                            <label>Màu sắc:</label>
+                            {getDetailProduct?.colors?.map((item, index) => (
+                              <>
+                                <input
+                                  id={`swatch-${index}-cam`}
+                                  type="radio"
+                                  name="color"
+                                  key={index}
+                                  value={item.color}
+                                  onChange={(event) =>
+                                    hendleClickChooseColor(event, index)
+                                  }
+                                  checked={item.color === selectedColor}
+                                />
 
-                          <div className="list-color"></div>
+                                <label
+                                  className={styles["color-product"]}
+                                  style={{ background: item.color }}
+                                  htmlFor={`swatch-${index}-cam`}
+                                  onClick={(event) =>
+                                    hendleClickChooseColor(event, index)
+                                  }
+                                >
+                                  <i
+                                    className={styles["iconCheck"]}
+                                    style={{
+                                      display:
+                                        index === selectedColorIndex
+                                          ? "block"
+                                          : "none",
+                                    }}
+                                  >
+                                    <FontAwesomeIcon icon={faCheck} />
+                                  </i>
+                                </label>
+                              </>
+                            ))}
+                          </div>
                         </div>
                       ) : (
                         ""
