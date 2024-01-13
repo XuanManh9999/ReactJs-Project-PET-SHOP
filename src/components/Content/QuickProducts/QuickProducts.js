@@ -2,18 +2,24 @@ import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faDongSign } from "@fortawesome/free-solid-svg-icons";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import styles from "./QuickProducts.module.scss";
 
 import { getDataProductsEqualId } from "../../../services/hendleProducts";
-
+import { store } from "../../../redux/store.js";
+import { saveDataFromLocalstore } from "../../../redux/actions.js";
+import { useData } from "../../Common/DataContext";
 function QuickProducts({ hendleQuickViewProduct, id }) {
   const [dataProduct, setDataProduct] = useState({});
+  const [totalProduct, setTotalProduct] = useState(1);
+  const { updateData } = useData();
   useEffect(() => {
     const getData = async () => {
       try {
         const product = await getDataProductsEqualId(id);
         const res = product.data[0];
-        setDataProduct(res)
+        setDataProduct(res);
       } catch (e) {
         console.log("Lỗi khi gọi API trong componets QUickProducts");
       }
@@ -27,7 +33,28 @@ function QuickProducts({ hendleQuickViewProduct, id }) {
     amount = parseFloat(amount);
     return amount.toLocaleString("vi-VN");
   };
-  console.log("Xuan manh check dataProduct", dataProduct);
+
+  const hendleTotalProduct = (value) => {
+    setTotalProduct(value);
+  };
+
+  const hendleAddCart = (id) => {
+    const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const existingProductIndex = existingCart.findIndex(
+      (item) => item.id === id
+    );
+
+    if (existingProductIndex !== -1) {
+      toast.warn("Sản phẩm đã tồn tài trong giỏ hàng");
+    } else {
+      existingCart.push({ id, quantity: +totalProduct });
+      store.dispatch(saveDataFromLocalstore(existingCart));
+      updateData(existingCart);
+      toast.success("Thêm sản phẩm thành công");
+    }
+  };
+
   return (
     <div
       onClick={hendleQuickViewProduct}
@@ -62,7 +89,6 @@ function QuickProducts({ hendleQuickViewProduct, id }) {
                     src={
                       dataProduct.detailImages?.length > 1 &&
                       dataProduct.detailImages[1].hrefImage
-
                     }
                     alt={dataProduct.name}
                   />
@@ -100,9 +126,23 @@ function QuickProducts({ hendleQuickViewProduct, id }) {
               ></div>
               <div className={clsx(styles.manyProduct)}>
                 <span>Số lượng: </span>
-                <input type="number" min={1} alt="" />
+                <input
+                  type="number"
+                  min={1}
+                  alt=""
+                  value={totalProduct}
+                  onChange={(event) => {
+                    hendleTotalProduct(event.target.value);
+                  }}
+                />
               </div>
-              <button>Thêm vào giỏ hàng</button>
+              <button
+                onClick={() => {
+                  hendleAddCart(dataProduct.id);
+                }}
+              >
+                Thêm vào giỏ hàng
+              </button>
             </div>
           </div>
         </div>

@@ -1,8 +1,10 @@
 import styles from "./Product-detail.module.scss";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDongSign, faTruckFast } from "@fortawesome/free-solid-svg-icons";
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   FaCartPlus,
   FaShoppingBag,
@@ -10,14 +12,50 @@ import {
   FaAudioDescription,
 } from "react-icons/fa";
 import Slide from "../Slide/Slide";
-
+import { store } from "../../../redux/store.js";
+import { saveDataFromLocalstore } from "../../../redux/actions.js";
+import { useData } from "../../Common/DataContext";
 function ProductDetail({ data = [], dataRelare = [] }) {
+  const [totalManyProduct, setTotalManyProduct] = useState(1);
+  const { updateData } = useData();
   const formatCurrency = (amount) => {
     amount = parseFloat(amount);
     return amount.toLocaleString("vi-VN");
   };
   const [getDetailProduct] = data;
-  console.log("Xuan manh check dataRelare", dataRelare);
+
+  const hendleAddCart = (id) => {
+    const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const existingProductIndex = existingCart.findIndex(
+      (item) => item.id === id
+    );
+
+    if (existingProductIndex !== -1) {
+      toast.warn("Sản phẩm đã tồn tài trong giỏ hàng");
+    } else {
+      existingCart.push({ id, quantity: +totalManyProduct });
+      store.dispatch(saveDataFromLocalstore(existingCart));
+      updateData(existingCart);
+      toast.success("Thêm sản phẩm thành công");
+    }
+  };
+
+  const hendlePaymentProduct = (id) => {
+    const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const existingProductIndex = existingCart.findIndex(
+      (item) => item.id === id
+    );
+
+    if (existingProductIndex !== -1) {
+    } else {
+      existingCart.push({ id, quantity: +totalManyProduct });
+      store.dispatch(saveDataFromLocalstore(existingCart));
+      updateData(existingCart);
+    }
+  };
+
   return (
     <>
       {data && data.length > 0 ? (
@@ -32,7 +70,9 @@ function ProductDetail({ data = [], dataRelare = [] }) {
                         <figure>
                           <img
                             src={
-                              getDetailProduct && getDetailProduct.detailImages[0] && getDetailProduct.detailImages[0].hrefImage
+                              getDetailProduct &&
+                              getDetailProduct.detailImages[0] &&
+                              getDetailProduct.detailImages[0].hrefImage
                                 ? getDetailProduct.detailImages[0].hrefImage
                                 : ""
                             }
@@ -43,7 +83,8 @@ function ProductDetail({ data = [], dataRelare = [] }) {
                         <figure>
                           <img
                             src={
-                              getDetailProduct && getDetailProduct.detailImages[1] && 
+                              getDetailProduct &&
+                              getDetailProduct.detailImages[1] &&
                               getDetailProduct.detailImages[1].hrefImage
                                 ? getDetailProduct.detailImages[1].hrefImage
                                 : ""
@@ -55,7 +96,8 @@ function ProductDetail({ data = [], dataRelare = [] }) {
                         <figure>
                           <img
                             src={
-                              getDetailProduct && getDetailProduct.detailImages[2] && 
+                              getDetailProduct &&
+                              getDetailProduct.detailImages[2] &&
                               getDetailProduct.detailImages[2].hrefImage
                                 ? getDetailProduct.detailImages[2].hrefImage
                                 : ""
@@ -67,7 +109,8 @@ function ProductDetail({ data = [], dataRelare = [] }) {
                         <figure>
                           <img
                             src={
-                              getDetailProduct && getDetailProduct.detailImages[3] && 
+                              getDetailProduct &&
+                              getDetailProduct.detailImages[3] &&
                               getDetailProduct.detailImages[3].hrefImage
                                 ? getDetailProduct.detailImages[3].hrefImage
                                 : ""
@@ -123,14 +166,17 @@ function ProductDetail({ data = [], dataRelare = [] }) {
                           </i>
                         </div>
                       </div>
-                      {getDetailProduct && getDetailProduct?.sizes[0].size !== null && getDetailProduct.sizes.length > 0 ? (
+                      {getDetailProduct &&
+                      getDetailProduct?.sizes[0].size !== null &&
+                      getDetailProduct.sizes.length > 0 ? (
                         <div className={styles["product-size"]}>
                           <label>Kích thước:</label>
                         </div>
                       ) : (
                         ""
                       )}
-                      {getDetailProduct && getDetailProduct?.colors[0].color !== null &&
+                      {getDetailProduct &&
+                      getDetailProduct?.colors[0].color !== null &&
                       getDetailProduct.colors.length > 0 ? (
                         <div className={styles["product-color"]}>
                           <label>Màu sắc:</label>
@@ -143,20 +189,35 @@ function ProductDetail({ data = [], dataRelare = [] }) {
 
                       <div className={styles["product-counter"]}>
                         <label>Số lượng:</label>
-                        <input type="number" min="1"></input>
+                        <input
+                          type="number"
+                          min="1"
+                          value={totalManyProduct}
+                          onChange={(e) => {
+                            setTotalManyProduct(e.target.value);
+                          }}
+                        ></input>
                       </div>
 
                       <div className={styles["product-right-btn"]}>
                         <Link
                           to={"/payment-processing"}
-                          className={styles["btn"]}
+                          className={styles["payment"]}
+                          onClick={() => {
+                            hendlePaymentProduct(getDetailProduct.id);
+                          }}
                         >
                           <i>
                             <FaShoppingBag />
                           </i>
                           MUA NGAY
                         </Link>
-                        <button className={styles["btn"]}>
+                        <button
+                          onClick={() => {
+                            hendleAddCart(getDetailProduct.id);
+                          }}
+                          className={styles["btn"]}
+                        >
                           <i>
                             <FaCartPlus />
                           </i>
