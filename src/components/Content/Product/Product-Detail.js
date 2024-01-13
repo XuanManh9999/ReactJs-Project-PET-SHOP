@@ -32,7 +32,7 @@ function ProductDetail({ data = [], dataRelare = [] }) {
                         <figure>
                           <img
                             src={
-                              getDetailProduct.detailImages[0].hrefImage
+                              getDetailProduct && getDetailProduct.detailImages[0] && getDetailProduct.detailImages[0].hrefImage
                                 ? getDetailProduct.detailImages[0].hrefImage
                                 : ""
                             }
@@ -43,8 +43,9 @@ function ProductDetail({ data = [], dataRelare = [] }) {
                         <figure>
                           <img
                             src={
-                              getDetailProduct.detailImages[0].hrefImage
-                                ? getDetailProduct.detailImages[0].hrefImage
+                              getDetailProduct && getDetailProduct.detailImages[1] && 
+                              getDetailProduct.detailImages[1].hrefImage
+                                ? getDetailProduct.detailImages[1].hrefImage
                                 : ""
                             }
                             alt=""
@@ -54,8 +55,9 @@ function ProductDetail({ data = [], dataRelare = [] }) {
                         <figure>
                           <img
                             src={
-                              getDetailProduct.detailImages[0].hrefImage
-                                ? getDetailProduct.detailImages[0].hrefImage
+                              getDetailProduct && getDetailProduct.detailImages[2] && 
+                              getDetailProduct.detailImages[2].hrefImage
+                                ? getDetailProduct.detailImages[2].hrefImage
                                 : ""
                             }
                             alt=""
@@ -65,8 +67,9 @@ function ProductDetail({ data = [], dataRelare = [] }) {
                         <figure>
                           <img
                             src={
-                              getDetailProduct.detailImages[0].hrefImage
-                                ? getDetailProduct.detailImages[0].hrefImage
+                              getDetailProduct && getDetailProduct.detailImages[3] && 
+                              getDetailProduct.detailImages[3].hrefImage
+                                ? getDetailProduct.detailImages[3].hrefImage
                                 : ""
                             }
                             alt=""

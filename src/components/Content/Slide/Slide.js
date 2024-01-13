@@ -120,7 +120,7 @@ function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
                                                             )}
                                                         >
                                                             {formatCurrency(
-                                                                item.price
+                                                                item.salePrice
                                                             )}
                                                             <FontAwesomeIcon
                                                                 className={clsx(
@@ -137,7 +137,7 @@ function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
                                                             )}
                                                         >
                                                             {formatCurrency(
-                                                                item.salePrice
+                                                                item.price
                                                             )}
                                                             <FontAwesomeIcon
                                                                 className={clsx(

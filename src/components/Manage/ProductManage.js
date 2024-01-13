@@ -31,19 +31,19 @@ function ManageProduct() {
       setDataProduct(res);
     };
     callAPIGetALLData();
-  }, []);
+  }, [isCHeckDelete]);
   const hendleDeleteProduct = async (id) => {
     try {
       const res = await deleteProductById(id);
       if (res && res.status === 200) {
-          setIsCheckDelete(true);
-          toast.success("Xóa thành công");
+        setIsCheckDelete(true);
+        toast.success("Xóa thành công");
       } else {
-          setIsCheckDelete(false);
+        setIsCheckDelete(false);
         toast.err("Xóa không thành công");
       }
     } catch (err) {
-        setIsCheckDelete(false);    
+      setIsCheckDelete(false);
       toast.error("Xóa không thành công. Đã xảy ra lỗi phía server");
     }
   };
@@ -117,11 +117,12 @@ function ManageProduct() {
                           <tr key={index}>
                             <td>{index + 1}</td>
                             <td>{item.name}</td>
-                            <td>
+                            <td className="">
                               <img
                                 src={item.avatar}
-                                width={"80px"}
-                                height={"70px"}
+                                style={{ objectFit: "cover" }}
+                                width={"50px"}
+                                height={"80px"}
                               />
                             </td>
                             <td>
@@ -143,13 +144,13 @@ function ManageProduct() {
                                 : "N/A"}
                             </td>
                             <td>{item.manyProducts}</td>
-                            <td>{item.price}</td>
+                            <td>{item.price}đ</td>
                             <td>{item.salePrice}đ</td>
                             <td>
                               {(
                                 ((item.price - item.salePrice) / item.price) *
                                 100
-                              ).toFixed(2)}
+                              ).toFixed(0)}
                               %
                             </td>
                             <td>{item.comment ? item.comment : "N/A"}</td>
