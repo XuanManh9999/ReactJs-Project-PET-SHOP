@@ -75,6 +75,30 @@ const createProduct = async (data) => {
     throw error;
   }
 };
+
+const deleteProductById = async (id) => {
+  try {
+    const response = await axios.delete(
+      `http://127.0.0.1:8000/api/v2/product/remove-product/${id}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error;
+  }
+};
+
+const getAllProduct = async () => {
+  try {
+    const response = await axios.get(
+      `http://127.0.0.1:8000/api/v2/product/all-data`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error;
+  }
+};
 export {
   getDataProducts,
   getDataProductsEqualId,
@@ -82,4 +106,6 @@ export {
   getProductsRelate,
   getDataCardProducts,
   createProduct,
+  deleteProductById,
+  getAllProduct,
 };

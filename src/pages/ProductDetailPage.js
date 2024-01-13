@@ -35,6 +35,7 @@ function ProductDetailPage() {
 
     fetchData();
   }, [id, trademark]);
+  console.log("Xuan Manh Check dataRelateProduct", dataRelateProduct);
   return (
     <>
       <Header
