@@ -64,7 +64,6 @@ function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
         amount = parseFloat(amount);
         return amount.toLocaleString("vi-VN");
     };
-    console.log("Xuan Manh Check data", data);
     return (
         <>
             <div className={clsx(styles.container)}>
@@ -120,7 +119,7 @@ function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
                                                             )}
                                                         >
                                                             {formatCurrency(
-                                                                item.price
+                                                                item.salePrice
                                                             )}
                                                             <FontAwesomeIcon
                                                                 className={clsx(
@@ -137,7 +136,7 @@ function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
                                                             )}
                                                         >
                                                             {formatCurrency(
-                                                                item.salePrice
+                                                                item.price
                                                             )}
                                                             <FontAwesomeIcon
                                                                 className={clsx(

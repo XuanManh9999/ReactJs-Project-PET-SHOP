@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "animate.css/animate.min.css";
 import "datatables.net-bs5/css/dataTables.bootstrap5.min.css";
@@ -31,6 +31,8 @@ const mdParser = new MarkdownIt(/* Markdown-it options */);
 // Finish!
 
 function AddProduct() {
+  const editorRef = useRef();
+
   const [productData, setProductData] = useState({
     name: "",
     desc: "",
@@ -85,6 +87,7 @@ function AddProduct() {
         ...prev,
         detailImages: saveImages,
       }));
+      setSaveImages([]);
       toast.success("Lưu thành công");
     } else {
       toast.warn("Không thể lưu dữ liệu rỗng");
@@ -109,6 +112,7 @@ function AddProduct() {
         ...prev,
         colors: saveColor,
       }));
+      setSaveColor([]);
       toast.success("Lưu thành công");
     } else {
       toast.warn("Không thể lưu dữ liệu rỗng");
@@ -133,30 +137,37 @@ function AddProduct() {
         sizes: saveSize,
       }));
       toast.success("Lưu thành công");
+      setSaveSize([]);
     } else {
       toast.warn("Không thể lưu dữ liệu rỗng");
     }
   };
-  console.log(productData);
+  // Hàm để xóa toàn bộ dữ liệu
+  const clearData = () => {
+    setProductData({
+      name: "",
+      desc: "",
+      descHTML: "",
+      avatar: "",
+      price: 0,
+      salePrice: 0,
+      manyProducts: 0,
+      comment: "",
+      trademark: "",
+      detailImages: [],
+      sizes: [],
+      colors: [],
+    });
+  };
   const hendleAddProduct = async () => {
     try {
       const response = await createProduct(productData);
       if (response && response.status === 200) {
         toast.success("Thêm sản phẩm thành công");
-        setProductData({
-          name: "",
-          desc: "",
-          descHTML: "",
-          avatar: "",
-          price: 0,
-          salePrice: 0,
-          manyProducts: 0,
-          comment: "",
-          trademark: "",
-          detailImages: [],
-          sizes: [],
-          colors: [],
-        });
+        if (editorRef.current) {
+          editorRef.current.setText("");
+        }
+        clearData();
       } else {
         toast.warn(
           "Thêm sản phẩm không thành công vui lòng kiểm tra lại dữ liệu"
@@ -166,7 +177,6 @@ function AddProduct() {
       toast.error("Thêm sản phẩm không thành công. Đã xảy ra lỗi");
     }
   };
-  console.log("Xuan Manh Check dataProduct", productData);
   return (
     <main id="main" className="main">
       <div className="pagetitle">
@@ -363,6 +373,8 @@ function AddProduct() {
                           style={{ height: "500px" }}
                           renderHTML={(text) => mdParser.render(text)}
                           onChange={handleEditorChange}
+                          value={productData.desc}
+                          ref={editorRef}
                         />
                       </div>
                       <div className="image-previews"></div>
@@ -430,20 +442,7 @@ function AddProduct() {
                         className="btn btn-gradient-primary me-2"
                         onClick={() => {
                           toast.success("Reset thành công");
-                          setProductData({
-                            name: "",
-                            desc: "",
-                            descHTML: "",
-                            avatar: "",
-                            price: 0,
-                            salePrice: 0,
-                            manyProducts: 0,
-                            comment: "",
-                            trademark: "",
-                            detailImages: [],
-                            sizes: [],
-                            colors: [],
-                          });
+                          clearData();
                         }}
                       >
                         Reset

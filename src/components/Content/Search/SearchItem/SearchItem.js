@@ -75,7 +75,7 @@ function SearchItem({ close_search }) {
                     return (
                         <Link
                             key={index}
-                            to={`/ProductDetail/${item.id}/${item.role}`}
+                            to={`/ProductDetail/${item.id}/${item.trademark}`}
                             className={clsx(styles.data_search)}
                         >
                             <div className={clsx(styles.data_search_item)}>
