@@ -14,7 +14,7 @@ import ProductPayPage from "../pages/ProductPayPage";
 import HomeManage from "../pages/Manage/HomeManage";
 import ProductManage from "../pages/Manage/ProductManage";
 import ProductAdd from "../pages/Manage/ProductAdd";
-
+import UpdatePRD from "../pages/Manage/UpdateProduct";
 const publicRoutes = [
   {
     path: "/",
@@ -80,6 +80,10 @@ const publicRoutes = [
   {
     path: "/payment-processing",
     component: <ProductPayPage />,
+  },
+  {
+    path: "/update-product",
+    component: <UpdatePRD />,
   },
 ];
 // Cần đăng nhập

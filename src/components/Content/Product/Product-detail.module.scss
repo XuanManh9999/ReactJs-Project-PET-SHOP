@@ -130,6 +130,27 @@
   color: #363025;
 }
 
+.product-size {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  input {
+    z-index: 1;
+    opacity: 0;
+  }
+  .size-product {
+    width: 60px;
+    height: 40px;
+    border: 1px solid #ccc;
+    text-align: center;
+    line-height: 40px;
+    position: relative;
+    cursor: pointer;
+    left: -25px;
+    z-index: 2;
+  }
+}
+
 .product-color .list-color {
 }
 .product-color label {
