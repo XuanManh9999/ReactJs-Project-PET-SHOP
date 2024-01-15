@@ -2,6 +2,8 @@ import styles from "./Product-detail.module.scss";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { PhotoProvider, PhotoView } from "react-photo-view";
+import "react-photo-view/dist/react-photo-view.css";
 import {
   faCheck,
   faDongSign,
@@ -86,71 +88,115 @@ function ProductDetail({ data = [], dataRelare = [] }) {
               <div className={styles["container"]}>
                 <div className={styles["product-detail-block"]}>
                   <div className={styles["product-detail-left"]}>
-                    {data.length > 0 ? (
-                      <div className={styles["product-left-colum"]}>
-                        <figure>
-                          <img
-                            src={
-                              getDetailProduct &&
-                              getDetailProduct.detailImages[0] &&
-                              getDetailProduct.detailImages[0].hrefImage
-                                ? getDetailProduct.detailImages[0].hrefImage
-                                : ""
-                            }
-                            alt=""
-                            className={styles["product-detail-img"]}
-                          />
-                        </figure>
-                        <figure>
-                          <img
-                            src={
-                              getDetailProduct &&
-                              getDetailProduct.detailImages[1] &&
-                              getDetailProduct.detailImages[1].hrefImage
-                                ? getDetailProduct.detailImages[1].hrefImage
-                                : ""
-                            }
-                            alt=""
-                            className={styles["product-detail-img"]}
-                          />
-                        </figure>
-                        <figure>
-                          <img
-                            src={
-                              getDetailProduct &&
-                              getDetailProduct.detailImages[2] &&
-                              getDetailProduct.detailImages[2].hrefImage
-                                ? getDetailProduct.detailImages[2].hrefImage
-                                : ""
-                            }
-                            alt=""
-                            className={styles["product-detail-img"]}
-                          />
-                        </figure>
-                        <figure>
-                          <img
-                            src={
-                              getDetailProduct &&
-                              getDetailProduct.detailImages[3] &&
-                              getDetailProduct.detailImages[3].hrefImage
-                                ? getDetailProduct.detailImages[3].hrefImage
-                                : ""
-                            }
-                            alt=""
-                            className={styles["product-detail-img"]}
-                          />
-                        </figure>
-                      </div>
-                    ) : (
-                      ""
-                    )}
+                    <PhotoProvider>
+                      {data.length > 0 ? (
+                        <div className={styles["product-left-colum"]}>
+                          <figure>
+                            <PhotoView
+                              src={
+                                getDetailProduct &&
+                                getDetailProduct.detailImages[0] &&
+                                getDetailProduct.detailImages[0].hrefImage
+                                  ? getDetailProduct.detailImages[0].hrefImage
+                                  : ""
+                              }
+                            >
+                              <img
+                                src={
+                                  getDetailProduct &&
+                                  getDetailProduct.detailImages[0] &&
+                                  getDetailProduct.detailImages[0].hrefImage
+                                    ? getDetailProduct.detailImages[0].hrefImage
+                                    : ""
+                                }
+                                alt=""
+                                className={styles["product-detail-img"]}
+                              />
+                            </PhotoView>
+                          </figure>
+                          <figure>
+                            <PhotoView
+                              src={
+                                getDetailProduct &&
+                                getDetailProduct.detailImages[1] &&
+                                getDetailProduct.detailImages[1].hrefImage
+                                  ? getDetailProduct.detailImages[1].hrefImage
+                                  : ""
+                              }
+                            >
+                              <img
+                                src={
+                                  getDetailProduct &&
+                                  getDetailProduct.detailImages[1] &&
+                                  getDetailProduct.detailImages[1].hrefImage
+                                    ? getDetailProduct.detailImages[1].hrefImage
+                                    : ""
+                                }
+                                alt=""
+                                className={styles["product-detail-img"]}
+                              />
+                            </PhotoView>
+                          </figure>
+                          <figure>
+                            <PhotoView
+                              src={
+                                getDetailProduct &&
+                                getDetailProduct.detailImages[2] &&
+                                getDetailProduct.detailImages[2].hrefImage
+                                  ? getDetailProduct.detailImages[2].hrefImage
+                                  : ""
+                              }
+                            >
+                              <img
+                                src={
+                                  getDetailProduct &&
+                                  getDetailProduct.detailImages[2] &&
+                                  getDetailProduct.detailImages[2].hrefImage
+                                    ? getDetailProduct.detailImages[2].hrefImage
+                                    : ""
+                                }
+                                alt=""
+                                className={styles["product-detail-img"]}
+                              />
+                            </PhotoView>
+                          </figure>
+                          <figure>
+                            <PhotoView
+                              src={
+                                getDetailProduct &&
+                                getDetailProduct.detailImages[3] &&
+                                getDetailProduct.detailImages[3].hrefImage
+                                  ? getDetailProduct.detailImages[3].hrefImage
+                                  : ""
+                              }
+                            >
+                              <img
+                                src={
+                                  getDetailProduct &&
+                                  getDetailProduct.detailImages[3] &&
+                                  getDetailProduct.detailImages[3].hrefImage
+                                    ? getDetailProduct.detailImages[3].hrefImage
+                                    : ""
+                                }
+                                alt=""
+                                className={styles["product-detail-img"]}
+                              />
+                            </PhotoView>
+                          </figure>
+                        </div>
+                      ) : (
+                        ""
+                      )}
 
-                    <div className={styles["product-left-img"]}>
-                      <img
-                        src={getDetailProduct.avatar}
-                        alt="Detail Products"
-                      />
-                    </div>
+                      <div className={styles["product-left-img"]}>
+                        <PhotoView src={getDetailProduct.avatar}>
+                          <img
+                            src={getDetailProduct.avatar}
+                            alt="Detail Products"
+                          />
+                        </PhotoView>
+                      </div>
+                    </PhotoProvider>
                   </div>
                   <div className={styles["product-detail-right"]}>
                     <div className={styles["product-container"]}>

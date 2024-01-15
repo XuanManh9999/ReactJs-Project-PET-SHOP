@@ -88,6 +88,19 @@ const deleteProductById = async (id) => {
   }
 };
 
+const updateProductById = async (data) => {
+  try {
+    const response = await axios.put(
+      `http://127.0.0.1:8000/api/v2/product/update-products`,
+      data
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error;
+  }
+};
+
 const getAllProduct = async () => {
   try {
     const response = await axios.get(
@@ -108,4 +121,5 @@ export {
   createProduct,
   deleteProductById,
   getAllProduct,
+  updateProductById
 };

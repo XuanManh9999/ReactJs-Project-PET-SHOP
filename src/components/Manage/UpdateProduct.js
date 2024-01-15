@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "animate.css/animate.min.css";
 import "datatables.net-bs5/css/dataTables.bootstrap5.min.css";
@@ -15,13 +15,20 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./Header.module.scss";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { PhotoProvider, PhotoView } from "react-photo-view";
+import "react-photo-view/dist/react-photo-view.css";
 // markdown
 import MarkdownIt from "markdown-it";
 import MdEditor from "react-markdown-editor-lite";
 // import style manually
 import "react-markdown-editor-lite/lib/index.css";
 
-import { createProduct } from "../../services/hendleProducts";
+import {
+  getDataProducts,
+  getDataProductsEqualId,
+  updateProductById,
+} from "../../services/hendleProducts";
+import styles from "./UpdateProduct.module.scss";
 // Register plugins if required
 // MdEditor.use(YOUR_PLUGINS_HERE);
 
@@ -47,12 +54,23 @@ function UpdateProduct() {
     sizes: [],
     colors: [],
   });
+  // data
+  const [idSelected, setIdSelect] = useState(null);
+  const [dataProducts, setDataProducts] = useState([]);
   const [detailImages, setDetailImage] = useState("");
   const [saveImages, setSaveImages] = useState([]);
   const [detailColor, setDetailColor] = useState("");
   const [saveColor, setSaveColor] = useState([]);
   const [detailSize, setDetailSize] = useState("");
   const [saveSize, setSaveSize] = useState([]);
+
+  useEffect(() => {
+    const fetchingData = async () => {
+      const res = await getDataProducts();
+      setDataProducts(res.data);
+    };
+    fetchingData();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -159,22 +177,55 @@ function UpdateProduct() {
       colors: [],
     });
   };
-  const hendleAddProduct = async () => {
+  const hendleUpdateProduct = async () => {
     try {
-      const response = await createProduct(productData);
-      if (response && response.status === 200) {
-        toast.success("Thêm sản phẩm thành công");
-        if (editorRef.current) {
-          editorRef.current.setText("");
+      if (idSelected !== null) {
+        const response = await updateProductById({
+          ...productData,
+          id: idSelected,
+        });
+        if (response && response.status === 200) {
+          toast.success("Cập nhật sản phẩm thành công");
+          if (editorRef.current) {
+            editorRef.current.setText("");
+          }
+          clearData();
+        } else {
+          toast.warn(
+            "Cập nhật sản phẩm thành công không thành công vui lòng kiểm tra lại dữ liệu"
+          );
         }
-        clearData();
       } else {
-        toast.warn(
-          "Thêm sản phẩm không thành công vui lòng kiểm tra lại dữ liệu"
-        );
+        toast.warn("Không tìm thấy id sản phẩm");
       }
     } catch (e) {
-      toast.error("Thêm sản phẩm không thành công. Đã xảy ra lỗi");
+      toast.error(
+        "Cập nhật sản phẩm thành công không thành công. Đã xảy ra lỗi"
+      );
+    }
+  };
+  const hendleSelectedId = async (event) => {
+    const value = event.target.value;
+    if (value !== "" && value !== "Chọn sản phẩm") {
+      setIdSelect(value);
+      const res = await getDataProductsEqualId(value);
+      setProductData(res.data[0]);
+    } else {
+      clearData();
+    }
+  };
+
+  const hendleBtn = (event) => {
+    const { name } = event.target;
+    const res = window.confirm("Bạn có chắc chắn muốn clear dữ liệu không?");
+    if (res) {
+      if (name === "btnImages") {
+        setProductData({ ...productData, detailImages: [] });
+      } else if (name === "btnColor") {
+        setProductData({ ...productData, colors: [] });
+      } else if (name === "btnSizes") {
+        setProductData({ ...productData, sizes: [] });
+      }
     }
   };
   return (
@@ -200,17 +251,24 @@ function UpdateProduct() {
                     >
                       <div className="col-md-4 mb-3">
                         <label for="inputState" className="form-label">
-                          Danh mục
+                          Tên sản phẩm
                         </label>
                         <select
                           id="inputState"
                           name="id_cate"
                           className="form-select"
+                          onChange={(event) => {
+                            hendleSelectedId(event);
+                          }}
                         >
-                          <option value="">Chó</option>
-                          <option value="">Mèo</option>
-                          <option value="">Chim</option>
-                          <option value="">Phụ kiện cho thú cưng</option>
+                          <option>Chọn sản phẩm</option>
+                          {dataProducts && dataProducts.length > 0
+                            ? dataProducts.map((item, index) => (
+                                <option key={index} value={item.id}>
+                                  {item.name}
+                                </option>
+                              ))
+                            : ""}
                         </select>
                       </div>
                       <div className="form-group">
@@ -222,6 +280,7 @@ function UpdateProduct() {
                           placeholder="Name"
                           required
                           name="name"
+                          value={productData.name}
                           onChange={handleInputChange}
                         />
                       </div>
@@ -233,6 +292,7 @@ function UpdateProduct() {
                           id="exampleInputName1"
                           required
                           name="manyProducts"
+                          value={productData.manyProducts}
                           onChange={handleInputChange}
                         />
                       </div>
@@ -244,6 +304,7 @@ function UpdateProduct() {
                           id="exampleInputName1"
                           required
                           name="price"
+                          value={productData.price}
                           onChange={handleInputChange}
                         />
                       </div>
@@ -255,21 +316,11 @@ function UpdateProduct() {
                           id="exampleInputName1"
                           required
                           name="salePrice"
+                          value={productData.salePrice}
                           onChange={handleInputChange}
                         />
                       </div>
 
-                      <div className="form-group">
-                        <label for="exampleInputName1">Avatar</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="exampleInputName1"
-                          required
-                          name="avatar"
-                          onChange={handleInputChange}
-                        />
-                      </div>
                       <div className="form-group">
                         <label for="exampleInputName1">Trademark</label>
                         <input
@@ -278,11 +329,72 @@ function UpdateProduct() {
                           id="exampleInputName1"
                           required
                           name="trademark"
+                          value={productData.trademark}
                           onChange={handleInputChange}
                         />
                       </div>
                       <div className="form-group">
-                        <label>Ảnh</label>
+                        <div className="d-flex gap-3 align-items-center">
+                          <label htmlFor="exampleInputName1">Avatar</label>
+
+                          {productData.avatar !== "" ? (
+                            <PhotoProvider>
+                              <PhotoView src={productData.avatar}>
+                                <img
+                                  className={styles.avatarImg}
+                                  src={productData.avatar}
+                                  alt={productData.name}
+                                  style={{ marginBottom: "5px" }}
+                                />
+                              </PhotoView>
+                            </PhotoProvider>
+                          ) : (
+                            ""
+                          )}
+                        </div>
+
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="exampleInputName1"
+                          required
+                          name="avatar"
+                          value={productData.avatar}
+                          onChange={handleInputChange}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <div className="d-flex gap-3 align-items-center">
+                          <label>Ảnh</label>
+                          {productData.detailImages.length > 0 &&
+                            productData.detailImages.length > 1 &&
+                            productData.detailImages.map((item, index) => (
+                              <PhotoProvider>
+                                <PhotoView src={item.hrefImage}>
+                                  <img
+                                    className={styles.avatarImg}
+                                    src={item.hrefImage}
+                                    alt={productData.name}
+                                    style={{ marginBottom: "5px" }}
+                                  />
+                                </PhotoView>
+                              </PhotoProvider>
+                            ))}
+                          {productData.detailImages.length > 0 &&
+                            productData.detailImages.length > 1 && (
+                              <button
+                                type="button"
+                                className="btn btn-primary mb-3"
+                                name="btnImages"
+                                onClick={(event) => {
+                                  hendleBtn(event);
+                                }}
+                              >
+                                Reset
+                              </button>
+                            )}
+                        </div>
+
                         <input
                           type="file"
                           name="img"
@@ -320,7 +432,35 @@ function UpdateProduct() {
                       </div>
 
                       <div className="form-group">
-                        <label>Màu sắc</label>
+                        <div className="d-flex gap-3  align-items-center">
+                          <label>Màu sắc</label>
+                          {productData.colors.length > 0 &&
+                            productData.colors[0] !== null &&
+                            productData.colors.map((item, index) => (
+                              <>
+                                <div
+                                  key={index}
+                                  className={styles.colorProduct}
+                                  style={{
+                                    background: `${item.color}`,
+                                  }}
+                                ></div>
+                              </>
+                            ))}
+                          {productData.colors.length > 0 &&
+                            productData.colors[0] !== null && (
+                              <button
+                                type="button"
+                                name="btnColor"
+                                className="btn btn-primary mb-3"
+                                onClick={(event) => {
+                                  hendleBtn(event);
+                                }}
+                              >
+                                Reset
+                              </button>
+                            )}
+                        </div>
                         <input
                           type="file"
                           name="img"
@@ -364,6 +504,7 @@ function UpdateProduct() {
                           required
                           name="comment"
                           rows="4"
+                          value={productData.comment}
                           onChange={handleInputChange}
                         ></textarea>
                       </div>
@@ -379,12 +520,41 @@ function UpdateProduct() {
                       </div>
                       <div className="image-previews"></div>
                       <div className="form-group row" id="size-container">
-                        <label
-                          for="size-select"
-                          className="col-sm-2 col-form-label"
-                        >
-                          Size
-                        </label>
+                        <div className="d-flex mb-3 align-items-center gap-3">
+                          <label
+                            for="size-select"
+                            className="col-sm-2 col-form-label"
+                          >
+                            Size đã tồn tại:
+                          </label>
+                          {productData.sizes.length > 0 &&
+                            productData.sizes[0].size !== null &&
+                            productData.sizes.map((item, index) => {
+                              return (
+                                <>
+                                  <div
+                                    className={styles.sizeProduct}
+                                    key={index}
+                                  >
+                                    {item.size}
+                                  </div>
+                                </>
+                              );
+                            })}
+                          {productData.sizes.length > 0 &&
+                            productData.sizes[0].size !== null && (
+                              <button
+                                type="button"
+                                className="btn btn-primary "
+                                name="btnSizes"
+                                onClick={(event) => {
+                                  hendleBtn(event);
+                                }}
+                              >
+                                Reset
+                              </button>
+                            )}
+                        </div>
                         <div className="col-sm-6">
                           <select
                             className="form-control"
@@ -433,9 +603,9 @@ function UpdateProduct() {
                       <button
                         type="reset"
                         className="btn btn-primary me-2"
-                        onClick={hendleAddProduct}
+                        onClick={hendleUpdateProduct}
                       >
-                        Thêm
+                        Save
                       </button>
                       <button
                         type="reset"
