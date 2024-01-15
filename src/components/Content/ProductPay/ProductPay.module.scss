@@ -119,7 +119,9 @@ th {
     color: #fff;
 }
 }
-
+.product-price-left {
+  margin-top: 43px;
+}
 .product-price-left button {
   text-align: center;
   font-family: "Quicksand", sans-serif;
@@ -195,4 +197,7 @@ th {
   background: #363025;
   color: #fff;
   border-color: #363025;
+}
+.emptyData {
+  text-align: center;
 }

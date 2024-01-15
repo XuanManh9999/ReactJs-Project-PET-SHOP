@@ -14,21 +14,22 @@ import {
   FaShoppingBag,
   FaDiceD6,
   FaAudioDescription,
-  FaCheck,
 } from "react-icons/fa";
 
 import Slide from "../Slide/Slide";
 import { store } from "../../../redux/store.js";
 import { saveDataFromLocalstore } from "../../../redux/actions.js";
 import { useData } from "../../Common/DataContext";
+
 function ProductDetail({ data = [], dataRelare = [] }) {
   const [getDetailProduct] = data;
   const [totalManyProduct, setTotalManyProduct] = useState(1);
 
-  const [selectedColorIndex, setSelectedColorIndex] = useState(null);
-
   const { updateData } = useData();
+  const [selectedColorIndex, setSelectedColorIndex] = useState(0);
+  const [selectedSizeIndex, setSelectedSizeIndex] = useState(0);
   const [selectedColor, setSelectedColor] = useState(null);
+  const [selectedSize, setSelectedSize] = useState(null);
   const formatCurrency = (amount) => {
     amount = parseFloat(amount);
     return amount.toLocaleString("vi-VN");
@@ -69,6 +70,12 @@ function ProductDetail({ data = [], dataRelare = [] }) {
     const selectedValue = event.target.value;
     setSelectedColor(selectedValue);
     setSelectedColorIndex(index);
+  };
+
+  const hendleSizeProduct = (event, index) => {
+    const selectedValue = event.target.value;
+    setSelectedSize(selectedValue);
+    setSelectedSizeIndex(index);
   };
   return (
     <>
@@ -185,6 +192,40 @@ function ProductDetail({ data = [], dataRelare = [] }) {
                       getDetailProduct.sizes.length > 0 ? (
                         <div className={styles["product-size"]}>
                           <label>Kích thước:</label>
+                          {getDetailProduct.sizes.map((item, index) => {
+                            return (
+                              <>
+                                <input
+                                  id={`sizes-${index}-cam`}
+                                  type="radio"
+                                  name="size"
+                                  value={item.size}
+                                  key={index}
+                                  onChange={(event) => {
+                                    hendleSizeProduct(event, index);
+                                  }}
+                                  checked={item.size === selectedSize}
+                                />
+                                <label
+                                  className={styles["size-product"]}
+                                  htmlFor={`sizes-${index}-cam`}
+                                  style={{
+                                    background:
+                                      index === selectedSizeIndex
+                                        ? "#f9a529"
+                                        : "",
+                                    color:
+                                      index === selectedSizeIndex ? "#fff" : "",
+                                  }}
+                                  onClick={(event) =>
+                                    hendleSizeProduct(event, index)
+                                  }
+                                >
+                                  {item.size}
+                                </label>
+                              </>
+                            );
+                          })}
                         </div>
                       ) : (
                         ""

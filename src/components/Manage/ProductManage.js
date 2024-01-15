@@ -105,7 +105,7 @@ function ManageProduct() {
                       <th>Sale</th>
                       <th>Giảm giá</th>
                       <th>Mô tả</th>
-                      <th>Thao tác</th>
+                      <th>Xóa sản phẩm</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -155,14 +155,6 @@ function ManageProduct() {
                             </td>
                             <td>{item.comment ? item.comment : "N/A"}</td>
                             <td>
-                              <a
-                                href=""
-                                className="edit"
-                                title="Edit"
-                                data-toggle="tooltip"
-                              >
-                                <i className="bi bi-pencil"></i>
-                              </a>
                               <button
                                 style={{
                                   border: "none",
