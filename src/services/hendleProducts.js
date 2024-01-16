@@ -121,5 +121,5 @@ export {
   createProduct,
   deleteProductById,
   getAllProduct,
-  updateProductById
+  updateProductById,
 };
