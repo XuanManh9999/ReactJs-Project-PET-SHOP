@@ -15,7 +15,6 @@ import "./assets/vendor/quill/quill.bubble.css";
 import "./assets/vendor/remixicon/remixicon.css";
 import "./assets/vendor/simple-datatables/style.css";
 
-import $ from "jquery";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./Header.module.scss";
 import {
@@ -62,17 +61,17 @@ function ManageProduct() {
                   action=""
                   className="forms-sample"
                   method="post"
-                  enctype="multipart/form-data"
+                  encType="multipart/form-data"
                 >
                   <div className="d-flex align-items-center">
                     <div className="col-md-4 mb-3 me-2">
-                      <label for="inputState" className="form-label">
+                      <label htmlFor="inputState" className="htmlForm-label">
                         Danh mục
                       </label>
                       <select
                         id="inputState"
                         name="id_cate"
-                        className="form-select"
+                        className="htmlForm-select"
                       >
                         <option value="">Tất cả</option>
                         <option value="">Chó</option>
@@ -123,6 +122,7 @@ function ManageProduct() {
                                 style={{ objectFit: "cover" }}
                                 width={"50px"}
                                 height={"80px"}
+                                alt=""
                               />
                             </td>
                             <td>

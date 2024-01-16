@@ -196,10 +196,10 @@ function AddProduct() {
                       className="forms-sample"
                       id="addsppp"
                       method="post"
-                      enctype="multipart/form-data"
+                      encType="multipart/form-data"
                     >
                       <div className="col-md-4 mb-3">
-                        <label for="inputState" className="form-label">
+                        <label htmlFor="inputState" className="form-label">
                           Danh mục
                         </label>
                         <select
@@ -214,7 +214,7 @@ function AddProduct() {
                         </select>
                       </div>
                       <div className="form-group">
-                        <label for="exampleInputName1">Tên sản phẩm</label>
+                        <label htmlFor="exampleInputName1">Tên sản phẩm</label>
                         <input
                           type="text"
                           className="form-control"
@@ -226,7 +226,7 @@ function AddProduct() {
                         />
                       </div>
                       <div className="form-group">
-                        <label for="exampleInputName1">Số lượng</label>
+                        <label htmlFor="exampleInputName1">Số lượng</label>
                         <input
                           type="text"
                           className="form-control"
@@ -237,7 +237,7 @@ function AddProduct() {
                         />
                       </div>
                       <div className="form-group">
-                        <label for="exampleInputName1">Giá</label>
+                        <label htmlFor="exampleInputName1">Giá</label>
                         <input
                           type="number"
                           className="form-control"
@@ -248,7 +248,7 @@ function AddProduct() {
                         />
                       </div>
                       <div className="form-group">
-                        <label for="exampleInputName1">Sale</label>
+                        <label htmlFor="exampleInputName1">Sale</label>
                         <input
                           type="text"
                           className="form-control"
@@ -260,7 +260,7 @@ function AddProduct() {
                       </div>
 
                       <div className="form-group">
-                        <label for="exampleInputName1">Avatar</label>
+                        <label htmlFor="exampleInputName1">Avatar</label>
                         <input
                           type="text"
                           className="form-control"
@@ -271,7 +271,7 @@ function AddProduct() {
                         />
                       </div>
                       <div className="form-group">
-                        <label for="exampleInputName1">Trademark</label>
+                        <label htmlFor="exampleInputName1">Trademark</label>
                         <input
                           type="text"
                           className="form-control"
@@ -357,7 +357,7 @@ function AddProduct() {
                         <div className="text-danger"></div>
                       </div>
                       <div className="form-group">
-                        <label for="exampleTextarea1">Mô tả</label>
+                        <label htmlFor="exampleTextarea1">Mô tả</label>
                         <textarea
                           className="form-control"
                           id="exampleTextarea1"
@@ -380,7 +380,7 @@ function AddProduct() {
                       <div className="image-previews"></div>
                       <div className="form-group row" id="size-container">
                         <label
-                          for="size-select"
+                          htmlFor="size-select"
                           className="col-sm-2 col-form-label"
                         >
                           Size

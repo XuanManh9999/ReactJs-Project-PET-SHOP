@@ -28,8 +28,8 @@ function ProductDetail({ data = [], dataRelare = [] }) {
   const [totalManyProduct, setTotalManyProduct] = useState(1);
 
   const { updateData } = useData();
-  const [selectedColorIndex, setSelectedColorIndex] = useState(0);
-  const [selectedSizeIndex, setSelectedSizeIndex] = useState(0);
+  const [selectedColorIndex, setSelectedColorIndex] = useState(null);
+  const [selectedSizeIndex, setSelectedSizeIndex] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
   const formatCurrency = (amount) => {
@@ -47,7 +47,12 @@ function ProductDetail({ data = [], dataRelare = [] }) {
     if (existingProductIndex !== -1) {
       toast.warn("Sản phẩm đã tồn tài trong giỏ hàng");
     } else {
-      existingCart.push({ id, quantity: +totalManyProduct });
+      existingCart.push({
+        id,
+        quantity: +totalManyProduct,
+        size: selectedSize,
+        color: selectedColor,
+      });
       store.dispatch(saveDataFromLocalstore(existingCart));
       updateData(existingCart);
       toast.success("Thêm sản phẩm thành công");
@@ -63,7 +68,12 @@ function ProductDetail({ data = [], dataRelare = [] }) {
 
     if (existingProductIndex !== -1) {
     } else {
-      existingCart.push({ id, quantity: +totalManyProduct });
+      existingCart.push({
+        id,
+        quantity: +totalManyProduct,
+        size: selectedSize,
+        color: selectedColor,
+      });
       store.dispatch(saveDataFromLocalstore(existingCart));
       updateData(existingCart);
     }
@@ -79,6 +89,7 @@ function ProductDetail({ data = [], dataRelare = [] }) {
     setSelectedSize(selectedValue);
     setSelectedSizeIndex(index);
   };
+
   return (
     <>
       {data && data.length > 0 ? (
@@ -92,16 +103,11 @@ function ProductDetail({ data = [], dataRelare = [] }) {
                       {data.length > 0 ? (
                         <div className={styles["product-left-colum"]}>
                           <figure>
-                            <PhotoView
-                              src={
-                                getDetailProduct &&
-                                getDetailProduct.detailImages[0] &&
-                                getDetailProduct.detailImages[0].hrefImage
-                                  ? getDetailProduct.detailImages[0].hrefImage
-                                  : ""
-                              }
-                            >
-                              <img
+                            {getDetailProduct &&
+                            getDetailProduct.detailImages[0] &&
+                            getDetailProduct.detailImages[0].hrefImage !==
+                              "" ? (
+                              <PhotoView
                                 src={
                                   getDetailProduct &&
                                   getDetailProduct.detailImages[0] &&
@@ -109,22 +115,30 @@ function ProductDetail({ data = [], dataRelare = [] }) {
                                     ? getDetailProduct.detailImages[0].hrefImage
                                     : ""
                                 }
-                                alt=""
-                                className={styles["product-detail-img"]}
-                              />
-                            </PhotoView>
+                              >
+                                <img
+                                  src={
+                                    getDetailProduct &&
+                                    getDetailProduct.detailImages[0] &&
+                                    getDetailProduct.detailImages[0].hrefImage
+                                      ? getDetailProduct.detailImages[0]
+                                          .hrefImage
+                                      : ""
+                                  }
+                                  alt=""
+                                  className={styles["product-detail-img"]}
+                                />
+                              </PhotoView>
+                            ) : (
+                              ""
+                            )}
                           </figure>
                           <figure>
-                            <PhotoView
-                              src={
-                                getDetailProduct &&
-                                getDetailProduct.detailImages[1] &&
-                                getDetailProduct.detailImages[1].hrefImage
-                                  ? getDetailProduct.detailImages[1].hrefImage
-                                  : ""
-                              }
-                            >
-                              <img
+                            {getDetailProduct &&
+                            getDetailProduct.detailImages[1] &&
+                            getDetailProduct.detailImages[1].hrefImage !==
+                              "" ? (
+                              <PhotoView
                                 src={
                                   getDetailProduct &&
                                   getDetailProduct.detailImages[1] &&
@@ -132,22 +146,30 @@ function ProductDetail({ data = [], dataRelare = [] }) {
                                     ? getDetailProduct.detailImages[1].hrefImage
                                     : ""
                                 }
-                                alt=""
-                                className={styles["product-detail-img"]}
-                              />
-                            </PhotoView>
+                              >
+                                <img
+                                  src={
+                                    getDetailProduct &&
+                                    getDetailProduct.detailImages[1] &&
+                                    getDetailProduct.detailImages[1].hrefImage
+                                      ? getDetailProduct.detailImages[1]
+                                          .hrefImage
+                                      : ""
+                                  }
+                                  alt=""
+                                  className={styles["product-detail-img"]}
+                                />
+                              </PhotoView>
+                            ) : (
+                              ""
+                            )}
                           </figure>
                           <figure>
-                            <PhotoView
-                              src={
-                                getDetailProduct &&
-                                getDetailProduct.detailImages[2] &&
-                                getDetailProduct.detailImages[2].hrefImage
-                                  ? getDetailProduct.detailImages[2].hrefImage
-                                  : ""
-                              }
-                            >
-                              <img
+                            {getDetailProduct &&
+                            getDetailProduct.detailImages[2] &&
+                            getDetailProduct.detailImages[2].hrefImage !==
+                              "" ? (
+                              <PhotoView
                                 src={
                                   getDetailProduct &&
                                   getDetailProduct.detailImages[2] &&
@@ -155,22 +177,30 @@ function ProductDetail({ data = [], dataRelare = [] }) {
                                     ? getDetailProduct.detailImages[2].hrefImage
                                     : ""
                                 }
-                                alt=""
-                                className={styles["product-detail-img"]}
-                              />
-                            </PhotoView>
+                              >
+                                <img
+                                  src={
+                                    getDetailProduct &&
+                                    getDetailProduct.detailImages[2] &&
+                                    getDetailProduct.detailImages[2].hrefImage
+                                      ? getDetailProduct.detailImages[2]
+                                          .hrefImage
+                                      : ""
+                                  }
+                                  alt=""
+                                  className={styles["product-detail-img"]}
+                                />
+                              </PhotoView>
+                            ) : (
+                              ""
+                            )}
                           </figure>
                           <figure>
-                            <PhotoView
-                              src={
-                                getDetailProduct &&
-                                getDetailProduct.detailImages[3] &&
-                                getDetailProduct.detailImages[3].hrefImage
-                                  ? getDetailProduct.detailImages[3].hrefImage
-                                  : ""
-                              }
-                            >
-                              <img
+                            {getDetailProduct &&
+                            getDetailProduct.detailImages[3] &&
+                            getDetailProduct.detailImages[3].hrefImage !==
+                              "" ? (
+                              <PhotoView
                                 src={
                                   getDetailProduct &&
                                   getDetailProduct.detailImages[3] &&
@@ -178,10 +208,23 @@ function ProductDetail({ data = [], dataRelare = [] }) {
                                     ? getDetailProduct.detailImages[3].hrefImage
                                     : ""
                                 }
-                                alt=""
-                                className={styles["product-detail-img"]}
-                              />
-                            </PhotoView>
+                              >
+                                <img
+                                  src={
+                                    getDetailProduct &&
+                                    getDetailProduct.detailImages[3] &&
+                                    getDetailProduct.detailImages[3].hrefImage
+                                      ? getDetailProduct.detailImages[3]
+                                          .hrefImage
+                                      : ""
+                                  }
+                                  alt=""
+                                  className={styles["product-detail-img"]}
+                                />
+                              </PhotoView>
+                            ) : (
+                              ""
+                            )}
                           </figure>
                         </div>
                       ) : (
@@ -399,7 +442,11 @@ function ProductDetail({ data = [], dataRelare = [] }) {
             </div>
           </section>
           <div style={{ marginBottom: "50px" }}>
-            <Slide data={dataRelare} title="Sản phẩm tương tự" />
+            {dataRelare && dataRelare.length >= 4 ? (
+              <Slide data={dataRelare} title="Sản phẩm tương tự" />
+            ) : (
+              ""
+            )}
           </div>
         </>
       ) : (
