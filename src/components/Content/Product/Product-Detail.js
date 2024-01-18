@@ -1,8 +1,9 @@
 import styles from "./Product-detail.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { PhotoProvider, PhotoView } from "react-photo-view";
+import { animateScroll as scroll } from "react-scroll";
 import "react-photo-view/dist/react-photo-view.css";
 import {
   faCheck,
@@ -24,6 +25,9 @@ import { saveDataFromLocalstore } from "../../../redux/actions.js";
 import { useData } from "../../Common/DataContext";
 
 function ProductDetail({ data = [], dataRelare = [] }) {
+  useEffect(() => {
+    scroll.scrollToTop({ duration: 10 });
+  }, []);
   const [getDetailProduct] = data;
   const [totalManyProduct, setTotalManyProduct] = useState(1);
 
