@@ -13,6 +13,7 @@ function App() {
                   key={index}
                   path={route.path}
                   element={route.component}
+                  
                 />
               );
             })}
