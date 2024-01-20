@@ -112,6 +112,57 @@ const getAllProduct = async () => {
     throw error;
   }
 };
+
+const fetchCity = async () => {
+  try {
+    const response = await axios.get("https://provinces.open-api.vn/api/");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data: ", error);
+    throw error;
+  }
+};
+
+const fetchProvince = async (code) => {
+  try {
+    const response = await axios.get(
+      `https://provinces.open-api.vn/api/p/${code}?depth=2`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data: ", error);
+    throw error;
+  }
+};
+
+const fetchWards = async (code) => {
+  try {
+    const response = await axios.get(
+      `https://provinces.open-api.vn/api/d/${code}?depth=2`
+    );
+    return response.data;
+  } catch (error) {
+    console.log("Error fetching data: ", error);
+    throw error;
+  }
+};
+
+const hendleDiscountProducts = async (discount, ids) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:4000/api/v1/products/discount?discount=GIAMGIA2024",
+      {
+        discount,
+        ids,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.log("Error fetching data: ", error);
+    throw error;
+  }
+};
+
 export {
   getDataProducts,
   getDataProductsEqualId,
@@ -122,4 +173,8 @@ export {
   deleteProductById,
   getAllProduct,
   updateProductById,
+  fetchCity,
+  fetchProvince,
+  fetchWards,
+  hendleDiscountProducts,
 };
