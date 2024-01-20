@@ -112,6 +112,41 @@ const getAllProduct = async () => {
     throw error;
   }
 };
+
+const fetchCityProduct = async () => {
+  try {
+    const response = await axios.get("https://provinces.open-api.vn/api/");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data: ", error);
+    throw error;
+  }
+};
+
+const fetchProvince = async (code) => {
+  try {
+    const response = await axios.get(
+      `https://provinces.open-api.vn/api/p/${code}?depth=2`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data: ", error);
+    throw error;
+  }
+};
+
+const fetchWards = async (code) => {
+  try {
+    const response = await axios.get(
+      `https://provinces.open-api.vn/api/d/${code}?depth=2`
+    );
+    return response.data;
+  } catch (error) {
+    console.log("Error fetching data: ", error);
+    throw error;
+  }
+};
+
 export {
   getDataProducts,
   getDataProductsEqualId,
@@ -122,4 +157,7 @@ export {
   deleteProductById,
   getAllProduct,
   updateProductById,
+  fetchCityProduct,
+  fetchProvince,
+  fetchWards
 };

@@ -8,13 +8,21 @@ import {
   FaAngleDown,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { getDataCardProducts } from "../../../services/hendleProducts";
+import {
+  fetchCityProduct,
+  getDataCardProducts,
+  fetchProvince,
+  fetchWards,
+} from "../../../services/hendleProducts";
 function Pay() {
   const [showBankImage, setShowBankImage] = useState(false);
-  
+
   const [cartItems, setCartItems] = useState(
     () => JSON.parse(localStorage.getItem("cart")) || []
   );
+  const [dataCity, setDataCity] = useState([]);
+  const [provinces, setProvinces] = useState([]);
+  const [wards, setWards] = useState([]);
   const [data, setData] = useState([]);
   useEffect(() => {
     const getIds = (dataArray) => {
@@ -33,6 +41,20 @@ function Pay() {
       fetchData();
     }
   }, [cartItems]);
+
+  // call provide
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetchCityProduct();
+        setDataCity(response);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
   const hendleGetManyProduct = (id) => {
     const { quantity } = cartItems.find((item) => item.id === id);
     return quantity;
@@ -49,6 +71,32 @@ function Pay() {
       style: "currency",
       currency: "VND",
     }).format(amount);
+  };
+
+  const hendleOnchangeProvince = (event) => {
+    const fetchData = async () => {
+      try {
+        const getCode = event.target.value;
+        const response = await fetchProvince(getCode);
+        setProvinces(response.districts);
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+    fetchData();
+  };
+
+  const hendleOnchangeProvice = (event) => {
+    const fetchData = async () => {
+      try {
+        const getCode = event.target.value;
+        const response = await fetchWards(getCode);
+        setWards(response.wards);
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+    fetchData();
   };
   return (
     <section>
@@ -67,6 +115,7 @@ function Pay() {
                       type="text"
                       className={styles.email}
                       placeholder="Email:"
+                      name="email"
                     />
                     <span className={styles.form_message}></span>
                   </div>
@@ -75,6 +124,7 @@ function Pay() {
                       type="text"
                       placeholder="Họ Và tên"
                       className={styles.surname}
+                      name="name"
                     />
                     <span className={styles.form_message}></span>
                   </div>
@@ -83,23 +133,56 @@ function Pay() {
                       type="text"
                       placeholder="Số điện thoại"
                       className={styles.phone}
+                      name="phone"
                     />
                     <span className={styles.form_message}></span>
                   </div>
                   <div className={styles.form_group}>
                     <input
                       type="text"
-                      placeholder="Địa chỉ"
+                      placeholder="Số nhà, tên đường..."
                       className={styles.adresss}
+                      name="address"
                     />
                     <span className={styles.form_message}></span>
                   </div>
-                  <select name="" id="province"></select>
-                  <select name="" id="district">
-                    <option value="">chọn quận</option>
+                  <select
+                    name="city"
+                    id="city"
+                    onChange={hendleOnchangeProvince}
+                  >
+                    <option key={0} value={""}>
+                      {"Chọn thành phố"}
+                    </option>
+                    {dataCity &&
+                      dataCity.length > 0 &&
+                      dataCity.map((item, index) => (
+                        <option key={index} value={item.code}>
+                          {item.name}
+                        </option>
+                      ))}
                   </select>
-                  <select name="" id="ward">
-                    <option value="">chọn phường</option>
+                  <select
+                    name="provice"
+                    onChange={hendleOnchangeProvice}
+                    id="district"
+                  >
+                    {provinces &&
+                      provinces.length > 0 &&
+                      provinces.map((item, index) => (
+                        <option key={index} value={item.code}>
+                          {item.name}
+                        </option>
+                      ))}
+                  </select>
+                  <select name="ward" id="ward">
+                    {wards &&
+                      wards.length > 0 &&
+                      wards.map((item, index) => (
+                        <option key={index} value={item.code}>
+                          {item.name}
+                        </option>
+                      ))}
                   </select>
                   <div className={styles.form_group}>
                     <textarea

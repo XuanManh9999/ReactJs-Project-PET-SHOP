@@ -32,7 +32,7 @@ function Item() {
 
             // Tính tổng giá trị khi có dữ liệu mới
             const total = response.data.reduce(
-              (acc, item) => acc + parseFloat(item.price) * item.quantity,
+              (acc, item) => acc + parseFloat(item.salePrice) * item.quantity,
               0
             );
             setTotalPrice(total);
