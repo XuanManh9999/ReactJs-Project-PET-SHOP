@@ -150,7 +150,7 @@ const fetchWards = async (code) => {
 const hendleDiscountProducts = async (discount, ids) => {
   try {
     const response = await axios.post(
-      "http://localhost:4000/api/v1/products/discount?discount=GIAMGIA2024",
+      `http://localhost:4000/api/v1/products/discount`,
       {
         discount,
         ids,
@@ -160,6 +160,30 @@ const hendleDiscountProducts = async (discount, ids) => {
   } catch (error) {
     console.log("Error fetching data: ", error);
     throw error;
+  }
+};
+
+const getProductsByType = async (name) => {
+  try {
+    const response = await axios.get(
+      `http://localhost:4000/api/v1/products/data-products-by-type?name=${name}`
+    );
+    return response.data;
+  } catch (err) {
+    console.log("Error fetching data: ", err);
+    throw err;
+  }
+};
+
+const getAllDataTypeProducts = async (name) => {
+  try {
+    const response = await axios.get(
+      `http://localhost:4000/api/v1/products/all-data-typeProduct`
+    );
+    return response.data;
+  } catch (err) {
+    console.log("Error fetching data: ", err);
+    throw err;
   }
 };
 
@@ -177,4 +201,6 @@ export {
   fetchProvince,
   fetchWards,
   hendleDiscountProducts,
+  getProductsByType,
+  getAllDataTypeProducts,
 };
