@@ -99,6 +99,11 @@ function Pay() {
     const fetchData = async () => {
       try {
         const getCode = event.target.value;
+        const res = dataCity.find((item) => item.code == getCode);
+        setState((prev) => ({
+          ...prev,
+          city: res.name,
+        }));
         const response = await fetchProvince(getCode);
 
         setProvinces(response.districts);
@@ -113,7 +118,13 @@ function Pay() {
     const fetchData = async () => {
       try {
         const getCode = event.target.value;
+        const res = provinces.find((item) => item.code == getCode);
+        setState((prev) => ({
+          ...prev,
+          provice: res?.name,
+        }));
         const response = await fetchWards(getCode);
+
         setWards(response.wards);
       } catch (error) {
         console.error("Error fetching data: ", error);
@@ -121,6 +132,16 @@ function Pay() {
     };
     fetchData();
   };
+
+  const hendleWard = (event) => {
+    const getCode = event.target.value;
+    const res = wards.find((item) => item.code == getCode);
+    setState((prev) => ({
+      ...prev,
+      ward: res?.name,
+    }));
+  };
+
   const hendleApplyDiscount = async () => {
     if (discount && discount !== "") {
       const filteredArray = cartItems.map((item) => item.id);
@@ -154,6 +175,73 @@ function Pay() {
       return (bag += total.salePrice * hendleGetManyProduct(total.id));
     }, 0);
   };
+
+  const validateForm = () => {
+    let isValid = true;
+
+    const validateEmail = (email) => {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    };
+
+    const validatePhoneNumber = (phone) => {
+      const phoneNumberRegex =
+        /^(0[1-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9]|6[0-9]|7[0-9]|8[0-9]|9[0-9])\d{8}$/;
+      return phoneNumberRegex.test(phone);
+    };
+
+    // Kiểm tra và cập nhật lỗi cho từng trường
+    if (!state.email || !validateEmail(state.email)) {
+      toast.warning("Email is invalid");
+      isValid = false;
+      return;
+    }
+
+    if (!state.name) {
+      toast.warning("Name is required");
+      isValid = false;
+      return;
+    }
+
+    if (!state.phone || !validatePhoneNumber(state.phone)) {
+      toast.warning("Phone is invalid");
+      isValid = false;
+      return;
+    }
+
+    if (!state.address) {
+      toast.warning("Address is required");
+      isValid = false;
+      return;
+    }
+
+    if (!state.city) {
+      toast.warning("City is required");
+      isValid = false;
+      return;
+    }
+
+    if (!state.provice) {
+      toast.warning("Province is required");
+      isValid = false;
+      return;
+    }
+
+    if (!state.ward) {
+      toast.warning("Ward is required");
+      isValid = false;
+      return;
+    }
+
+    return isValid;
+  };
+
+  const hendlePay = () => {
+    if (validateForm()) {
+      toast.success("Đặt hàng thành công");
+    }
+  };
+  console.log("Xuan manh check state. ", state);
   return (
     <>
       <section>
@@ -217,10 +305,11 @@ function Pay() {
                       onChange={hendleOnchangeProvince}
                       defaultValue={dataCity.length > 0 ? dataCity[0].code : ""}
                     >
+                      <option key={0}>---</option>
                       {dataCity &&
                         dataCity.length > 0 &&
                         dataCity.map((item, index) => (
-                          <option key={index} value={item.code}>
+                          <option key={index + 1} value={item.code}>
                             {item.name}
                           </option>
                         ))}
@@ -244,6 +333,7 @@ function Pay() {
                       defaultValue={1}
                       defaultChecked={1}
                       id="ward"
+                      onChange={hendleWard}
                     >
                       {wards &&
                         wards.length > 0 &&
@@ -434,7 +524,11 @@ function Pay() {
                     <i className="fa-solid fa-chevron-left"></i>
                     Quay về trang chủ
                   </Link>
-                  <button className={styles.btn_order_products} type="submit">
+                  <button
+                    className={styles.btn_order_products}
+                    onClick={hendlePay}
+                    type="submit"
+                  >
                     Đặt hàng
                   </button>
                 </div>
