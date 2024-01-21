@@ -1,152 +1,151 @@
-
 .intro-accessoire-buy {
-    
-    text-align: center;
+  text-align: center;
 }
-body{
-    background-color: #fcf8ee;
+body {
+  background-color: #fcf8ee;
 }
 .title {
-    font-family: 'Montserrat', sans-serif;
-    margin: 0;
-    font-size: 40px;
-    color: #ffffff;
-    font-weight: 700;
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  font-size: 40px;
+  color: #ffffff;
+  font-weight: 700;
 }
 
 .img-hero {
-    display: block;
-    margin-top: 20px;
+  display: block;
+  margin-top: 20px;
 }
 
-.accessoire{
-    padding: 80px;
-    
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-image: url('https://xuanmanh9999.github.io/Project-Two-One/asset/img/bg-accessoire.webp');
+.accessoire {
+  padding: 80px;
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-image: url("https://xuanmanh9999.github.io/Project-Two-One/asset/img/bg-accessoire.webp");
 }
 
-.accessoire-container-products{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 40px;
+.accessoire-container-products {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 40px;
 }
 
-.main-content{
-    max-width: 1170px;
-    margin: 0 auto;
+.main-content {
+  max-width: 1170px;
+  margin: 0 auto;
 }
-.producitem{  
-    height: 190px;
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    width: calc(98% / 3);
-    flex-wrap: wrap;     
-}
-
-.producitem-content{
-    display: flex;
+.producitem {
+  height: 190px;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  width: calc(98% / 3);
+  flex-wrap: wrap;
+  text-decoration: none;
 }
 
-.producitem .img-item-hero  {
-    width: 30%;
+.producitem-content {
+  display: flex;
+}
+
+.producitem .img-item-hero {
+  width: 30%;
 }
 
 .img-item-hero img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .producitem .price {
-    padding-left: 6px;
-    width: 70%;
+  padding-left: 6px;
+  width: 70%;
 }
 
 .producitem .price a {
-    line-height: 23px;
-    text-decoration: none;
-    color: var(--text-color);
-    font-size: 17px;
-    text-align: justify;
+  line-height: 23px;
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 17px;
+  text-align: justify;
 }
 
 .producitem .price-item-many {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 7px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 7px;
 }
 .price-item-many .price-new {
-    font-size: 18px;
-    font-weight: 700;
-    color: #ef1515;
-    position: relative;
+  font-size: 18px;
+  font-weight: 700;
+  color: #ef1515;
+  position: relative;
 }
 .price-item-many .price-old {
-    margin-right: 10px;
-    font-size: 14px;
-    color: var(--text-color);
-    text-decoration: line-through;
-    position: relative;
+  margin-right: 10px;
+  font-size: 14px;
+  color: var(--text-color);
+  text-decoration: line-through;
+  position: relative;
 }
 
-
-
-.box-modal-buy{
-    display: flex;
-    justify-content: space-between;
+.box-modal-buy {
+  display: flex;
+  justify-content: space-between;
 }
 
 .box-modal-buy span {
-    text-decoration: none;
-    font-size: 16px;
-    color: #fff;
-    margin-left: 10px;
+  text-decoration: none;
+  font-size: 16px;
+  color: #fff;
+  margin-left: 10px;
 }
 
-.box-modal-buy .hero-buy-produc > a, .box-modal-buy .hero-read-produc > a {
-    text-decoration: none;
-    font-size: 14px;
-    color: #fff;
+.box-modal-buy .hero-buy-produc > a,
+.box-modal-buy .hero-read-produc > a {
+  text-decoration: none;
+  font-size: 14px;
+  color: #fff;
 }
 
-.box-modal-buy .hero-buy-produc, .box-modal-buy .hero-read-produc {
-    display: block;
-    background-color: var(--primary-color);
-    border: none;
-    border-radius: 8px;
-    padding: 10px 15px;
-    margin-top: 10px;
-    cursor: pointer;
+.box-modal-buy .hero-buy-produc,
+.box-modal-buy .hero-read-produc {
+  display: block;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  margin-top: 10px;
+  cursor: pointer;
 }
 
-.box-modal-buy .hero-buy-produc:hover, .box-modal-buy .hero-read-produc:hover {
-    background: #f4b915;
+.box-modal-buy .hero-buy-produc:hover,
+.box-modal-buy .hero-read-produc:hover {
+  background: #f4b915;
 }
 
-.more-buy-products{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 50px 0 0px;
-    
+.more-buy-products {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px 0 0px;
 }
-.more-buy-products i{
-    color: #ffffff;
-    margin-left: 3px;
+.more-buy-products i {
+  color: #ffffff;
+  margin-left: 3px;
 }
 .more-buy-products a {
-    text-align: center;
-    font-size: 18px;
-    font-weight: 500;
-    text-decoration: none;
-    color: white;
-    padding: 0 5px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  text-decoration: none;
+  color: white;
+  padding: 0 5px;
 }
-.more-buy-products a:hover{
-    color: #000000;
+.more-buy-products a:hover {
+  color: #000000;
 }
