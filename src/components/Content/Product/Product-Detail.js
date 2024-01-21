@@ -10,7 +10,7 @@ import {
   faDongSign,
   faTruckFast,
 } from "@fortawesome/free-solid-svg-icons";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
   FaCartPlus,
@@ -458,6 +458,18 @@ function ProductDetail({ data = [], dataRelare = [] }) {
           Sản phẩm chưa có trang Detail. Vui lòng chọn sản phẩm khác.
         </strong>
       )}
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </>
   );
 }

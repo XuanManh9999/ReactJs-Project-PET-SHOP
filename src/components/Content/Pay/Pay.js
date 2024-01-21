@@ -217,10 +217,11 @@ function Pay() {
                       onChange={hendleOnchangeProvince}
                       defaultValue={dataCity.length > 0 ? dataCity[0].code : ""}
                     >
+                      <option key={0}>---</option>
                       {dataCity &&
                         dataCity.length > 0 &&
                         dataCity.map((item, index) => (
-                          <option key={index} value={item.code}>
+                          <option key={index + 1} value={item.code}>
                             {item.name}
                           </option>
                         ))}
