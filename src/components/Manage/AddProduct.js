@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "animate.css/animate.min.css";
 import "datatables.net-bs5/css/dataTables.bootstrap5.min.css";
@@ -21,7 +21,10 @@ import MdEditor from "react-markdown-editor-lite";
 // import style manually
 import "react-markdown-editor-lite/lib/index.css";
 
-import { createProduct } from "../../services/hendleProducts";
+import {
+  createProduct,
+  getAllDataTypeProducts,
+} from "../../services/hendleProducts";
 // Register plugins if required
 // MdEditor.use(YOUR_PLUGINS_HERE);
 
@@ -43,16 +46,26 @@ function AddProduct() {
     manyProducts: 0,
     comment: "",
     trademark: "",
+    idProductType: "",
     detailImages: [],
     sizes: [],
     colors: [],
   });
+  const [dataTypeProducts, setDataTypeProducts] = useState([]);
   const [detailImages, setDetailImage] = useState("");
   const [saveImages, setSaveImages] = useState([]);
   const [detailColor, setDetailColor] = useState("");
   const [saveColor, setSaveColor] = useState([]);
   const [detailSize, setDetailSize] = useState("");
   const [saveSize, setSaveSize] = useState([]);
+
+  useEffect(() => {
+    const fetchingData = async () => {
+      const response = await getAllDataTypeProducts();
+      setDataTypeProducts(response.data);
+    };
+    fetchingData();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -79,6 +92,13 @@ function AddProduct() {
     } else {
       toast.warn("Không thể thêm urlImage rỗng. Vui lòng thao tác lại");
     }
+  };
+
+  const hendleOnchangeSelectTypeProducts = (event) => {
+    setProductData((prev) => ({
+      ...prev,
+      idProductType: event.target.value,
+    }));
   };
 
   let hendleSaveDetailImage = () => {
@@ -177,6 +197,7 @@ function AddProduct() {
       toast.error("Thêm sản phẩm không thành công. Đã xảy ra lỗi");
     }
   };
+  console.log("Xuan manh check productData", productData);
   return (
     <main id="main" className="main">
       <div className="pagetitle">
@@ -200,19 +221,24 @@ function AddProduct() {
                     >
                       <div className="col-md-4 mb-3">
                         <label htmlFor="inputState" className="form-label">
-                          Danh mục
+                          Loại sản phẩm
                         </label>
                         <select
                           id="inputState"
                           name="id_cate"
                           className="form-select"
+                          onChange={hendleOnchangeSelectTypeProducts}
                         >
-                          <option value="">Chó</option>
-                          <option value="">Mèo</option>
-                          <option value="">Chim</option>
-                          <option value="">Phụ kiện cho thú cưng</option>
+                          <option key={0}>---</option>
+                          {dataTypeProducts &&
+                            dataTypeProducts.map((item, index) => (
+                              <option key={index + 1} value={item.idType}>
+                                {item.nameType}
+                              </option>
+                            ))}
                         </select>
                       </div>
+
                       <div className="form-group">
                         <label htmlFor="exampleInputName1">Tên sản phẩm</label>
                         <input

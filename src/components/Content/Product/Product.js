@@ -1,50 +1,82 @@
-import React, { useState } from 'react';
-import styles from './Product.module.scss';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import styles from "./Product.module.scss";
+import { Link } from "react-router-dom";
+import ProductList from "./Product-List";
+import { getProductsByType } from "../../../services/hendleProducts";
+const productCategories = [
+  "Thức ăn cho Mèo",
+  "Thức ăn cho Chó",
+  "Thức ăn cho Hamster",
+  "Thức ăn cho Chim",
+];
+
+const hendleConvert = {
+  0: "cat",
+  1: "dog",
+  2: "hamster",
+  3: "bird",
+};
 
 function Product() {
-    const [selectedItem, setSelectedItem] = useState(null);
-
-    const handleItemClick = (index) => {
-        setSelectedItem(index === selectedItem ? null : index);
+  const [selectedItem, setSelectedItem] = useState(0); // Đặt giá trị mặc định là 0
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await getProductsByType(hendleConvert[selectedItem]);
+      setData(response.data);
     };
+    fetchData();
+  }, [selectedItem]);
+  const handleItemClick = (index) => {
+    if (selectedItem !== index) {
+      setSelectedItem(index);
+    }
+  };
+  return (
+    <section>
+      <div className={styles["product-buy"]}>
+        <div className={styles["main-content"]}>
+          <div className={styles["intro-product-buy"]}>
+            <h1 className={styles.title}>Sản phẩm shop đang bán</h1>
+            <picture className={styles["img-hero"]}>
+              <img
+                src="Images/hero_animal.png"
+                alt="Chào mừng bạn đến với Catchy Pet"
+              />
+            </picture>
+          </div>
 
-    return (
-        <section>
-
-            <div className={styles['product-buy']}>
-                <div className={styles['main-content']}>
-
-                    <div className={styles['intro-product-buy']}>
-                        <h1 className={styles.title}>Sản phẩm shop đang bán</h1>
-                        <picture className={styles['img-hero']}>
-                            <img src="Images/hero_animal.png" alt="Chào mừng bạn đến với Catchy Pet" />
-                        </picture>
-                    </div>
-
-                    {/* navigation */}
-                    <div className={styles['product-buy-products']}>
-                        <div className={styles['product-buy-navigation']}>
-                            <ul>
-                                <li className={selectedItem === 0 ? styles['action-navigation'] : ''} onClick={() => handleItemClick(0)}>
-                                    <Link className={selectedItem === 0 ? styles['action-navigation-a'] : ''} to={""}>Thức ăn cho Mèo</Link>
-                                </li>
-                                <li className={selectedItem === 1 ? styles['action-navigation'] : ''} onClick={() => handleItemClick(1)}>
-                                    <Link className={selectedItem === 1 ? styles['action-navigation-a'] : ''} to={""}>Thức ăn cho Chó</Link>
-                                </li>
-                                <li className={selectedItem === 2 ? styles['action-navigation'] : ''} onClick={() => handleItemClick(2)}>
-                                    <Link className={selectedItem === 2 ? styles['action-navigation-a'] : ''} to={""}>Thức ăn cho Hamster</Link>
-                                </li>
-                                <li className={selectedItem === 3 ? styles['action-navigation'] : ''} onClick={() => handleItemClick(3)}>
-                                    <Link className={selectedItem === 3 ? styles['action-navigation-a'] : ''} to={""}>Thức ăn cho Chim</Link>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+          <div className={styles["product-buy-products"]}>
+            <div className={styles["product-buy-navigation"]}>
+              <ul>
+                {productCategories.map((category, index) => (
+                  <li
+                    key={index}
+                    className={
+                      selectedItem === index ? styles["action-navigation"] : ""
+                    }
+                    onClick={() => handleItemClick(index)}
+                  >
+                    <Link
+                      className={
+                        selectedItem === index
+                          ? styles["action-navigation-a"]
+                          : ""
+                      }
+                      to={""}
+                    >
+                      {category}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-        </section>
-    );
+          </div>
+        </div>
+      </div>
+      <ProductList data={data} />
+    </section>
+  );
 }
 
 export default Product;
