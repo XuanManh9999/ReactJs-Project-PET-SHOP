@@ -7,11 +7,43 @@ import {
   faRightLong,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { useRef, useState } from "react";
+import { store } from "../../../redux/store.js";
+import { saveDataFromLocalstore } from "../../../redux/actions.js";
+import { useData } from "../../Common/DataContext";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import QuickProducts from "../QuickProducts/QuickProducts";
 const formatCurrency = (amount) => {
   amount = parseFloat(amount);
   return amount.toLocaleString("vi-VN");
 };
 function Accessoire({ data = [] }) {
+  const [quickView, setQuickView] = useState(false);
+  const getIdProduct = useRef();
+  const { updateData } = useData();
+
+  const hendleQuickView = (id) => {
+    getIdProduct.current = id;
+    setQuickView((pre) => !pre);
+  };
+
+  const hendleAddToCart = (id) => {
+    const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const existingProductIndex = existingCart.findIndex(
+      (item) => item.id === id
+    );
+
+    if (existingProductIndex !== -1) {
+      toast.warn("Sản phẩm đã tồn tài trong giỏ hàng");
+    } else {
+      existingCart.push({ id, quantity: 1 });
+      store.dispatch(saveDataFromLocalstore(existingCart));
+      updateData(existingCart);
+      toast.success("Thêm sản phẩm thành công");
+    }
+  };
   return (
     <section>
       <div className={styles["accessoire"]}>
@@ -30,12 +62,14 @@ function Accessoire({ data = [] }) {
             {/* Item 1 */}
             {data &&
               data.map((item, index) => (
-                <div key={index} className={styles["producitem"]}>
+                <Link
+                  key={index}
+                  to={`/ProductDetail/${item.id}/${item.trademark}`}
+                  className={styles["producitem"]}
+                >
                   <div className={styles["producitem-content"]}>
                     <picture className={styles["img-item-hero"]}>
-                      <a href="#!">
-                        <img src={item.avatar} alt={item.name} />
-                      </a>
+                      <img src={item.avatar} alt={item.name} />
                     </picture>
                     <div className={styles["price"]}>
                       <div className={styles["line-clamp"]}>
@@ -58,7 +92,12 @@ function Accessoire({ data = [] }) {
                     </div>
                   </div>
                   <div className={styles["box-modal-buy"]}>
-                    <button className={styles["hero-read-produc"]}>
+                    <button
+                      onClick={() => {
+                        hendleQuickView(item.id);
+                      }}
+                      className={styles["hero-read-produc"]}
+                    >
                       <Link to={""}>
                         <i>
                           <FontAwesomeIcon icon={faMagnifyingGlassPlus} />
@@ -66,7 +105,12 @@ function Accessoire({ data = [] }) {
                         <span>Xem nhanh</span>
                       </Link>
                     </button>
-                    <button className={styles["hero-buy-produc"]}>
+                    <button
+                      onClick={() => {
+                        hendleAddToCart(item.id);
+                      }}
+                      className={styles["hero-buy-produc"]}
+                    >
                       <Link to={""}>
                         <i>
                           <FontAwesomeIcon icon={faCartPlus} />
@@ -75,7 +119,7 @@ function Accessoire({ data = [] }) {
                       </Link>
                     </button>
                   </div>
-                </div>
+                </Link>
               ))}
           </div>
 
@@ -87,6 +131,14 @@ function Accessoire({ data = [] }) {
           </div>
         </div>
       </div>
+      {quickView ? (
+        <QuickProducts
+          id={getIdProduct.current}
+          hendleQuickViewProduct={hendleQuickView}
+        />
+      ) : (
+        ""
+      )}
     </section>
   );
 }

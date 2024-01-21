@@ -6,7 +6,7 @@ import {
   faCartPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import styles from "./ProductList.module.scss";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import QuickProducts from "../QuickProducts/QuickProducts";
@@ -138,18 +138,6 @@ function ProductList({ data = [] }) {
       ) : (
         ""
       )}
-      <ToastContainer
-        position="top-right"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-      />
     </section>
   );
 }
