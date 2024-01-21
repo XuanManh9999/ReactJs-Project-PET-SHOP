@@ -320,10 +320,11 @@ function Pay() {
                       id="district"
                       defaultValue={1}
                     >
+                      <option key={0}>---</option>
                       {provinces &&
                         provinces.length > 0 &&
                         provinces.map((item, index) => (
-                          <option key={index} value={item.code}>
+                          <option key={index + 1} value={item.code}>
                             {item.name}
                           </option>
                         ))}
@@ -335,10 +336,11 @@ function Pay() {
                       id="ward"
                       onChange={hendleWard}
                     >
+                      <option key={0}>---</option>
                       {wards &&
                         wards.length > 0 &&
                         wards.map((item, index) => (
-                          <option key={index} value={item.code}>
+                          <option key={index + 1} value={item.code}>
                             {item.name}
                           </option>
                         ))}
