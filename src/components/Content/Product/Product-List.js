@@ -119,7 +119,9 @@ function ProductList({ data = [] }) {
             </div>
             {data && data.length > 0 ? (
               <div className={styles["more-buy-products"]}>
-                <Link to={""}>Xem thêm sản phẩm.</Link>
+                <Link to={`/MoreProduct/${data[0].nameType}`}>
+                  Xem thêm sản phẩm.
+                </Link>
                 <i>
                   <FontAwesomeIcon icon={faRightLong} />
                 </i>

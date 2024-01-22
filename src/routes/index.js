@@ -70,7 +70,7 @@ const publicRoutes = [
   },
 
   {
-    path: "/MoreProduct",
+    path: "/MoreProduct/:typeProduct",
     component: <MoreProductPage />,
   },
   {
