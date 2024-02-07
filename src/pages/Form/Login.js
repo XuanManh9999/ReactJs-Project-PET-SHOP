@@ -1,16 +1,12 @@
-import Header from "../../components/Header/Header";
+import Wrap from "../Wrap/Wrap";
 
 import Login from "../../components/Forms/Login";
 
-import Footer from "../../components/Footer/Footer";
-
 function LoginPage() {
   return (
-    <>
-      <Header urlImageBg={"images/bgheader2.png"} imageHeight={"300px"} />
+    <Wrap>
       <Login />
-      <Footer />
-    </>
+    </Wrap>
   );
 }
 

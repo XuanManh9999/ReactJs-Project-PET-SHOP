@@ -2,8 +2,7 @@ import styles from "./AllProduct.module.scss";
 import { Link } from "react-router-dom";
 
 import { FaChevronDown } from "react-icons/fa";
-import ProductList from "../Product/Product-List";
-
+import ProudctItem from "./ProductItem";
 function AllProduct() {
   return (
     <section>
@@ -46,6 +45,7 @@ function AllProduct() {
             </ul>
           </li>
         </ul>
+        <ProudctItem />
       </div>
     </section>
   );

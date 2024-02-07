@@ -24,22 +24,34 @@ function MoreProduct() {
               <h1 className={styles.title}>Danh mục sản phẩm</h1>
               <ul className={styles["list-items-function"]}>
                 <li>
-                  <Link to={""} className={styles.all_products_animal}>
+                  <Link
+                    to={"MoreProduct/dog"}
+                    className={styles.all_products_animal}
+                  >
                     Thức ăn cho chó
                   </Link>
                 </li>
                 <li>
-                  <Link to={""} className={styles.all_products_animal}>
+                  <Link
+                    to={"MoreProduct/cat"}
+                    className={styles.all_products_animal}
+                  >
                     Thức ăn cho mèo
                   </Link>
                 </li>
                 <li>
-                  <Link to={""} className={styles.all_products_animal}>
+                  <Link
+                    to={"MoreProduct/hamster"}
+                    className={styles.all_products_animal}
+                  >
                     Thức ăn cho Hamster
                   </Link>
                 </li>
                 <li>
-                  <Link to={""} className={styles.all_products_animal}>
+                  <Link
+                    to={"MoreProduct/bird"}
+                    className={styles.all_products_animal}
+                  >
                     Thức ăn cho chim
                   </Link>
                 </li>
@@ -272,7 +284,10 @@ function MoreProduct() {
                     styles.all_products__sidebar_price_range_element_img
                   }
                 >
-                  <img src="Images/p.fix.png" alt="Banner_products_all" />
+                  <img
+                    src="https://i.ibb.co/3mPszQ8/p-fix.png"
+                    alt="Banner_products_all"
+                  />
                 </picture>
               </div>
             </div>

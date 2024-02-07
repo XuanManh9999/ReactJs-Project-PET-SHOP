@@ -445,7 +445,7 @@ function ProductDetail({ data = [], dataRelare = [] }) {
               </div>
             </div>
           </section>
-          <div style={{ marginBottom: "50px" }}>
+          <div style={{ paddingBottom: "50px" }}>
             {dataRelare && dataRelare.length >= 4 ? (
               <Slide data={dataRelare} title="Sản phẩm tương tự" />
             ) : (
