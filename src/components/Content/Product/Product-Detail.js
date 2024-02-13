@@ -20,8 +20,6 @@ import {
 } from "react-icons/fa";
 
 import Slide from "../Slide/Slide";
-import { store } from "../../../redux/store.js";
-import { saveDataFromLocalstore } from "../../../redux/actions.js";
 import { useData } from "../../Common/DataContext";
 
 function ProductDetail({ data = [], dataRelare = [] }) {
@@ -31,7 +29,7 @@ function ProductDetail({ data = [], dataRelare = [] }) {
   const [getDetailProduct] = data;
   const [totalManyProduct, setTotalManyProduct] = useState(1);
 
-  const { updateData } = useData();
+  const { updateData, yourData } = useData();
   const [selectedColorIndex, setSelectedColorIndex] = useState(null);
   const [selectedSizeIndex, setSelectedSizeIndex] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
@@ -42,44 +40,38 @@ function ProductDetail({ data = [], dataRelare = [] }) {
   };
 
   const hendleAddCart = (id) => {
-    const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    const existingProductIndex = existingCart.findIndex(
-      (item) => item.id === id
-    );
+    const existingProductIndex = yourData.findIndex((item) => item.id === id);
 
     if (existingProductIndex !== -1) {
       toast.warn("Sản phẩm đã tồn tài trong giỏ hàng");
     } else {
-      existingCart.push({
-        id,
-        quantity: +totalManyProduct,
-        size: selectedSize,
-        color: selectedColor,
-      });
-      store.dispatch(saveDataFromLocalstore(existingCart));
-      updateData(existingCart);
+      updateData([
+        ...yourData,
+        {
+          id,
+          quantity: +totalManyProduct,
+          size: selectedSize,
+          color: selectedColor,
+        },
+      ]);
       toast.success("Thêm sản phẩm thành công");
     }
   };
 
   const hendlePaymentProduct = (id) => {
-    const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    const existingProductIndex = existingCart.findIndex(
-      (item) => item.id === id
-    );
+    const existingProductIndex = yourData.findIndex((item) => item.id === id);
 
     if (existingProductIndex !== -1) {
     } else {
-      existingCart.push({
-        id,
-        quantity: +totalManyProduct,
-        size: selectedSize,
-        color: selectedColor,
-      });
-      store.dispatch(saveDataFromLocalstore(existingCart));
-      updateData(existingCart);
+      updateData([
+        ...yourData,
+        {
+          id,
+          quantity: +totalManyProduct,
+          size: selectedSize,
+          color: selectedColor,
+        },
+      ]);
     }
   };
   const hendleClickChooseColor = (event, index) => {

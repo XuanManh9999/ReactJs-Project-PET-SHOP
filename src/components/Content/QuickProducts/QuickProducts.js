@@ -12,13 +12,12 @@ import "react-toastify/dist/ReactToastify.css";
 import styles from "./QuickProducts.module.scss";
 
 import { getDataProductsEqualId } from "../../../services/hendleProducts";
-import { store } from "../../../redux/store.js";
-import { saveDataFromLocalstore } from "../../../redux/actions.js";
+
 import { useData } from "../../Common/DataContext";
 function QuickProducts({ hendleQuickViewProduct, id }) {
   const [dataProduct, setDataProduct] = useState({});
   const [totalProduct, setTotalProduct] = useState(1);
-  const { updateData } = useData();
+  const { updateData, yourData } = useData();
 
   const [selectedColorIndex, setSelectedColorIndex] = useState(null);
   const [selectedSizeIndex, setSelectedSizeIndex] = useState(null);
@@ -50,23 +49,20 @@ function QuickProducts({ hendleQuickViewProduct, id }) {
   };
 
   const hendleAddCart = (id) => {
-    const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    const existingProductIndex = existingCart.findIndex(
-      (item) => item.id === id
-    );
+    const existingProductIndex = yourData.findIndex((item) => item.id === id);
 
     if (existingProductIndex !== -1) {
       toast.warn("Sản phẩm đã tồn tài trong giỏ hàng");
     } else {
-      existingCart.push({
-        id,
-        quantity: +totalProduct,
-        size: selectedSize,
-        color: selectedColor,
-      });
-      store.dispatch(saveDataFromLocalstore(existingCart));
-      updateData(existingCart);
+      updateData([
+        ...yourData,
+        {
+          id,
+          quantity: +totalProduct,
+          size: selectedSize,
+          color: selectedColor,
+        },
+      ]);
       toast.success("Thêm sản phẩm thành công");
     }
   };
@@ -81,7 +77,6 @@ function QuickProducts({ hendleQuickViewProduct, id }) {
     setSelectedSize(selectedValue);
     setSelectedSizeIndex(index);
   };
-  console.log("Xuan manh check dataProduct", selectedColor, selectedSize);
 
   return (
     <div

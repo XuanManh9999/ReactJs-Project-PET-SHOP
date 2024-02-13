@@ -10,19 +10,16 @@ import { useData } from "../../Common/DataContext";
 import { getDataCardProducts } from "../../../services/hendleProducts";
 function ProductPay() {
   const [data, setData] = useState([]);
-  const { updateData } = useData();
-  const [cartItems, setCartItems] = useState(
-    () => JSON.parse(localStorage.getItem("cart")) || []
-  );
+  const { updateData, yourData } = useData();
 
   useEffect(() => {
     const getIds = (dataArray) => {
       return dataArray.map((item) => item.id);
     };
-    if (cartItems.length > 0) {
+    if (yourData.length > 0) {
       const fetchData = async () => {
         try {
-          const dl = await getDataCardProducts(getIds(cartItems));
+          const dl = await getDataCardProducts(getIds(yourData));
           setData(dl.data);
         } catch (error) {
           console.error("Error fetching data:", error);
@@ -31,7 +28,7 @@ function ProductPay() {
 
       fetchData();
     }
-  }, [cartItems]);
+  }, [yourData]);
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat("vi-VN", {
       style: "currency",
@@ -40,26 +37,26 @@ function ProductPay() {
   };
 
   const hendleQuantityProduct = (id) => {
-    const hendle = cartItems.find((item) => {
+    const hendle = yourData.find((item) => {
       return +item.id === id ? item.quantity : 0;
     });
     return hendle;
   };
   const hendleOnchaneEventProduct = (id, newQuantity) => {
-    const updatedCartItems = cartItems.map((item) =>
+    const updatedCartItems = yourData.map((item) =>
       item.id === id ? { ...item, quantity: newQuantity } : item
     );
     updateData(updatedCartItems);
-    setCartItems(updatedCartItems);
+    updateData(updatedCartItems);
     localStorage.setItem("cart", JSON.stringify(updatedCartItems));
   };
 
   const handleRemoveProduct = (id) => {
-    const updatedCartItems = cartItems.filter((item) => item.id !== id);
+    const updatedCartItems = yourData.filter((item) => item.id !== id);
     if (updatedCartItems.length === 0) {
       setData([]);
     } else {
-      setCartItems(updatedCartItems);
+      updateData(updatedCartItems);
     }
     updateData(updatedCartItems);
     localStorage.setItem("cart", JSON.stringify(updatedCartItems));
@@ -67,7 +64,7 @@ function ProductPay() {
   const calculateTotalPayment = () => {
     let total = 0;
     data.forEach((item) => {
-      cartItems.forEach((element) => {
+      yourData.forEach((element) => {
         if (item.id === element.id) {
           total += item.salePrice * element.quantity;
         }
