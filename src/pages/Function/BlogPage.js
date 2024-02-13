@@ -5,14 +5,12 @@ import Dflex from "../../components/Common/Dflex";
 import Wrap from "../Wrap/Wrap";
 function BlogPage() {
   return (
-    <>
-      <Wrap>
-        <Dflex>
-          <Blog />
-          <BlogPost />
-        </Dflex>
-      </Wrap>
-    </>
+    <Wrap>
+      <Dflex>
+        <Blog />
+        <BlogPost />
+      </Dflex>
+    </Wrap>
   );
 }
 

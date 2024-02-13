@@ -15,27 +15,13 @@ import HomeManage from "../pages/Manage/HomeManage";
 import ProductManage from "../pages/Manage/ProductManage";
 import ProductAdd from "../pages/Manage/ProductAdd";
 import UpdatePRD from "../pages/Manage/UpdateProduct";
+
 const publicRoutes = [
   {
     path: "/",
     component: <Home />,
   },
-  {
-    path: "/manage",
-    component: <HomeManage />,
-  },
-  {
-    path: "/OrderList",
-    component: <OrderList />,
-  },
-  {
-    path: "/ProductManage",
-    component: <ProductManage />,
-  },
-  {
-    path: "/ProductAdd",
-    component: <ProductAdd />,
-  },
+
   {
     path: "/Register",
     component: <RegisterPage />,
@@ -86,6 +72,22 @@ const publicRoutes = [
     component: <UpdatePRD />,
   },
 ];
-// Cần đăng nhập
-const privateRoutes = [];
+const privateRoutes = [
+  {
+    path: "/manage",
+    component: <HomeManage />,
+  },
+  {
+    path: "/ProductManage",
+    component: <ProductManage />,
+  },
+  {
+    path: "/OrderList",
+    component: <OrderList />,
+  },
+  {
+    path: "/ProductAdd",
+    component: <ProductAdd />,
+  },
+];
 export { publicRoutes, privateRoutes };

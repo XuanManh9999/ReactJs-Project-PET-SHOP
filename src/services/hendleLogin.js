@@ -2,7 +2,7 @@ import axios from "axios";
 const hendleRegister = async (data) => {
   try {
     const response = await axios.post(
-      "http://127.0.0.1:8000/api/v2/user/new-user",
+      "http://127.0.0.1:4000/api/v1/register/data",
       data
     );
     return response.data;

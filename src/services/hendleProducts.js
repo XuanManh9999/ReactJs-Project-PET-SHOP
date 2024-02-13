@@ -2,7 +2,7 @@ import axios from "axios";
 const getDataProducts = async () => {
   try {
     const response = await axios.get(
-      "http://127.0.0.1:8000/api/v2/product/all-data"
+      "http://127.0.0.1:4000/api/v1/products/data"
     );
     return response.data;
   } catch (error) {
@@ -14,7 +14,7 @@ const getDataProducts = async () => {
 const getDataProductsEqualId = async (id) => {
   try {
     const response = await axios.get(
-      `http://127.0.0.1:8000/api/v2/product/data-by-id/${id}`
+      `http://localhost:4000/api/v1/products/data-equal-id/?id=${id}`
     );
     return response.data;
   } catch (error) {
@@ -38,7 +38,7 @@ const getDataImageDetail = async (id) => {
 const getProductsRelate = async (trademark) => {
   try {
     const response = await axios.get(
-      `http://127.0.0.1:8000/api/v2/product/data-by-trademark/${trademark}`
+      `http://localhost:4000/api/v1/products/data-products-relate/${trademark}`
     );
     return response.data;
   } catch (error) {
@@ -66,7 +66,7 @@ const getDataCardProducts = async (ids) => {
 const createProduct = async (data) => {
   try {
     const response = await axios.post(
-      `http://127.0.0.1:8000/api/v2/product/new-product`,
+      `http://127.0.0.1:4000/api/v1/products/new-product`,
       data
     );
     return response.data;
@@ -79,7 +79,7 @@ const createProduct = async (data) => {
 const deleteProductById = async (id) => {
   try {
     const response = await axios.delete(
-      `http://127.0.0.1:8000/api/v2/product/remove-product/${id}`
+      `http://127.0.0.1:4000/api/v1/delete-product/${id}`
     );
     return response.data;
   } catch (error) {
@@ -91,7 +91,7 @@ const deleteProductById = async (id) => {
 const updateProductById = async (data) => {
   try {
     const response = await axios.put(
-      `http://127.0.0.1:8000/api/v2/product/update-products`,
+      `http://127.0.0.1:4000/api/v1/update-product`,
       data
     );
     return response.data;
@@ -104,7 +104,7 @@ const updateProductById = async (data) => {
 const getAllProduct = async () => {
   try {
     const response = await axios.get(
-      `http://127.0.0.1:8000/api/v2/product/all-data`
+      `http://127.0.0.1:4000/api/v1/products/data`
     );
     return response.data;
   } catch (error) {

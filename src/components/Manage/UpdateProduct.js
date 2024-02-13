@@ -192,16 +192,14 @@ function UpdateProduct() {
           clearData();
         } else {
           toast.warn(
-            "Cập nhật sản phẩm thành công không thành công vui lòng kiểm tra lại dữ liệu"
+            "Cập nhật sản phẩm không thành công vui lòng kiểm tra lại dữ liệu"
           );
         }
       } else {
         toast.warn("Không tìm thấy id sản phẩm");
       }
     } catch (e) {
-      toast.error(
-        "Cập nhật sản phẩm thành công không thành công. Đã xảy ra lỗi"
-      );
+      toast.error("Cập nhật sản phẩm không thành công. Đã xảy ra lỗi");
     }
   };
   const hendleSelectedId = async (event) => {
