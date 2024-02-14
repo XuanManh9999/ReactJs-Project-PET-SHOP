@@ -5,7 +5,7 @@ import Wrap from "../Wrap/Wrap";
 import {
   getDataProductsEqualId,
   getProductsRelate,
-} from "../../services/hendleProducts";
+} from "../../services/client/hendleProducts";
 
 function ProductDetailPage() {
   const { id, trademark } = useParams();

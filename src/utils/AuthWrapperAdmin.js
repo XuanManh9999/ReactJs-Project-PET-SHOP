@@ -4,9 +4,13 @@ import { useEffect } from "react";
 function AuthWrapperAdmin({ children }) {
   const navigate = useNavigate();
   useEffect(() => {
-    if (!isAuthenticatedAdmin()) {
-      navigate("/Login"); // Chuyển hướng người dùng đến trang đăng nhập nếu chưa xác thực
-    }
+    let fetching = async () => {
+      const check = await isAuthenticatedAdmin();
+      if (!check) {
+        navigate("/Login");
+      }
+    };
+    fetching();
   }, []);
   return children;
 }

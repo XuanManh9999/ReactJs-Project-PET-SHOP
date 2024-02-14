@@ -27,7 +27,7 @@ import {
   getDataProducts,
   getDataProductsEqualId,
   updateProductById,
-} from "../../services/hendleProducts";
+} from "../../services/client/hendleProducts";
 import styles from "./UpdateProduct.module.scss";
 // Register plugins if required
 // MdEditor.use(YOUR_PLUGINS_HERE);

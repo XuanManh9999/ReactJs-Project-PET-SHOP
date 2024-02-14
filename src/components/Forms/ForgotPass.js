@@ -3,7 +3,7 @@ import styles from "./ForgotPass.module.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { hendleForgot } from "../../services/hendleLogin";
+import { hendleForgot } from "../../services/client/hendleLogin";
 function ForgotPass() {
     const navigate = useNavigate();
 

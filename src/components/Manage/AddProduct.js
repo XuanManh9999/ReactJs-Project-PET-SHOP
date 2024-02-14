@@ -24,7 +24,7 @@ import "react-markdown-editor-lite/lib/index.css";
 import {
   createProduct,
   getAllDataTypeProducts,
-} from "../../services/hendleProducts";
+} from "../../services/client/hendleProducts";
 // Register plugins if required
 // MdEditor.use(YOUR_PLUGINS_HERE);
 

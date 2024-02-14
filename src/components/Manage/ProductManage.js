@@ -20,7 +20,7 @@ import "./Header.module.scss";
 import {
   getAllProduct,
   deleteProductById,
-} from "../../services/hendleProducts";
+} from "../../services/client/hendleProducts";
 function ManageProduct() {
   const [dataProduct, setDataProduct] = useState([]);
   const [isCHeckDelete, setIsCheckDelete] = useState(false);

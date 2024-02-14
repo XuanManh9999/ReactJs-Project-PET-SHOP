@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./Product.module.scss";
 import { Link } from "react-router-dom";
 import ProductList from "./Product-List";
-import { getProductsByType } from "../../../services/hendleProducts";
+import { getProductsByType } from "../../../services/client/hendleProducts";
 const productCategories = [
   "Thức ăn cho Mèo",
   "Thức ăn cho Chó",

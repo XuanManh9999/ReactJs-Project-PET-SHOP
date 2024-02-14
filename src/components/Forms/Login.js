@@ -6,7 +6,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Cookies from "js-cookie";
-import { hendleLogin as postLogin } from "../../services/hendleLogin";
+import { hendleLogin as postLogin } from "../../services/client/hendleLogin";
 import styles from "./Login.module.scss";
 function Login() {
   const [isShowPassWord, setIsShowPassWord] = useState(faEyeSlash);

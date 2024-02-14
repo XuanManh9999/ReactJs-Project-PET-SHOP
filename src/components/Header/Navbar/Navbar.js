@@ -14,7 +14,7 @@ import {
 import styles from "./Navbar.module.scss";
 import Cart from "../../Content/Cart/Cart";
 import Search from "../../Content/Search/Search";
-import { checkToken } from "../../../services/hendleLogin";
+import { checkToken } from "../../../services/client/hendleLogin";
 import { useData } from "../../Common/DataContext";
 function Navbar() {
   const [search, setSearch] = useState(false);

@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 import {
   getProductsHotSearch,
   userSearchProducts,
-} from "../../../../services/hendleUser";
+} from "../../../../services/client/hendleUser";
 
 function SearchItem({ close_search }) {
   const [dataSearch, setDataSearch] = useState([]);

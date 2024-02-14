@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "./QuickProducts.module.scss";
 
-import { getDataProductsEqualId } from "../../../services/hendleProducts";
+import { getDataProductsEqualId } from "../../../services/client/hendleProducts";
 
 import { useData } from "../../Common/DataContext";
 function QuickProducts({ hendleQuickViewProduct, id }) {

@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { FaTrash } from "react-icons/fa";
 import { useData } from "../../Common/DataContext";
 
-import { getDataCardProducts } from "../../../services/hendleProducts";
+import { getDataCardProducts } from "../../../services/client/hendleProducts";
 function ProductPay() {
   const [data, setData] = useState([]);
   const { updateData, yourData } = useData();

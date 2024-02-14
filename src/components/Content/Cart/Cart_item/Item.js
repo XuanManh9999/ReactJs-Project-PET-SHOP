@@ -9,7 +9,7 @@ import {
   faPlus,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
-import { getDataCardProducts } from "../../../../services/hendleProducts";
+import { getDataCardProducts } from "../../../../services/client/hendleProducts";
 import { useData } from "../../../Common/DataContext";
 import { Link } from "react-router-dom";
 
