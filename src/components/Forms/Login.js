@@ -13,7 +13,12 @@ function Login() {
   const [stateShow, SetStateShow] = useState(false);
   const input_password = useRef();
   const navigate = useNavigate();
-
+  useEffect(() => {
+    const check = Cookies.get("refreshToken") || "";
+    if (check) {
+      navigate("/");
+    }
+  }, [navigate]);
   const [inputValues, setInputValues] = useState({
     email: "",
     password: "",
@@ -44,7 +49,10 @@ function Login() {
         const decodeToken = jwtDecode(data?.data?.access_token);
         if (data && data.status === 200) {
           Cookies.set("access_token", data.data.access_token, {
-            expires: 1 / 24,
+            expires: 1,
+          });
+          Cookies.set("refreshToken", data.data.refresh_token, {
+            expires: 30,
           });
           if (decodeToken?.role === "R0") {
             toast.success("Đăng nhập thành công");

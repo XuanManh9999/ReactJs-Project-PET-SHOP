@@ -197,7 +197,6 @@ function AddProduct() {
       toast.error("Thêm sản phẩm không thành công. Đã xảy ra lỗi");
     }
   };
-  console.log("Xuan manh check productData", productData);
   return (
     <main id="main" className="main">
       <div className="pagetitle">

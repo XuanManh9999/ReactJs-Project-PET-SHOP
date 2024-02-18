@@ -2,10 +2,12 @@ import styles from "./MoreProduct.module.scss";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
+import { useData } from "../../Common/DataContext";
 
 function MoreProduct() {
   const [amount, setAmount] = useState(10000000);
-
+  const [databackup, setDatabackup] = useState([]);
+  const { dataProduct, setDataProduct } = useData();
   const handleSliderChange = (event) => {
     const newValue = parseInt(event.target.value, 10);
     setAmount(newValue);
@@ -13,6 +15,28 @@ function MoreProduct() {
 
   const formatCurrency = (value) => {
     return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  };
+
+  const hendleChangePrice = () => {
+    for (let i = 0; i < databackup?.length; i++) {
+      let check = true;
+      for (let j = 0; j < dataProduct?.length; j++) {
+        if (databackup[i]?.id === dataProduct[j]?.id || null) {
+          check = false;
+        }
+      }
+      if (check) {
+        dataProduct.push(databackup[i]);
+      }
+    }
+    const newData = dataProduct.filter((product) =>
+      product.salePrice <= amount
+        ? product.salePrice <= amount
+        : databackup.filter((item) => item?.id !== product?.id)
+        ? setDatabackup((prev) => [...prev, product])
+        : false
+    );
+    setDataProduct(newData);
   };
 
   return (
@@ -25,7 +49,7 @@ function MoreProduct() {
               <ul className={styles["list-items-function"]}>
                 <li>
                   <Link
-                    to={"MoreProduct/dog"}
+                    to={"/MoreProduct/dog"}
                     className={styles.all_products_animal}
                   >
                     Thức ăn cho chó
@@ -33,7 +57,7 @@ function MoreProduct() {
                 </li>
                 <li>
                   <Link
-                    to={"MoreProduct/cat"}
+                    to={"/MoreProduct/cat"}
                     className={styles.all_products_animal}
                   >
                     Thức ăn cho mèo
@@ -41,7 +65,7 @@ function MoreProduct() {
                 </li>
                 <li>
                   <Link
-                    to={"MoreProduct/hamster"}
+                    to={"/MoreProduct/hamster"}
                     className={styles.all_products_animal}
                   >
                     Thức ăn cho Hamster
@@ -49,14 +73,17 @@ function MoreProduct() {
                 </li>
                 <li>
                   <Link
-                    to={"MoreProduct/bird"}
+                    to={"/MoreProduct/bird"}
                     className={styles.all_products_animal}
                   >
                     Thức ăn cho chim
                   </Link>
                 </li>
                 <li>
-                  <Link to={""} className={styles.all_products_animal}>
+                  <Link
+                    to={"/MoreProduct/accessories"}
+                    className={styles.all_products_animal}
+                  >
                     Phụ kiện
                   </Link>
                 </li>
@@ -276,6 +303,7 @@ function MoreProduct() {
                 </div>
                 <button
                   className={styles.all_products__sidebar_price_range_btn}
+                  onClick={hendleChangePrice}
                 >
                   Lọc giá
                 </button>

@@ -1,5 +1,6 @@
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
+import { useEffect } from "react";
 function Wrap({ children }) {
   return (
     <>
