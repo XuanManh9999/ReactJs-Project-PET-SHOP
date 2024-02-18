@@ -41,6 +41,9 @@
       }
     }
   }
+  .wrapITem {
+    text-decoration: none;
+  }
   picture {
     display: flex;
     justify-content: center;
@@ -58,11 +61,14 @@
     color: var(--text-color);
     font-size: 16px;
     text-align: center;
+    text-decoration: none;
   }
   .productItem__price {
     display: flex;
     justify-content: space-evenly;
     margin-top: 15px;
+    text-decoration: none;
+
     .productItem__price__oldPrice {
       text-decoration: line-through;
       font-size: 14px;
@@ -78,6 +84,22 @@
     }
   }
 }
+.emptyProduct {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    object-fit: cover;
+  }
+  p {
+    font-size: 22px;
+    color: var(--text-color);
+    margin-bottom: 20px;
+    font-weight: 600;
+    line-height: 1.6;
+  }
+}
+
 @keyframes slideInFromBottom {
   0% {
     opacity: 0;
