@@ -187,6 +187,30 @@ const getAllDataTypeProducts = async (name) => {
   }
 };
 
+const getAllDataTrademarkProduct = async () => {
+  try {
+    const response = await axios.get(
+      "http://localhost:4000/api/v1/products/all-trademark"
+    );
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
+
+const getDataTrademarkByName = async (trademark) => {
+  try {
+    const response = await axios.get(
+      `http://localhost:4000/api/v1/products/all-trademark-by-name/${trademark}`
+    );
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
+
 export {
   getDataProducts,
   getDataProductsEqualId,
@@ -203,4 +227,6 @@ export {
   hendleDiscountProducts,
   getProductsByType,
   getAllDataTypeProducts,
+  getAllDataTrademarkProduct,
+  getDataTrademarkByName,
 };

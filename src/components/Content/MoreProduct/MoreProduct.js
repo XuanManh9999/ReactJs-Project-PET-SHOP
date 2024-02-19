@@ -1,13 +1,77 @@
 import styles from "./MoreProduct.module.scss";
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useData } from "../../Common/DataContext";
-
+import { getAllDataTrademarkProduct } from "../../../services/client/hendleProducts";
+import { animateScroll as scroll } from "react-scroll";
 function MoreProduct() {
   const [amount, setAmount] = useState(10000000);
-  const [databackup, setDatabackup] = useState([]);
   const { dataProduct, setDataProduct } = useData();
+  const [databackup, setDatabackup] = useState([]);
+  const [dataTrademark, setDataTrademark] = useState([]);
+  const [searchTrademark, setSearchTrademark] = useState("");
+  const [backcupTrademark, setBackcupTrademark] = useState([]);
+  const [saveTrademark, setSaveTrademark] = useState([]);
+  const [backcupProduct, setBackcupProduct] = useState([]);
+
+  const [scrollPosition, setScrollPosition] = useState({ x: 0, y: 0 });
+
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     setScrollPosition({ x: window.scrollX, y: window.scrollY });
+  //   };
+
+  //   window.addEventListener("scroll", handleScroll);
+
+  //   // Clear up the event listener on unmount
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []); // Only run once on mount
+
+  useEffect(() => {
+    // Hàm tùy chỉnh để cuộn với hiệu ứng chậm dần
+    const scrollToSmooth = (to, duration) => {
+      const start = window.pageYOffset;
+      const change = to - start;
+      const increment = 20;
+      let currentTime = 0;
+
+      const animateScroll = () => {
+        currentTime += increment;
+        const val = Math.easeInOutQuad(currentTime, start, change, duration);
+        window.scrollTo(0, val);
+        if (currentTime < duration) {
+          setTimeout(animateScroll, increment);
+        }
+      };
+      animateScroll();
+    };
+
+    // Hàm easeInOutQuad để điều chỉnh tốc độ cuộn
+    Math.easeInOutQuad = (t, b, c, d) => {
+      t /= d / 2;
+      if (t < 1) return (c / 2) * t * t + b;
+      t--;
+      return (-c / 2) * (t * (t - 2) - 1) + b;
+    };
+
+    // Cuộn với tốc độ nhanh ban đầu và chậm dần
+    scroll.scrollTo(300, { duration: 100, smooth: "linear" });
+
+    // Kích hoạt hiệu ứng chậm dần
+    scrollToSmooth(300, 5); // 1000 là thời gian cuộn
+  }, [dataProduct]);
+
+  useEffect(() => {
+    const fetchingData = async () => {
+      const res = await getAllDataTrademarkProduct();
+      setDataTrademark(res?.data || []);
+    };
+    fetchingData();
+  }, []);
+
   const handleSliderChange = (event) => {
     const newValue = parseInt(event.target.value, 10);
     setAmount(newValue);
@@ -37,6 +101,37 @@ function MoreProduct() {
         : false
     );
     setDataProduct(newData);
+  };
+
+  const hendleSearchTrademark = (event) => {
+    const value = event.target.value;
+    setSearchTrademark(value || "");
+
+    backcupTrademark.forEach((obj1) => {
+      if (!dataTrademark.some((obj2) => obj2.id === obj1.id)) {
+        dataTrademark.push(obj1);
+      }
+    });
+    const newData = dataTrademark.filter((product) =>
+      product.trademark.includes(value)
+        ? product.trademark.includes(value)
+        : setBackcupTrademark((prev) => [...prev, product])
+    );
+    setDataTrademark(newData);
+  };
+
+  const hendleOnchangeTrademark = (event) => {
+    let checkend = event.target.checked;
+    let value = event.target.value;
+    if (checkend) {
+      let check = !saveTrademark.includes(value);
+      if (check) {
+        setSaveTrademark((prev) => [...prev, value]);
+      }
+    } else {
+      let newSaveTrademark = saveTrademark.filter((item) => item !== value);
+      setSaveTrademark(newSaveTrademark);
+    }
   };
 
   return (
@@ -94,6 +189,8 @@ function MoreProduct() {
                   type="text"
                   placeholder="Bạn muốn tìm gì?"
                   className={styles.all_products_find_brand}
+                  value={searchTrademark}
+                  onChange={hendleSearchTrademark}
                 />
                 <div className={styles.all_products__sidebar_icon_search}>
                   <i>
@@ -102,175 +199,33 @@ function MoreProduct() {
                 </div>
               </div>
               <ul className={styles.all_products__sidebar_trademark}>
-                <li className={styles.all_products__sidebar_trademark_item}>
-                  <input
-                    className={
-                      styles.all_products__sidebar_trademark_item_input
-                    }
-                    type="checkbox"
-                    name="Doca"
-                    id="Doca"
-                  />
-                  <label
-                    for="Doca"
-                    className={styles.all_products__sidebar_trademark_link}
-                  >
-                    Doca
-                  </label>
-                </li>
-                <li className={styles.all_products__sidebar_trademark_item}>
-                  <input
-                    className={
-                      styles.all_products__sidebar_trademark_item_input
-                    }
-                    type="checkbox"
-                    name=""
-                    id="FiBs"
-                  />
-                  <label
-                    for="FiBs"
-                    to={""}
-                    className={styles.all_products__sidebar_trademark_link}
-                  >
-                    FiBs
-                  </label>
-                </li>
-                <li className={styles.all_products__sidebar_trademark_item}>
-                  <input
-                    className={
-                      styles.all_products__sidebar_trademark_item_input
-                    }
-                    type="checkbox"
-                    name=""
-                    id="Minino"
-                  />
-                  <label
-                    for="Minino"
-                    to={""}
-                    className={styles.all_products__sidebar_trademark_link}
-                  >
-                    Minino
-                  </label>
-                </li>
-                <li className={styles.all_products__sidebar_trademark_item}>
-                  <input
-                    className={
-                      styles.all_products__sidebar_trademark_item_input
-                    }
-                    type="checkbox"
-                    name=""
-                    id="Nutrience"
-                  />
-                  <label
-                    for="Nutrience"
-                    to={""}
-                    className={styles.all_products__sidebar_trademark_link}
-                  >
-                    Nutrience
-                  </label>
-                </li>
-                <li className={styles.all_products__sidebar_trademark_item}>
-                  <input
-                    className={
-                      styles.all_products__sidebar_trademark_item_input
-                    }
-                    type="checkbox"
-                    name=""
-                    id="Pedigree"
-                  />
-                  <label
-                    for="Pedigree"
-                    to={""}
-                    className={styles.all_products__sidebar_trademark_link}
-                  >
-                    Pedigree
-                  </label>
-                </li>
-                <li className={styles.all_products__sidebar_trademark_item}>
-                  <input
-                    className={
-                      styles.all_products__sidebar_trademark_item_input
-                    }
-                    type="checkbox"
-                    name=""
-                    id="Royal Canin"
-                  />
-                  <label
-                    for="Royal Canin"
-                    to={""}
-                    className={styles.all_products__sidebar_trademark_link}
-                  >
-                    Royal Canin
-                  </label>
-                </li>
-                <li className={styles.all_products__sidebar_trademark_item}>
-                  <input
-                    className={
-                      styles.all_products__sidebar_trademark_item_input
-                    }
-                    type="checkbox"
-                    name=""
-                    id="Smartheart"
-                  />
-                  <label
-                    for="Smartheart"
-                    to={""}
-                    className={styles.all_products__sidebar_trademark_link}
-                  >
-                    Smartheart
-                  </label>
-                </li>
-                <li className={styles.all_products__sidebar_trademark_item}>
-                  <input
-                    className={
-                      styles.all_products__sidebar_trademark_item_input
-                    }
-                    type="checkbox"
-                    name=""
-                    id="Tropiclean"
-                  />
-                  <label
-                    for="Tropiclean"
-                    to={""}
-                    className={styles.all_products__sidebar_trademark_link}
-                  >
-                    Tropiclean
-                  </label>
-                </li>
-                <li className={styles.all_products__sidebar_trademark_item}>
-                  <input
-                    className={
-                      styles.all_products__sidebar_trademark_item_input
-                    }
-                    type="checkbox"
-                    name="Whiskat"
-                    id="Whiskat"
-                  />
-                  <label
-                    for="Whiskat"
-                    to={""}
-                    className={styles.all_products__sidebar_trademark_link}
-                  >
-                    Whiskat
-                  </label>
-                </li>
-                <li className={styles.all_products__sidebar_trademark_item}>
-                  <input
-                    className={
-                      styles.all_products__sidebar_trademark_item_input
-                    }
-                    type="checkbox"
-                    name=""
-                    id="Zenith"
-                  />
-                  <label
-                    for="Zenith"
-                    to={""}
-                    className={styles.all_products__sidebar_trademark_link}
-                  >
-                    Zenith
-                  </label>
-                </li>
+                {dataTrademark && dataTrademark?.length > 0
+                  ? dataTrademark.map((product) => (
+                      <li
+                        key={product.id}
+                        className={styles.all_products__sidebar_trademark_item}
+                      >
+                        <input
+                          className={
+                            styles.all_products__sidebar_trademark_item_input
+                          }
+                          type="checkbox"
+                          name={product.trademark}
+                          id={product.trademark}
+                          value={product.trademark}
+                          onChange={hendleOnchangeTrademark}
+                        />
+                        <label
+                          htmlFor={product.trademark}
+                          className={
+                            styles.all_products__sidebar_trademark_link
+                          }
+                        >
+                          {product.trademark}
+                        </label>
+                      </li>
+                    ))
+                  : ""}
               </ul>
               <h1 className={styles.title}>Khoảng giá</h1>
               <div className={styles.all_products__sidebar_price_range_element}>

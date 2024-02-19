@@ -124,7 +124,7 @@ function Accessoire({ data = [] }) {
           </div>
 
           <div className={styles["more-buy-products"]}>
-            <Link to={""}>Xem thêm sản phẩm.</Link>
+            <Link to={"/MoreProduct/accessories"}>Xem thêm sản phẩm.</Link>
             <i>
               <FontAwesomeIcon icon={faRightLong} />
             </i>
