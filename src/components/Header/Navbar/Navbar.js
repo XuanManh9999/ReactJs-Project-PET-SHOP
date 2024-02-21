@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import clsx from "clsx";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Cookies from "js-cookie";
 import {
   FaPaw,
@@ -16,6 +16,7 @@ import Cart from "../../Content/Cart/Cart";
 import Search from "../../Content/Search/Search";
 import { useData } from "../../Common/DataContext";
 import { jwtDecode } from "jwt-decode";
+
 function Navbar() {
   const [search, setSearch] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -26,6 +27,9 @@ function Navbar() {
     link1: "/Login",
     link2: "/Register",
   });
+
+  const { slug } = useParams();
+  console.log("Xuan manh check params", window.location.pathname);
   useEffect(() => {
     const getToken = Cookies.get("access_token");
     if (getToken) {
