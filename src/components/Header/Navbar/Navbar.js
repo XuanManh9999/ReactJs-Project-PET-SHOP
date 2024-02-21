@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import clsx from "clsx";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 import {
   FaPaw,
@@ -28,8 +28,6 @@ function Navbar() {
     link2: "/Register",
   });
 
-  const { slug } = useParams();
-  console.log("Xuan manh check params", window.location.pathname);
   useEffect(() => {
     const getToken = Cookies.get("access_token");
     if (getToken) {

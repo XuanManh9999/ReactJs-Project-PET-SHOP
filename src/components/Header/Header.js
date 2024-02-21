@@ -3,6 +3,8 @@ import styles from "./Header.module.scss";
 
 import Navbar from "./Navbar/Navbar";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useData } from "../Common/DataContext";
 
 const breadcrumb = {
   Price: "Bảng giá",
@@ -14,18 +16,25 @@ const breadcrumb = {
   bird: "Thức ăn cho chim",
   hamster: "Thức ăn cho Hamster",
   accessories: "Phụ kiện",
-  Login: "Đăng nhập",
+  login: "Đăng nhập",
   Register: "Đăng ký",
   ForgotPass: "Quên mật khẩu",
+  "payment-processing": "Giỏ hàng",
 };
 
 function Header({ urlImageBg = "", imageHeight = "" }) {
+  const { dataProduct } = useData();
   let urlBg = "https://i.ibb.co/QbsN2bk/bgheader.png";
   if (urlImageBg === "") {
     urlImageBg = urlBg;
   }
+  const [hendle, setHendle] = useState("");
+
   const url = window.location.pathname;
-  const hendle = url.split("/").pop();
+  useEffect(() => {
+    const value = url.split("/").pop();
+    setHendle(value);
+  }, [url]);
   return (
     <header
       style={{
