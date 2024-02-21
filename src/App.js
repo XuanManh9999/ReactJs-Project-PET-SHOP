@@ -7,7 +7,7 @@ import AuthWrapperAdmin from "./utils/AuthWrapperAdmin";
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div style={{ backgroundColor: "#fcf8ee" }} className="App">
         <DataProvider>
           <Routes>
             {/* Public */}

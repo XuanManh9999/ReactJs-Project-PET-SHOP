@@ -1,37 +1,25 @@
 import styles from "./MoreProduct.module.scss";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useData } from "../../Common/DataContext";
-import { getAllDataTrademarkProduct } from "../../../services/client/hendleProducts";
+import {
+  getAllDataTrademarkProduct,
+  getDataTrademarkByName,
+  getProductsByType,
+} from "../../../services/client/hendleProducts";
 import { animateScroll as scroll } from "react-scroll";
 function MoreProduct() {
+  const { typeProduct } = useParams();
   const [amount, setAmount] = useState(10000000);
   const { dataProduct, setDataProduct } = useData();
   const [databackup, setDatabackup] = useState([]);
   const [dataTrademark, setDataTrademark] = useState([]);
   const [searchTrademark, setSearchTrademark] = useState("");
   const [backcupTrademark, setBackcupTrademark] = useState([]);
-  const [saveTrademark, setSaveTrademark] = useState([]);
-  const [backcupProduct, setBackcupProduct] = useState([]);
-
-  const [scrollPosition, setScrollPosition] = useState({ x: 0, y: 0 });
-
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     setScrollPosition({ x: window.scrollX, y: window.scrollY });
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-
-  //   // Clear up the event listener on unmount
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []); // Only run once on mount
+  const [saveTrademark, SetSaveTrademark] = useState([]);
 
   useEffect(() => {
-    // Hàm tùy chỉnh để cuộn với hiệu ứng chậm dần
     const scrollToSmooth = (to, duration) => {
       const start = window.pageYOffset;
       const change = to - start;
@@ -49,7 +37,6 @@ function MoreProduct() {
       animateScroll();
     };
 
-    // Hàm easeInOutQuad để điều chỉnh tốc độ cuộn
     Math.easeInOutQuad = (t, b, c, d) => {
       t /= d / 2;
       if (t < 1) return (c / 2) * t * t + b;
@@ -57,7 +44,6 @@ function MoreProduct() {
       return (-c / 2) * (t * (t - 2) - 1) + b;
     };
 
-    // Cuộn với tốc độ nhanh ban đầu và chậm dần
     scroll.scrollTo(300, { duration: 100, smooth: "linear" });
 
     // Kích hoạt hiệu ứng chậm dần
@@ -71,6 +57,23 @@ function MoreProduct() {
     };
     fetchingData();
   }, []);
+
+  useEffect(() => {
+    const fetchingData = async () => {
+      if (saveTrademark.length > 0) {
+        const newObject = {
+          type: typeProduct,
+          arrTrademark: saveTrademark,
+        };
+        const res = await getDataTrademarkByName(JSON.stringify(newObject));
+        setDataProduct(res.data);
+      } else {
+        const res = await getProductsByType(typeProduct);
+        setDataProduct(res.data);
+      }
+    };
+    fetchingData();
+  }, [saveTrademark, setDataProduct, typeProduct]);
 
   const handleSliderChange = (event) => {
     const newValue = parseInt(event.target.value, 10);
@@ -124,13 +127,12 @@ function MoreProduct() {
     let checkend = event.target.checked;
     let value = event.target.value;
     if (checkend) {
-      let check = !saveTrademark.includes(value);
-      if (check) {
-        setSaveTrademark((prev) => [...prev, value]);
-      }
+      SetSaveTrademark((prev) => [...prev, value]);
     } else {
-      let newSaveTrademark = saveTrademark.filter((item) => item !== value);
-      setSaveTrademark(newSaveTrademark);
+      let newTradeMark = saveTrademark.filter(
+        (trademark) => trademark !== value
+      );
+      SetSaveTrademark(newTradeMark);
     }
   };
 
