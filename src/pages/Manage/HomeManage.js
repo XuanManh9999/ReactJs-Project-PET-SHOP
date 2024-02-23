@@ -1,4 +1,4 @@
-import HeaderAdmin from "../../components/Manage/Header";
+import HeaderAdmin from "../../components/Manage/layout/Header";
 
 function HomeManage() {
   return <HeaderAdmin />;

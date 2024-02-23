@@ -6,21 +6,21 @@ import { useState, useEffect } from "react";
 import "datatables.net-bs5/css/dataTables.bootstrap5.min.css";
 import "datatables.net-bs5/js/dataTables.bootstrap5.min.js";
 
-import "./assets/css/style.css";
-import "./assets/vendor/bootstrap/css/bootstrap.min.css";
-import "./assets/vendor/bootstrap-icons/bootstrap-icons.css";
-import "./assets/vendor/boxicons/css/boxicons.min.css";
-import "./assets/vendor/quill/quill.snow.css";
-import "./assets/vendor/quill/quill.bubble.css";
-import "./assets/vendor/remixicon/remixicon.css";
-import "./assets/vendor/simple-datatables/style.css";
+import "../assets/css/style.css";
+import "../assets/vendor/bootstrap/css/bootstrap.min.css";
+import "../assets/vendor/bootstrap-icons/bootstrap-icons.css";
+import "../assets/vendor/boxicons/css/boxicons.min.css";
+import "../assets/vendor/quill/quill.snow.css";
+import "../assets/vendor/quill/quill.bubble.css";
+import "../assets/vendor/remixicon/remixicon.css";
+import "../assets/vendor/simple-datatables/style.css";
 
 import "bootstrap/dist/js/bootstrap.bundle.min";
-import "./Header.module.scss";
+import "../layout/Header.module.scss"
 import {
   getAllProduct,
   deleteProductById,
-} from "../../services/client/hendleProducts";
+} from "../../../services/client/hendleProducts";
 function ManageProduct() {
   const [dataProduct, setDataProduct] = useState([]);
   const [isCHeckDelete, setIsCheckDelete] = useState(false);

@@ -1,10 +1,10 @@
-import HeaderAdmin from "../../components/Manage/Header";
-import AddProduct from "../../components/Manage/AddProduct";
+import Header from "../../components/Manage/layout/Header";
+import AddProduct from "../../components/Manage/Product/AddProduct";
 
 function ProductAdd() {
   return (
     <>
-      <HeaderAdmin />
+      <Header />
       <AddProduct />
     </>
   );

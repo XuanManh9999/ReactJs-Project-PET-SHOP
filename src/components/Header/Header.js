@@ -5,7 +5,6 @@ import Navbar from "./Navbar/Navbar";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useData } from "../Common/DataContext";
-
 const breadcrumb = {
   Price: "Bảng giá",
   Blog: "Tin thú cưng",
@@ -16,7 +15,7 @@ const breadcrumb = {
   bird: "Thức ăn cho chim",
   hamster: "Thức ăn cho Hamster",
   accessories: "Phụ kiện",
-  login: "Đăng nhập",
+  Login: "Đăng nhập",
   Register: "Đăng ký",
   ForgotPass: "Quên mật khẩu",
   "payment-processing": "Giỏ hàng",
@@ -51,7 +50,7 @@ function Header({ urlImageBg = "", imageHeight = "" }) {
           </Link>
           <span>/</span>
           <Link to={""} className={clsx(styles.change)}>
-            {breadcrumb[hendle]}
+            {breadcrumb[hendle] ?? "Chi tiết sản phẩm"}
           </Link>
         </div>
       ) : (

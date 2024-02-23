@@ -5,18 +5,17 @@ import "animate.css/animate.min.css";
 import "datatables.net-bs5/css/dataTables.bootstrap5.min.css";
 import "datatables.net-bs5/js/dataTables.bootstrap5.min.js";
 
-import "./assets/css/style.css";
-import "./assets/vendor/bootstrap/css/bootstrap.min.css";
-import "./assets/vendor/bootstrap-icons/bootstrap-icons.css";
-import "./assets/vendor/boxicons/css/boxicons.min.css";
-import "./assets/vendor/quill/quill.snow.css";
-import "./assets/vendor/quill/quill.bubble.css";
-import "./assets/vendor/remixicon/remixicon.css";
-import "./assets/vendor/simple-datatables/style.css";
+import "../assets/css/style.css";
+import "../assets/vendor/bootstrap/css/bootstrap.min.css";
+import "../assets/vendor/bootstrap-icons/bootstrap-icons.css";
+import "../assets/vendor/boxicons/css/boxicons.min.css";
+import "../assets/vendor/quill/quill.snow.css";
+import "../assets/vendor/quill/quill.bubble.css";
+import "../assets/vendor/remixicon/remixicon.css";
+import "../assets/vendor/simple-datatables/style.css";
 
-import $ from "jquery";
 import "bootstrap/dist/js/bootstrap.bundle.min";
-import "./Header.module.scss";
+import "../layout/Header.module.scss";
 import { Link } from "react-router-dom";
 
 function HeaderAdmin() {
@@ -27,7 +26,7 @@ function HeaderAdmin() {
         className="header fixed-top d-flex align-items-center"
       >
         <div className="d-flex align-items-center justify-content-between">
-          <a href="" className="logo d-flex align-items-center">
+          <Link href="" className="logo d-flex align-items-center">
             <img
               src="Images/logo (2).png"
               width={"60px"}
@@ -35,7 +34,7 @@ function HeaderAdmin() {
               alt=""
             />
             <span className="d-none d-lg-block">PetShop</span>
-          </a>
+          </Link>
           <i className="bi bi-list toggle-sidebar-btn"></i>
         </div>
         <div className="search-bar">
@@ -59,29 +58,29 @@ function HeaderAdmin() {
         <nav className="header-nav ms-auto">
           <ul className="d-flex align-items-center">
             <li className="nav-item d-block d-lg-none">
-              <a className="nav-link nav-icon search-bar-toggle " href="#">
+              <Link className="nav-link nav-icon search-bar-toggle " href="#">
                 <i className="bi bi-search"></i>
-              </a>
+              </Link>
             </li>
 
             <li className="nav-item dropdown">
-              <a
+              <Link
                 className="nav-link nav-icon"
                 href="#"
                 data-bs-toggle="dropdown"
               >
                 <i className="bi bi-bell"></i>
                 <span className="badge bg-primary badge-number">4</span>
-              </a>
+              </Link>
 
               <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
                 <li className="dropdown-header">
                   You have 4 new notifications
-                  <a href="#">
+                  <Link href="#">
                     <span className="badge rounded-pill bg-primary p-2 ms-2">
                       View all
                     </span>
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <hr className="dropdown-divider" />
@@ -139,36 +138,36 @@ function HeaderAdmin() {
                   <hr className="dropdown-divider" />
                 </li>
                 <li className="dropdown-footer">
-                  <a href="#">Show all notifications</a>
+                  <Link href="#">Show all notifications</Link>
                 </li>
               </ul>
             </li>
 
             <li className="nav-item dropdown">
-              <a
+              <Link
                 className="nav-link nav-icon"
                 href="#"
                 data-bs-toggle="dropdown"
               >
                 <i className="bi bi-chat-left-text"></i>
                 <span className="badge bg-success badge-number">3</span>
-              </a>
+              </Link>
 
               <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
                 <li className="dropdown-header">
                   You have 3 new messages
-                  <a href="#">
+                  <Link href="#">
                     <span className="badge rounded-pill bg-primary p-2 ms-2">
                       View all
                     </span>
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <hr className="dropdown-divider" />
                 </li>
 
                 <li className="message-item">
-                  <a href="#">
+                  <Link href="#">
                     <img
                       src="assets/img/messages-1.jpg"
                       alt=""
@@ -182,14 +181,14 @@ function HeaderAdmin() {
                       </p>
                       <p>4 hrs. ago</p>
                     </div>
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <hr className="dropdown-divider" />
                 </li>
 
                 <li className="message-item">
-                  <a href="#">
+                  <Link href="#">
                     <img
                       src="assets/img/messages-2.jpg"
                       alt=""
@@ -203,14 +202,14 @@ function HeaderAdmin() {
                       </p>
                       <p>6 hrs. ago</p>
                     </div>
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <hr className="dropdown-divider" />
                 </li>
 
                 <li className="message-item">
-                  <a href="#">
+                  <Link href="#">
                     <img
                       src="assets/img/messages-3.jpg"
                       alt=""
@@ -224,20 +223,20 @@ function HeaderAdmin() {
                       </p>
                       <p>8 hrs. ago</p>
                     </div>
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <hr className="dropdown-divider" />
                 </li>
 
                 <li className="dropdown-footer">
-                  <a href="#">Show all messages</a>
+                  <Link href="#">Show all messages</Link>
                 </li>
               </ul>
             </li>
 
             <li className="nav-item dropdown pe-3">
-              <a
+              <Link
                 className="nav-link nav-profile d-flex align-items-center pe-0"
                 href="#"
                 data-bs-toggle="dropdown"
@@ -250,7 +249,7 @@ function HeaderAdmin() {
                 <span className="d-none d-md-block dropdown-toggle ps-2">
                   Mr.Duy
                 </span>
-              </a>
+              </Link>
 
               <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                 <li className="dropdown-header">
@@ -262,52 +261,52 @@ function HeaderAdmin() {
                 </li>
 
                 <li>
-                  <a
+                  <Link
                     className="dropdown-item d-flex align-items-center"
                     href="?act=setting_account"
                   >
                     <i className="bi bi-person"></i>
                     <span>My Profile</span>
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <hr className="dropdown-divider" />
                 </li>
 
                 <li>
-                  <a
+                  <Link
                     className="dropdown-item d-flex align-items-center"
                     href="?act=setting_account"
                   >
                     <i className="bi bi-gear"></i>
                     <span>Account Settings</span>
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <hr className="dropdown-divider" />
                 </li>
 
                 <li>
-                  <a
+                  <Link
                     className="dropdown-item d-flex align-items-center"
                     href="pages-faq.html"
                   >
                     <i className="bi bi-question-circle"></i>
                     <span>Need Help?</span>
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <hr className="dropdown-divider" />
                 </li>
 
                 <li>
-                  <a
+                  <Link
                     className="dropdown-item d-flex align-items-center"
                     href="?act=exits_account"
                   >
                     <i className="bi bi-box-arrow-right"></i>
                     <span>Sign Out</span>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
@@ -324,7 +323,7 @@ function HeaderAdmin() {
             </Link>
           </li>
           <li className="nav-item">
-            <a
+            <Link
               className="nav-link collapsed"
               data-bs-target="#bill-nav"
               data-bs-toggle="collapse"
@@ -333,7 +332,7 @@ function HeaderAdmin() {
               <i className="bi bi-layout-text-window-reverse"></i>
               <span>Đơn hàng</span>
               <i className="bi bi-chevron-down ms-auto"></i>
-            </a>
+            </Link>
             <ul
               id="bill-nav"
               className="nav-content collapse "
@@ -348,7 +347,7 @@ function HeaderAdmin() {
             </ul>
           </li>
           <li className="nav-item">
-            <a
+            <Link
               className="nav-link collapsed"
               data-bs-target="#products-nav"
               data-bs-toggle="collapse"
@@ -357,7 +356,7 @@ function HeaderAdmin() {
               <i className="bi bi-journal-text"></i>
               <span>Quản lý sản phẩm </span>
               <i className="bi bi-chevron-down ms-auto"></i>
-            </a>
+            </Link>
             <ul
               id="products-nav"
               className="nav-content collapse "
@@ -383,8 +382,45 @@ function HeaderAdmin() {
               </li>
             </ul>
           </li>
+
           <li className="nav-item">
-            <a
+            <Link
+              className="nav-link collapsed"
+              data-bs-target="#blog-nav"
+              data-bs-toggle="collapse"
+              href="#"
+            >
+              <i className="bi bi-journal-text"></i>
+              <span>Quản Lý Bài Viết</span>
+              <i className="bi bi-chevron-down ms-auto"></i>
+            </Link>
+            <ul
+              id="blog-nav"
+              className="nav-content collapse "
+              data-bs-parent="#sidebar-nav"
+            >
+              <li>
+                <Link to="/ProductAdd">
+                  <i className="bi bi-circle"></i>
+                  <span>Thêm Bài Viết</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/ProductManage">
+                  <i className="bi bi-circle"></i>
+                  <span>Danh sách bài viết</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/update-product">
+                  <i className="bi bi-circle"></i>
+                  <span>Cập nhật bài viết</span>
+                </Link>
+              </li>
+            </ul>
+          </li>
+          <li className="nav-item">
+            <Link
               className="nav-link collapsed"
               data-bs-target="#products-dm-nav"
               data-bs-toggle="collapse"
@@ -393,28 +429,28 @@ function HeaderAdmin() {
               <i className="bi bi-box-seam"></i>
               <span>Danh mục sản phẩm</span>
               <i className="bi bi-chevron-down ms-auto"></i>
-            </a>
+            </Link>
             <ul
               id="products-dm-nav"
               className="nav-content collapse "
               data-bs-parent="#sidebar-nav"
             >
               <li>
-                <a href="?act=add_category">
+                <Link href="?act=add_category">
                   <i className="bi bi-circle"></i>
                   <span>Thêm danh mục</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="?act=show_category_admin">
+                <Link href="?act=show_category_admin">
                   <i className="bi bi-circle"></i>
                   <span>Danh sách danh mục</span>
-                </a>
+                </Link>
               </li>
             </ul>
           </li>
           <li className="nav-item">
-            <a
+            <Link
               className="nav-link collapsed"
               data-bs-target="#comment"
               data-bs-toggle="collapse"
@@ -423,22 +459,22 @@ function HeaderAdmin() {
               <i className="bi bi-chat-square-dots"></i>
               <span>Quản lý phản hồi</span>
               <i className="bi bi-chevron-down ms-auto"></i>
-            </a>
+            </Link>
             <ul
               id="comment"
               className="nav-content collapse "
               data-bs-parent="#sidebar-nav"
             >
               <li>
-                <a href="">
+                <Link href="">
                   <i className="bi bi-circle"></i>
                   <span>Danh sách phản hồi</span>
-                </a>
+                </Link>
               </li>
             </ul>
           </li>
           <li className="nav-item">
-            <a
+            <Link
               className="nav-link collapsed"
               data-bs-target="#user"
               data-bs-toggle="collapse"
@@ -447,23 +483,23 @@ function HeaderAdmin() {
               <i className="bi bi-person-gear"></i>
               <span>Quản lý tài khoản</span>
               <i className="bi bi-chevron-down ms-auto"></i>
-            </a>
+            </Link>
             <ul
               id="user"
               className="nav-content collapse "
               data-bs-parent="#sidebar-nav"
             >
               <li>
-                <a href="">
+                <Link href="">
                   <i className="bi bi-circle"></i>
                   <span>Danh sách tài khoản khách hàng</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="">
+                <Link href="">
                   <i className="bi bi-circle"></i>
                   <span>Danh sách tài khoản quản trị</span>
-                </a>
+                </Link>
               </li>
             </ul>
           </li>
@@ -471,24 +507,24 @@ function HeaderAdmin() {
           <li className="nav-heading">Pages</li>
 
           <li className="nav-item">
-            <a className="nav-link collapsed" href="">
+            <Link className="nav-link collapsed" href="">
               <i className="bi bi-person"></i>
               <span>Tài khoản</span>
-            </a>
+            </Link>
           </li>
 
           <li className="nav-item">
-            <a className="nav-link collapsed" href="">
+            <Link className="nav-link collapsed" href="">
               <i className="bi bi-person-plus"></i>
               <span>Thêm quản trị viên</span>
-            </a>
+            </Link>
           </li>
 
           <li className="nav-item">
-            <a className="nav-link collapsed" href="">
+            <Link className="nav-link collapsed" href="">
               <i className="bi bi-box-arrow-in-right"></i>
               <span>Thoát</span>
-            </a>
+            </Link>
           </li>
         </ul>
       </aside>
