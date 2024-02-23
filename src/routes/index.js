@@ -12,9 +12,10 @@ import MoreProductPage from "../pages/Product/MoreProductPage";
 import PayPage from "../pages/Product/PayPage";
 import ProductPayPage from "../pages/Product/ProductPayPage";
 import HomeManage from "../pages/Manage/HomeManage";
-import ProductManage from "../pages/Manage/ProductManage";
-import ProductAdd from "../pages/Manage/ProductAdd";
-import UpdatePRD from "../pages/Manage/UpdateProduct";
+import ProductManage from "../pages/Manage/Product/ProductManage";
+import ProductAdd from "../pages/Manage/Product/ProductAdd";
+
+import UpdatePRD from "../pages/Manage/Product/UpdateProduct";
 
 const publicRoutes = [
   {
