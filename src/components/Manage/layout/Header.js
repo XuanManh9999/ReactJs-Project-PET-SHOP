@@ -400,19 +400,19 @@ function HeaderAdmin() {
               data-bs-parent="#sidebar-nav"
             >
               <li>
-                <Link to="/ProductAdd">
+                <Link to="/BlogAdd">
                   <i className="bi bi-circle"></i>
                   <span>Thêm Bài Viết</span>
                 </Link>
               </li>
               <li>
-                <Link to="/ProductManage">
+                <Link to="/ListBlog">
                   <i className="bi bi-circle"></i>
                   <span>Danh sách bài viết</span>
                 </Link>
               </li>
               <li>
-                <Link to="/update-product">
+                <Link to="/UpdateBlog">
                   <i className="bi bi-circle"></i>
                   <span>Cập nhật bài viết</span>
                 </Link>

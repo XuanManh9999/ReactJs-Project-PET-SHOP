@@ -14,6 +14,10 @@ import ProductPayPage from "../pages/Product/ProductPayPage";
 import HomeManage from "../pages/Manage/HomeManage";
 import ProductManage from "../pages/Manage/Product/ProductManage";
 import ProductAdd from "../pages/Manage/Product/ProductAdd";
+// Blog
+import AddBlogPage from "../pages/Manage/Blog/AddBlogPage";
+import AlterBlogPage from "../pages/Manage/Blog/AlterBlogPage";
+import ListBlogPage from "../pages/Manage/Blog/ListBlogPage";
 
 import UpdatePRD from "../pages/Manage/Product/UpdateProduct";
 
@@ -89,6 +93,18 @@ const privateRoutes = [
   {
     path: "/ProductAdd",
     component: <ProductAdd />,
+  },
+  {
+    path: "/BlogAdd",
+    component: <AddBlogPage />,
+  },
+  {
+    path: "/UpdateBlog",
+    component: <AlterBlogPage />,
+  },
+  {
+    path: "/ListBlog",
+    component: <ListBlogPage />,
   },
 ];
 export { publicRoutes, privateRoutes };

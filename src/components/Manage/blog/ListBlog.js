@@ -97,13 +97,8 @@ function ListBlog() {
                       <th>STT</th>
                       <th>Name</th>
                       <th>Ảnh</th>
-                      <th>Size</th>
-                      <th>Color</th>
-                      <th>Số lượng</th>
-                      <th>Giá</th>
-                      <th>Sale</th>
-                      <th>Giảm giá</th>
-                      <th>Mô tả</th>
+                      <th>Tác giả</th>
+                      <th>Thể loại</th>
                       <th>Xóa sản phẩm</th>
                     </tr>
                   </thead>
