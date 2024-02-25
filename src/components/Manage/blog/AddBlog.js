@@ -20,6 +20,8 @@ import MarkdownIt from "markdown-it";
 import MdEditor from "react-markdown-editor-lite";
 // import style manually
 import "react-markdown-editor-lite/lib/index.css";
+import { APIBlogs } from "../../../services/admin/blog";
+import Cookies from "js-cookie";
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 function AddBlog() {
@@ -48,7 +50,41 @@ function AddBlog() {
     }));
   };
 
-  const hendleAddBlog = () => {};
+  const validateData = ({
+    name,
+    avatar,
+    content,
+    contentHTML,
+    author,
+    category,
+  }) => {
+    if (name && avatar && content && contentHTML && author && category) {
+      return true;
+    }
+    toast.warning("Các thông tin không được rỗng");
+    return false;
+  };
+
+  const hendleAddBlog = async () => {
+    if (validateData(blogData)) {
+      const token = Cookies.get("access_token");
+      const response = await APIBlogs.addBlog(token, blogData);
+      if (response?.status === 200) {
+        toast.success("Thêm Blog thành công");
+        setBlogData({
+          name: "",
+          avatar: "",
+          content: "",
+          contentHTML: "",
+          author: "",
+          category: "",
+        });
+        editorRef.value = "";
+      } else {
+        toast.error("Thêm Blog không thành công");
+      }
+    }
+  };
 
   const hendleReset = () => {
     setBlogData({
