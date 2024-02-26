@@ -92,7 +92,8 @@ function UpdateBlog() {
                           name="id_cate"
                           className="form-select"
                         >
-                          <option>Chọn bài viết</option>
+                          <option value={""}>--------------</option>
+                          
                         </select>
                       </div>
 
