@@ -37,7 +37,7 @@ export const APIBlogs = {
   updateBlog: async (token, data) => {
     try {
       const response = await axios.put(
-        "http://localhost:4000/api/v1/blog/all-blog",
+        "http://localhost:4000/api/v1/blog/alter-blog",
         data,
         {
           headers: {

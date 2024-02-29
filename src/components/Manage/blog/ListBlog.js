@@ -17,39 +17,37 @@ import "../assets/vendor/simple-datatables/style.css";
 
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "../layout/Header.module.scss";
-import {
-  getAllProduct,
-  deleteProductById,
-} from "../../../services/client/hendleProducts";
+import Cookies from "js-cookie";
+import { APIBlogs } from "../../../services/admin/blog";
+
 function ListBlog() {
-  const [dataProduct, setDataProduct] = useState([]);
+  const [blogData, setBlogData] = useState([]);
   const [isCHeckDelete, setIsCheckDelete] = useState(false);
   useEffect(() => {
-    const callAPIGetALLData = async () => {
-      const res = await getAllProduct();
-      setDataProduct(res);
-    };
-    callAPIGetALLData();
+    (async () => {
+      const token = Cookies.get("access_token");
+      const response = await APIBlogs.allBlogs(token);
+      setBlogData(response.data);
+    })();
   }, [isCHeckDelete]);
-  const hendleDeleteProduct = async (id) => {
-    try {
-      const res = await deleteProductById(id);
-      if (res && res.status === 200) {
-        setIsCheckDelete(true);
-        toast.success("Xóa thành công");
+
+  const hendleDeleteBlog = (id) => {
+    (async () => {
+      const token = Cookies.get("access_token");
+      const response = await APIBlogs.deleteBlog(token, id);
+      if (response.status === 200) {
+        toast.success("Xóa bài viết thành công");
+        setIsCheckDelete((prev) => !prev);
       } else {
-        setIsCheckDelete(false);
-        toast.err("Xóa không thành công");
+        toast.error("Xóa bài viết không thành công");
       }
-    } catch (err) {
-      setIsCheckDelete(false);
-      toast.error("Xóa không thành công. Đã xảy ra lỗi phía server");
-    }
+    })();
   };
+
   return (
     <main id="main" className="main">
       <div className="pagetitle">
-        <h1>Quản lý sản phẩm</h1>
+        <h1>Quản lý bài viết</h1>
       </div>
 
       <section className="section">
@@ -66,7 +64,7 @@ function ListBlog() {
                   <div className="d-flex align-items-center">
                     <div className="col-md-4 mb-3 me-2">
                       <label htmlFor="inputState" className="htmlForm-label">
-                        Danh mục
+                        Thể loại
                       </label>
                       <select
                         id="inputState"
@@ -74,17 +72,8 @@ function ListBlog() {
                         className="htmlForm-select"
                       >
                         <option value="">Tất cả</option>
-                        <option value="">Chó</option>
-                        <option value="">Mèo</option>
-                        <option value="">Chim</option>
                       </select>
                     </div>
-                    <input
-                      type="submit"
-                      className="btn btn-primary mt-2"
-                      name="listok"
-                      value="show"
-                    />
                   </div>
                 </form>
 
@@ -95,78 +84,50 @@ function ListBlog() {
                   <thead>
                     <tr className="table-danger">
                       <th>STT</th>
-                      <th>Name</th>
+                      <th colSpan={2}>Name</th>
                       <th>Ảnh</th>
                       <th>Tác giả</th>
                       <th>Thể loại</th>
-                      <th>Xóa sản phẩm</th>
+                      <th>Xóa bài</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {dataProduct &&
-                      dataProduct.data &&
-                      dataProduct.data.length > 0 &&
-                      dataProduct.data.map((item, index) => {
-                        return (
-                          <tr key={index}>
-                            <td>{index + 1}</td>
-                            <td>{item.name}</td>
-                            <td className="">
-                              <img
-                                src={item.avatar}
-                                style={{ objectFit: "cover" }}
-                                width={"50px"}
-                                height={"80px"}
-                                alt=""
-                              />
-                            </td>
-                            <td>
-                              {item &&
-                              item.sizes[0].size !== null &&
-                              item.sizes.length > 0
-                                ? item.sizes
-                                    .map((sizeItem) => sizeItem.size)
-                                    .join(", ")
-                                : "N/A"}
-                            </td>
-                            <td>
-                              {item &&
-                              item.colors[0].color !== null &&
-                              item.colors.length > 0
-                                ? item.sizes
-                                    .map((sizeItem) => sizeItem.color)
-                                    .join(", ")
-                                : "N/A"}
-                            </td>
-                            <td>{item.manyProducts}</td>
-                            <td>{item.price}đ</td>
-                            <td>{item.salePrice}đ</td>
-                            <td>
-                              {(
-                                ((item.price - item.salePrice) / item.price) *
-                                100
-                              ).toFixed(0)}
-                              %
-                            </td>
-                            <td>{item.comment ? item.comment : "N/A"}</td>
-                            <td>
-                              <button
-                                style={{
-                                  border: "none",
-                                }}
-                                onClick={() => {
-                                  hendleDeleteProduct(item.id);
-                                }}
-                                className="delete"
-                                title="Delete"
-                                data-toggle="tooltip"
-                              >
-                                <i className="bi bi-trash3"></i>
-                              </button>
-                            </td>
-                          </tr>
-                        );
-                      })}
+                    {blogData && blogData.length > 0 ? (
+                      blogData.map((item, index) => (
+                        <tr key={item.id}>
+                          <td>{index}</td>
+                          <td colSpan={2}>{item.name}</td>
+                          <td>
+                            <img
+                              style={{ objectFit: "cover" }}
+                              width={"50px"}
+                              height={"80px"}
+                              src={item.avatar}
+                              alt={item.name}
+                            />
+                          </td>
+                          <td>{item.author}</td>
+                          <td>{item.category}</td>
+                          <td>
+                            <button
+                              style={{
+                                border: "none",
+                              }}
+                              onClick={() => {
+                                hendleDeleteBlog(item.id);
+                              }}
+                              className="delete"
+                              title="Delete"
+                              data-toggle="tooltip"
+                            >
+                              <i className="bi bi-trash3"></i>
+                            </button>
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <td colSpan={7}>Không có dữ liệu</td>
+                    )}
                   </tbody>
                 </table>
               </div>

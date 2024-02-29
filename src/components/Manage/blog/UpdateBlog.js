@@ -21,8 +21,23 @@ import MdEditor from "react-markdown-editor-lite";
 // import style manually
 import "react-markdown-editor-lite/lib/index.css";
 
+import { APIBlogs } from "../../../services/admin/blog";
+import Cookies from "js-cookie";
+
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 function UpdateBlog() {
+  const [selectBlog, setSelectBlog] = useState([]);
+  const [idBlogUpdate, setIdBlogUpdate] = useState(null);
+  useEffect(() => {
+    const fetching = async () => {
+      const token = Cookies.get("access_token");
+      if (token) {
+        const response = await APIBlogs.allBlogs(token);
+        setSelectBlog(response?.data);
+      }
+    };
+    fetching();
+  }, []);
   const editorRef = useRef();
   const [blogData, setBlogData] = useState({
     name: "",
@@ -48,7 +63,43 @@ function UpdateBlog() {
     }));
   };
 
-  const hendleAddBlog = () => {};
+  const validateData = ({
+    name,
+    avatar,
+    content,
+    contentHTML,
+    author,
+    category,
+  }) => {
+    if (name && avatar && content && contentHTML && author && category) {
+      return true;
+    }
+    return false;
+  };
+
+  const hendleUpdateBlog = () => {
+    const isCHeck = validateData(blogData);
+    if (isCHeck && idBlogUpdate) {
+      const fetching = async () => {
+        const token = Cookies.get("access_token");
+
+        const response = await APIBlogs.updateBlog(token, {
+          ...blogData,
+          id: idBlogUpdate,
+        });
+        if (response?.status === 200) {
+          toast.success("Cập nhật dữ liệu thành công");
+        } else {
+          toast.error(
+            "Cập nhật dữ liệu không thành công. Vui lòng kiểm tra và thử lại"
+          );
+        }
+      };
+      fetching();
+    } else {
+      toast.warn("Các dữ liệu không được rỗng");
+    }
+  };
 
   const hendleReset = () => {
     setBlogData({
@@ -61,6 +112,30 @@ function UpdateBlog() {
     });
     editorRef.value = "";
     toast.success("Retset data thành công");
+  };
+
+  const hendleSelectBlog = (event) => {
+    const idBlog = event.target.value;
+    if (idBlog) {
+      const fetching = async () => {
+        const token = Cookies.get("access_token");
+        const response = await APIBlogs.blogById(token, idBlog);
+        const data = response?.data;
+        if (data?.length > 0) {
+          setIdBlogUpdate(data[0].id);
+          setBlogData({
+            name: data[0].name,
+            avatar: data[0].avatar,
+            content: data[0].content,
+            contentHTML: data[0].contentHTML,
+            author: data[0].author,
+            category: data[0].category,
+          });
+          editorRef.value = data[0].content;
+        }
+      };
+      fetching();
+    }
   };
   return (
     <main id="main" className="main">
@@ -91,9 +166,16 @@ function UpdateBlog() {
                           id="inputState"
                           name="id_cate"
                           className="form-select"
+                          onChange={hendleSelectBlog}
                         >
                           <option value={""}>--------------</option>
-                          
+                          {selectBlog &&
+                            selectBlog?.length > 0 &&
+                            selectBlog.map((blog) => (
+                              <option key={blog.id} value={blog.id}>
+                                {blog.name}
+                              </option>
+                            ))}
                         </select>
                       </div>
 
@@ -107,6 +189,7 @@ function UpdateBlog() {
                           required
                           name="name"
                           onChange={handleInputChange}
+                          value={blogData.name}
                         />
                       </div>
                       <div className="form-group">
@@ -118,6 +201,7 @@ function UpdateBlog() {
                           required
                           name="category"
                           onChange={handleInputChange}
+                          value={blogData.category}
                         />
                       </div>
 
@@ -130,6 +214,7 @@ function UpdateBlog() {
                           required
                           name="avatar"
                           onChange={handleInputChange}
+                          value={blogData.avatar}
                         />
                       </div>
 
@@ -142,6 +227,7 @@ function UpdateBlog() {
                           required
                           name="author"
                           onChange={handleInputChange}
+                          value={blogData.author}
                         />
                       </div>
                       <div className="form-group">
@@ -166,9 +252,9 @@ function UpdateBlog() {
                       <button
                         type="reset"
                         className="btn btn-primary me-2"
-                        onClick={hendleAddBlog}
+                        onClick={hendleUpdateBlog}
                       >
-                        Thêm
+                        Lưu
                       </button>
                       <button
                         type="reset"
