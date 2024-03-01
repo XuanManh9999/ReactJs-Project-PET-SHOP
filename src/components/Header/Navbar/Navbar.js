@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
@@ -108,7 +108,7 @@ function Navbar() {
         <Link
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          to={""}
+          to={"/"}
           className={clsx(styles.cart)}
         >
           <i>
