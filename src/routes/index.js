@@ -48,7 +48,7 @@ const publicRoutes = [
     component: <QuestionsPage />,
   },
   {
-    path: "/Blog",
+    path: "/Blog/:id",
     component: <BlogPage />,
   },
   {
