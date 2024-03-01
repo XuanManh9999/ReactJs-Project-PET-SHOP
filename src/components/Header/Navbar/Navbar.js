@@ -43,9 +43,7 @@ function Navbar() {
     }
   }, []);
   let hendle_click_search = () => {
-    setSearch((pre) => {
-      return setSearch(!pre);
-    });
+    setSearch((prev) => !prev);
   };
 
   const hendleUser = (event) => {
@@ -76,9 +74,7 @@ function Navbar() {
     <div className={clsx(styles.container)}>
       <div className={clsx(styles.header_top)}>
         <div
-          onClick={() => {
-            hendle_click_search();
-          }}
+          onClick={hendle_click_search}
           className={clsx(styles.header_top_icon_search)}
         >
           <i>
