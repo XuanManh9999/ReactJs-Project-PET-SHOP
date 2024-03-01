@@ -41,9 +41,7 @@ function Blog() {
     };
 
     scroll.scrollTo(300, { duration: 100, smooth: "linear" });
-
-    // Kích hoạt hiệu ứng chậm dần
-    scrollToSmooth(300, 5); // 1000 là thời gian cuộn
+    scrollToSmooth(300, 5);
   }, [id]);
 
   const fortMatchDate = (date) => {
