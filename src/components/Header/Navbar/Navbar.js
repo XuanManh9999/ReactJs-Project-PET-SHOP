@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
@@ -16,11 +16,13 @@ import Cart from "../../Content/Cart/Cart";
 import Search from "../../Content/Search/Search";
 import { useData } from "../../Common/DataContext";
 import { jwtDecode } from "jwt-decode";
+import { clientAPIBlog } from "../../../services/client/hendleBlog";
 
 function Navbar() {
   const [search, setSearch] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const { getQuantityProducts } = useData();
+  const [idBlog, setIdBlog] = useState(null);
   const [user, setUser] = useState({
     title1: "Đăng nhập",
     title2: "Đăng ký",
@@ -58,6 +60,17 @@ function Navbar() {
       });
     }
   };
+
+  useEffect(() => {
+    (async () => {
+      const response = await clientAPIBlog.allIdBlog();
+      const data = response.data;
+      if (data.length > 0) {
+        const randomIndex = Math.floor(Math.random() * data.length);
+        setIdBlog(data[randomIndex]?.id);
+      }
+    })();
+  });
 
   return (
     <div className={clsx(styles.container)}>
@@ -171,7 +184,7 @@ function Navbar() {
             </Link>
           </li>
           <li className={clsx(styles.nav_item)}>
-            <Link to={"/Blog"}>Tin thú cưng</Link>
+            <Link to={`/Blog/${idBlog}`}>Tin thú cưng</Link>
           </li>
           <li className={clsx(styles.nav_item)}>
             <i className={clsx(styles.icon_nav_body)}>

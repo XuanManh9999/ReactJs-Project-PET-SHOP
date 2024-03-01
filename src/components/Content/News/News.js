@@ -51,7 +51,7 @@ function News() {
                   </picture>
                   <div className={styles["pet-news-content"]}>
                     <div className={styles["pet-news-title"]}>
-                      <Link to={""}>{blog.name}</Link>
+                      <Link to={`/Blog/${blog.id}`}>{blog.name}</Link>
                     </div>
                     <p className={`${styles["pet-news-desc"]} line-clamp-3`}>
                       {cleanedString(blog.content)}

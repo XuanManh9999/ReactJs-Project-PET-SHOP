@@ -14,15 +14,6 @@ function BlogPost() {
       }
     })();
   }, [id]);
-  const fortMatchDate = (date) => {
-    let originalDate = new Date(date);
-    let day = originalDate.getDate();
-    let month = originalDate.getMonth() + 1;
-    let year = originalDate.getFullYear();
-
-    let formattedDate = `${day}/${month}/${year}`;
-    return formattedDate;
-  };
 
   return (
     <section className={styles["main"]}>
@@ -33,23 +24,24 @@ function BlogPost() {
 
         {dataBlog && dataBlog.length > 0
           ? dataBlog.map((blog) => (
-              <div className={styles["blog__Featured-content"]}>
+              <Link
+                to={`/Blog/${blog.id}`}
+                className={styles["blog__Featured-content"]}
+              >
                 <img
                   src={blog.avatar}
                   alt={blog.name}
                   className={styles["featured-img"]}
                 />
-                <Link to={""}>
-                  <p>{blog.name}</p>
-                </Link>
-              </div>
+                <p className={styles["blog_name"]}>{blog.name}</p>
+              </Link>
             ))
           : ""}
         {/* Item 1 */}
 
         <div className={styles["blog__Featured-content-more"]}>
           <img
-            src="Images/p.fix.png"
+            src="https://i.ibb.co/J7Mp05d/banner-blog.webp"
             alt="Banner"
             className={styles["blog_img"]}
           />

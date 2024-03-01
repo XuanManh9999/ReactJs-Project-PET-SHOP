@@ -32,8 +32,14 @@ function Header({ urlImageBg = "", imageHeight = "" }) {
   const url = window.location.pathname;
   useEffect(() => {
     const value = url.split("/").pop();
-    setHendle(value);
+    if (typeof +value === "number") {
+      const value = url.split("/")[1];
+      setHendle(value);
+    } else {
+      setHendle(value);
+    }
   }, [url]);
+
   return (
     <header
       style={{
