@@ -20,18 +20,43 @@ import {
 } from "react-icons/fa";
 
 import Slide from "../Slide/Slide";
-import { store } from "../../../redux/store.js";
-import { saveDataFromLocalstore } from "../../../redux/actions.js";
 import { useData } from "../../Common/DataContext";
 
 function ProductDetail({ data = [], dataRelare = [] }) {
   useEffect(() => {
-    scroll.scrollToTop({ duration: 10 });
+    const scrollToSmooth = (to, duration) => {
+      const start = window.pageYOffset;
+      const change = to - start;
+      const increment = 20;
+      let currentTime = 0;
+
+      const animateScroll = () => {
+        currentTime += increment;
+        const val = Math.easeInOutQuad(currentTime, start, change, duration);
+        window.scrollTo(0, val);
+        if (currentTime < duration) {
+          setTimeout(animateScroll, increment);
+        }
+      };
+      animateScroll();
+    };
+
+    Math.easeInOutQuad = (t, b, c, d) => {
+      t /= d / 2;
+      if (t < 1) return (c / 2) * t * t + b;
+      t--;
+      return (-c / 2) * (t * (t - 2) - 1) + b;
+    };
+
+    scroll.scrollTo(300, { duration: 100, smooth: "linear" });
+
+    // Kích hoạt hiệu ứng chậm dần
+    scrollToSmooth(300, 5); // 1000 là thời gian cuộn
   }, []);
   const [getDetailProduct] = data;
   const [totalManyProduct, setTotalManyProduct] = useState(1);
 
-  const { updateData } = useData();
+  const { updateData, yourData } = useData();
   const [selectedColorIndex, setSelectedColorIndex] = useState(null);
   const [selectedSizeIndex, setSelectedSizeIndex] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
@@ -42,44 +67,38 @@ function ProductDetail({ data = [], dataRelare = [] }) {
   };
 
   const hendleAddCart = (id) => {
-    const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    const existingProductIndex = existingCart.findIndex(
-      (item) => item.id === id
-    );
+    const existingProductIndex = yourData.findIndex((item) => item.id === id);
 
     if (existingProductIndex !== -1) {
       toast.warn("Sản phẩm đã tồn tài trong giỏ hàng");
     } else {
-      existingCart.push({
-        id,
-        quantity: +totalManyProduct,
-        size: selectedSize,
-        color: selectedColor,
-      });
-      store.dispatch(saveDataFromLocalstore(existingCart));
-      updateData(existingCart);
+      updateData([
+        ...yourData,
+        {
+          id,
+          quantity: +totalManyProduct,
+          size: selectedSize,
+          color: selectedColor,
+        },
+      ]);
       toast.success("Thêm sản phẩm thành công");
     }
   };
 
   const hendlePaymentProduct = (id) => {
-    const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    const existingProductIndex = existingCart.findIndex(
-      (item) => item.id === id
-    );
+    const existingProductIndex = yourData.findIndex((item) => item.id === id);
 
     if (existingProductIndex !== -1) {
     } else {
-      existingCart.push({
-        id,
-        quantity: +totalManyProduct,
-        size: selectedSize,
-        color: selectedColor,
-      });
-      store.dispatch(saveDataFromLocalstore(existingCart));
-      updateData(existingCart);
+      updateData([
+        ...yourData,
+        {
+          id,
+          quantity: +totalManyProduct,
+          size: selectedSize,
+          color: selectedColor,
+        },
+      ]);
     }
   };
   const hendleClickChooseColor = (event, index) => {
@@ -445,7 +464,7 @@ function ProductDetail({ data = [], dataRelare = [] }) {
               </div>
             </div>
           </section>
-          <div style={{ marginBottom: "50px" }}>
+          <div style={{ paddingBottom: "50px" }}>
             {dataRelare && dataRelare.length >= 4 ? (
               <Slide data={dataRelare} title="Sản phẩm tương tự" />
             ) : (

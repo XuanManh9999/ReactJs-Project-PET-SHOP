@@ -1,12 +1,12 @@
-import HeaderAdmin from "../../components/Manage/Header";
-import ListOrder from "../../components/Manage/ListOrder";
+import HeaderAdmin from "../../components/Manage/layout/Header";
+import ListOrder from "../../components/Manage/order/ListOrder";
 function OrderList() {
-    return (
-        <div>
-            <HeaderAdmin/>
-            <ListOrder/>
-        </div>
-    );
+  return (
+    <>
+      <HeaderAdmin />
+      <ListOrder />
+    </>
+  );
 }
 
 export default OrderList;

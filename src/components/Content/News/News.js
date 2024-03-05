@@ -2,119 +2,101 @@ import styles from "./News.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faRightLong } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { clientAPIBlog } from "../../../services/client/hendleBlog";
 
 function News() {
-    return (
-        <section>
-            <div className={styles["pet-news"]}>
-                <div className={styles["main-content"]}>
-                    <div className={styles["intro-pet-news"]}>
-                        <h1 className={styles.title}>Tin thú cưng.</h1>
-                        <picture className={styles["img-hero"]}>
-                            <img
-                                src="Images/hero_animal.png"
-                                alt="Chào mừng bạn đến với Catchy Pet"
-                            />
-                        </picture>
-                    </div>
+  const [dataBlog, setDataBlog] = useState([]);
+  useEffect(() => {
+    (async () => {
+      const response = await clientAPIBlog.blogByLimit(2);
+      setDataBlog(response.data);
+    })();
+  }, []);
 
-                    <div className={styles["pet-news-list-items"]}>
-                        {/* Item 1 */}
-                        <div className={styles["pet-news-item"]}>
-                            <picture className={styles["pet-news-img"]}>
-                                <img
-                                    src="Images/wallpaperflare-com-wallpaper-1-1.webp"
-                                    alt="Ảnh mèo đi ngủ"
-                                />
-                            </picture>
-                            <div className={styles["pet-news-content"]}>
-                                <div className={styles["pet-news-title"]}>
-                                    <Link to={""}>
-                                        Cách ít người biết để dạy mèo đi vệ sinh
-                                        đúng chỗ.
-                                    </Link>
-                                </div>
-                                <p
-                                    className={`${styles["pet-news-desc"]} line-clamp-3`}
-                                >
-                                    Với không ít người nuôi mèo, việc dạy cho
-                                    mèo cách đi vệ sinh đúng chỗ là một chuyện
-                                    không hề dễ, và nếu không chú ý tới vấn đề
-                                    này ngay từ khi mèo còn nhỏ
-                                </p>
-                                <span className={styles["pet-news-date"]}>
-                                    <i>
-                                        <FontAwesomeIcon icon={faClock} />
-                                    </i>
-                                    11/07/2023
-                                </span>
-                                <Link
-                                    to={""}
-                                    className={styles["pet-new-more-watch_1"]}
-                                >
-                                    Xem tiếp
-                                </Link>
-                            </div>
-                        </div>
-                        {/* Item 2 */}
-                        <div className={styles["pet-news-item"]}>
-                            <picture className={styles["pet-news-img"]}>
-                                <img
-                                    src="Images/wallpaperflare-com-wallpaper-3.webp"
-                                    alt="Ảnh mèo đi ngủ"
-                                />
-                            </picture>
-                            <div className={styles["pet-news-content"]}>
-                                <div className={styles["pet-news-title"]}>
-                                    <Link to={""}>
-                                        Huấn luyện chó mèo ngủ đúng chỗ hiệu quả
-                                        nhất!
-                                    </Link>
-                                </div>
-                                <p
-                                    className={`${styles["pet-news-desc"]} line-clamp-3`}
-                                >
-                                    Chó mèo là những thú cưng đáng yêu, nhưng
-                                    nhiều khi các bé ấy dễ làm bạn bực mình lắm
-                                    nhé. Nhất là vấn đề ngủ nghỉ.
-                                </p>
-                                <span className={styles["pet-news-date"]}>
-                                    <i>
-                                        <FontAwesomeIcon icon={faClock} />
-                                    </i>
-                                    11/07/2023
-                                </span>
-                                <Link
-                                    to={""}
-                                    className={styles["pet-new-more-watch_1"]}
-                                >
-                                    Xem tiếp
-                                </Link>
-                            </div>
-                        </div>
-                    </div>
+  const fortMatchDate = (date) => {
+    let originalDate = new Date(date);
+    let day = originalDate.getDate();
+    let month = originalDate.getMonth() + 1;
+    let year = originalDate.getFullYear();
 
-                    <div className={styles["more-buy-products"]}>
-                        <Link to={""}>Xem thêm bài viết.</Link>
-                        <i>
-                            <FontAwesomeIcon icon={faRightLong} />
-                        </i>
-                    </div>
+    let formattedDate = `${day}/${month}/${year}`;
+    return formattedDate;
+  };
 
-                    <div
-                        className={styles["pet-news-logo-items"]}
-                        data-aos="fade-up-right"
-                    >
-                        <img src="Images/brand_1.webp" alt="brand_1" />
-                        <img src="Images/brand_2.webp" alt="brand_2" />
-                        <img src="Images/brand_3.webp" alt="brand_3" />
-                        <img src="Images/brand_4.webp" alt="brand_4" />
-                        <img src="Images/brand_5.webp" alt="brand_5" />
-                    </div>
-                </div>
+  const cleanedString = (originalString) => {
+    return originalString.replace(/##|\*\*|>/g, "");
+  };
+
+  return (
+    <section>
+      {dataBlog && dataBlog.length > 0 ? (
+        <div className={styles["pet-news"]}>
+          <div className={styles["main-content"]}>
+            <div className={styles["intro-pet-news"]}>
+              <h1 className={styles.title}>Tin thú cưng.</h1>
+              <picture className={styles["img-hero"]}>
+                <img
+                  src="Images/hero_animal.png"
+                  alt="Chào mừng bạn đến với Catchy Pet"
+                />
+              </picture>
             </div>
-        </section>
-    );
+
+            <div className={styles["pet-news-list-items"]}>
+              {dataBlog.map((blog) => (
+                <div key={blog.id} className={styles["pet-news-item"]}>
+                  <picture className={styles["pet-news-img"]}>
+                    <img src={blog.avatar} alt={blog.name} />
+                  </picture>
+                  <div className={styles["pet-news-content"]}>
+                    <div className={styles["pet-news-title"]}>
+                      <Link to={`/Blog/${blog.id}`}>{blog.name}</Link>
+                    </div>
+                    <p className={`${styles["pet-news-desc"]} line-clamp-3`}>
+                      {cleanedString(blog.content)}
+                    </p>
+                    <span className={styles["pet-news-date"]}>
+                      <i>
+                        <FontAwesomeIcon icon={faClock} />
+                      </i>
+                      {fortMatchDate(blog.createAt)}
+                    </span>
+                    <Link
+                      to={`/Blog/${blog.id}`}
+                      className={styles["pet-new-more-watch_1"]}
+                    >
+                      Xem tiếp
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className={styles["more-buy-products"]}>
+              <Link to={`/Blog/${dataBlog[0].id}`}>Xem thêm bài viết.</Link>
+              <i>
+                <FontAwesomeIcon icon={faRightLong} />
+              </i>
+            </div>
+
+            <div
+              className={styles["pet-news-logo-items"]}
+              data-aos="fade-up-right"
+            >
+              <img src="Images/brand_1.webp" alt="brand_1" />
+              <img src="Images/brand_2.webp" alt="brand_2" />
+              <img src="Images/brand_3.webp" alt="brand_3" />
+              <img src="Images/brand_4.webp" alt="brand_4" />
+              <img src="Images/brand_5.webp" alt="brand_5" />
+            </div>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
+    </section>
+  );
 }
 
 export default News;

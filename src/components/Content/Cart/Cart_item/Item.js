@@ -9,26 +9,22 @@ import {
   faPlus,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
-import { getDataCardProducts } from "../../../../services/hendleProducts";
+import { getDataCardProducts } from "../../../../services/client/hendleProducts";
 import { useData } from "../../../Common/DataContext";
 import { Link } from "react-router-dom";
 
 function Item() {
   const [productDetails, setProductDetails] = useState([]);
-  const [cartItems, setCartItems] = useState(
-    () => JSON.parse(localStorage.getItem("cart")) || []
-  );
+
   const [totalPrice, setTotalPrice] = useState(0);
-  const { updateData } = useData();
+  const { updateData, yourData } = useData();
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (cartItems.length > 0) {
-          const response = await getDataCardProducts(getIds(cartItems));
+        if (yourData.length > 0) {
+          const response = await getDataCardProducts(getIds(yourData));
           if (response && response.data.length > 0) {
-            setProductDetails(
-              updateArrayWithQuantity(response.data, cartItems)
-            );
+            setProductDetails(updateArrayWithQuantity(response.data, yourData));
 
             // Tính tổng giá trị khi có dữ liệu mới
             const total = response.data.reduce(
@@ -49,7 +45,7 @@ function Item() {
     };
 
     fetchData();
-  }, [cartItems]);
+  }, [yourData]);
   // get Ids
   const getIds = (dataArray) => {
     return dataArray.map((item) => item.id);
@@ -73,12 +69,10 @@ function Item() {
     return newArray;
   };
   const hendleDeleteProduct = (id) => {
-    if (id && cartItems.length > 0) {
-      const local = cartItems;
+    if (id && yourData.length > 0) {
+      const local = yourData;
       const newArr = local.filter((item) => item.id !== id);
-      localStorage.setItem("cart", JSON.stringify(newArr));
       updateData(newArr);
-      setCartItems(newArr);
     } else {
       setProductDetails([]);
     }
@@ -88,7 +82,7 @@ function Item() {
     return amount.toLocaleString("vi-VN");
   };
   const hendleMinusProduct = (id) => {
-    const newArr = [...cartItems];
+    const newArr = [...yourData];
     if (newArr && newArr.length > 0) {
       newArr.map((item) => {
         return [
@@ -99,12 +93,10 @@ function Item() {
         ];
       });
     }
-    localStorage.setItem("cart", JSON.stringify(newArr));
-    setCartItems(newArr);
     updateData(newArr);
   };
   const hendlePlusProduct = (id) => {
-    const newArr = [...cartItems];
+    const newArr = [...yourData];
     if (newArr && newArr.length > 0) {
       newArr.map((item) => {
         return [
@@ -113,8 +105,6 @@ function Item() {
         ];
       });
     }
-    localStorage.setItem("cart", JSON.stringify(newArr));
-    setCartItems(newArr);
     updateData(newArr);
   };
   return (

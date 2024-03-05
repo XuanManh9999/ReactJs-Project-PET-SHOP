@@ -1,20 +1,8 @@
-import { Types } from "./types";
+import { combineReducers } from "redux";
+import LocalStorageReducer from "./SliceReducer/localstorage";
 
-const initState = [];
+const RootReducer = combineReducers({
+  LocalStorageReducer: LocalStorageReducer,
+});
 
-const LocalStorageReducer = (state = initState, actions) => {
-    switch (actions.type) {
-        case Types.saveDataFromLocalstore: {
-            localStorage.setItem("cart", JSON.stringify(actions.payload));
-            const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
-            return [...existingCart];
-        }
-        case Types.getDataLocastore: {
-            const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
-            return [...existingCart];
-        }
-        default:
-            return state;
-    }
-};
-export default LocalStorageReducer;
+export default RootReducer;

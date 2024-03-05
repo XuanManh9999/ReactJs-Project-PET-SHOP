@@ -16,7 +16,7 @@ import {
   fetchProvince,
   fetchWards,
   hendleDiscountProducts,
-} from "../../../services/hendleProducts";
+} from "../../../services/client/hendleProducts";
 function Pay() {
   const [showBankImage, setShowBankImage] = useState(false);
   const [cartItems, setCartItems] = useState(

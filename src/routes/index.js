@@ -1,41 +1,32 @@
 import Home from "../pages/Home/Home";
 import LoginPage from "../pages/Form/Login";
 import RegisterPage from "../pages/Form/Rigister";
-import PricePage from "../pages/PricePage";
-import QuestionsPage from "../pages/QuestionsPage";
-import BlogPage from "../pages/BlogPage";
-import ContactPage from "../pages/ContactPage";
-import ProductDetailPage from "../pages/ProductDetailPage";
+import PricePage from "../pages/Product/PricePage";
+import QuestionsPage from "../pages/Function/QuestionsPage";
+import BlogPage from "../pages/Function/BlogPage";
+import ContactPage from "../pages/Function/ContactPage";
+import ProductDetailPage from "../pages/Product/ProductDetailPage";
 import OrderList from "../pages/Manage/OrderList";
 import ForgotPassPage from "../pages/Form/ForgotPass";
-import MoreProductPage from "../pages/MoreProductPage";
-import PayPage from "../pages/PayPage";
-import ProductPayPage from "../pages/ProductPayPage";
+import MoreProductPage from "../pages/Product/MoreProductPage";
+import PayPage from "../pages/Product/PayPage";
+import ProductPayPage from "../pages/Product/ProductPayPage";
 import HomeManage from "../pages/Manage/HomeManage";
-import ProductManage from "../pages/Manage/ProductManage";
-import ProductAdd from "../pages/Manage/ProductAdd";
-import UpdatePRD from "../pages/Manage/UpdateProduct";
+import ProductManage from "../pages/Manage/Product/ProductManage";
+import ProductAdd from "../pages/Manage/Product/ProductAdd";
+// Blog
+import AddBlogPage from "../pages/Manage/Blog/AddBlogPage";
+import AlterBlogPage from "../pages/Manage/Blog/AlterBlogPage";
+import ListBlogPage from "../pages/Manage/Blog/ListBlogPage";
+
+import UpdatePRD from "../pages/Manage/Product/UpdateProduct";
+
 const publicRoutes = [
   {
     path: "/",
     component: <Home />,
   },
-  {
-    path: "/manage",
-    component: <HomeManage />,
-  },
-  {
-    path: "/OrderList",
-    component: <OrderList />,
-  },
-  {
-    path: "/ProductManage",
-    component: <ProductManage />,
-  },
-  {
-    path: "/ProductAdd",
-    component: <ProductAdd />,
-  },
+
   {
     path: "/Register",
     component: <RegisterPage />,
@@ -57,7 +48,7 @@ const publicRoutes = [
     component: <QuestionsPage />,
   },
   {
-    path: "/Blog",
+    path: "/Blog/:id",
     component: <BlogPage />,
   },
   {
@@ -70,7 +61,7 @@ const publicRoutes = [
   },
 
   {
-    path: "/MoreProduct",
+    path: "/MoreProduct/:typeProduct",
     component: <MoreProductPage />,
   },
   {
@@ -86,6 +77,34 @@ const publicRoutes = [
     component: <UpdatePRD />,
   },
 ];
-// Cần đăng nhập
-const privateRoutes = [];
+const privateRoutes = [
+  {
+    path: "/manage",
+    component: <HomeManage />,
+  },
+  {
+    path: "/ProductManage",
+    component: <ProductManage />,
+  },
+  {
+    path: "/OrderList",
+    component: <OrderList />,
+  },
+  {
+    path: "/ProductAdd",
+    component: <ProductAdd />,
+  },
+  {
+    path: "/BlogAdd",
+    component: <AddBlogPage />,
+  },
+  {
+    path: "/UpdateBlog",
+    component: <AlterBlogPage />,
+  },
+  {
+    path: "/ListBlog",
+    component: <ListBlogPage />,
+  },
+];
 export { publicRoutes, privateRoutes };

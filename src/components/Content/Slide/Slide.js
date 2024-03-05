@@ -16,13 +16,11 @@ import {
 import styles from "./Slide.module.scss";
 import "./overwrite.scss";
 import QuickProducts from "../QuickProducts/QuickProducts";
-import { store } from "../../../redux/store.js";
 import { connect } from "react-redux";
-import { saveDataFromLocalstore } from "../../../redux/actions.js";
 import { useData } from "../../Common/DataContext";
 function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
   const [quickView, setQuickView] = useState(false);
-  const { updateData } = useData();
+  const { updateData, yourData } = useData();
   const getIdProduct = useRef();
   const settings = {
     dots: true,
@@ -41,18 +39,18 @@ function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
   };
 
   const hendleAddToCart = (id) => {
-    const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    const existingProductIndex = existingCart.findIndex(
-      (item) => item.id === id
-    );
+    const existingProductIndex = yourData.findIndex((item) => item.id === id);
 
     if (existingProductIndex !== -1) {
       toast.warn("Sản phẩm đã tồn tài trong giỏ hàng");
     } else {
-      existingCart.push({ id, quantity: 1 });
-      store.dispatch(saveDataFromLocalstore(existingCart));
-      updateData(existingCart);
+      updateData([
+        ...yourData,
+        {
+          id,
+          quantity: 1,
+        },
+      ]);
       toast.success("Thêm sản phẩm thành công");
     }
   };

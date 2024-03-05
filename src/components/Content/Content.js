@@ -13,7 +13,7 @@ import Carousel from "./Carousel/Carousel";
 import {
   getDataProducts,
   getProductsByType,
-} from "../../services/hendleProducts";
+} from "../../services/client/hendleProducts";
 
 function Content() {
   const [data, setData] = useState([]);

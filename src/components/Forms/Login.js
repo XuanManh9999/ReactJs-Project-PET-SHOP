@@ -1,15 +1,12 @@
 import { useEffect, useState, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import { jwtDecode } from "jwt-decode";
 import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate, Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Cookies from "js-cookie";
-import {
-  hendleLogin as postLogin,
-  checkToken,
-} from "../../services/hendleLogin";
+import { hendleLogin as postLogin } from "../../services/client/hendleLogin";
 import styles from "./Login.module.scss";
 function Login() {
   const [isShowPassWord, setIsShowPassWord] = useState(faEyeSlash);
@@ -17,46 +14,9 @@ function Login() {
   const input_password = useRef();
   const navigate = useNavigate();
   useEffect(() => {
-    let token = Cookies.get("token_login");
-    if (token) {
-      let hendleToken = async () => {
-        let result = await checkToken(token);
-        if (
-          result &&
-          result.status === 200 &&
-          result.data.length > 0 &&
-          result.data[0].role === "R0"
-        ) {
-          navigate("/manage");
-        } else if (
-          result &&
-          result.data.length > 0 &&
-          result.data[0].role === "R1"
-        ) {
-          navigate("/");
-        }
-
-        try {
-          let result = await checkToken(token);
-          if (
-            result &&
-            result.status === 200 &&
-            result.data.length > 0 &&
-            result.data[0].role === "R0"
-          ) {
-            navigate("/manage");
-          } else if (
-            result &&
-            result.data.length > 0 &&
-            result.data[0].role === "R1"
-          ) {
-            navigate("/");
-          }
-        } catch (e) {}
-      };
-      hendleToken();
-    } else {
-      navigate("/Login");
+    const check = Cookies.get("refreshToken") || "";
+    if (check) {
+      navigate("/");
     }
   }, [navigate]);
   const [inputValues, setInputValues] = useState({
@@ -86,14 +46,20 @@ function Login() {
     if (check === null) {
       try {
         let data = await postLogin(inputValues);
+        const decodeToken = jwtDecode(data?.data?.access_token);
         if (data && data.status === 200) {
-          Cookies.set("token_login", data.data.token);
-          if (data.data.role === "user") {
+          Cookies.set("access_token", data.data.access_token, {
+            expires: 1,
+          });
+          Cookies.set("refreshToken", data.data.refresh_token, {
+            expires: 30,
+          });
+          if (decodeToken?.role === "R0") {
             toast.success("Đăng nhập thành công");
             setTimeout(() => {
               navigate("/");
             }, 1500);
-          } else if (data.data.role === "admin") {
+          } else if (decodeToken?.role === "R1") {
             toast.success("Đăng nhập thành công");
             setTimeout(() => {
               navigate("/manage");
@@ -127,7 +93,6 @@ function Login() {
   };
   return (
     <>
-     
       <div id="form_2" className={styles["log_in"]}>
         <div className={styles["container_log_in"]}>
           <h1 className={styles["title"]}>Đăng nhập</h1>

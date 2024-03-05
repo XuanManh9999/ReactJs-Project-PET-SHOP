@@ -1,7 +1,20 @@
+import { useEffect, useState } from "react";
 import styles from "./BlogPost.module.scss";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { clientAPIBlog } from "../../../services/client/hendleBlog";
 
 function BlogPost() {
+  const [dataBlog, setDataBlog] = useState([]);
+  const { id } = useParams();
+  useEffect(() => {
+    (async () => {
+      if (id) {
+        const response = await clientAPIBlog.blogOrtherID(id);
+        setDataBlog(response.data);
+      }
+    })();
+  }, [id]);
+
   return (
     <section className={styles["main"]}>
       <div className={styles["blog__Featured_Posts"]}>
@@ -9,57 +22,26 @@ function BlogPost() {
           BÀI VIẾT NỔI BẬT
         </h1>
 
+        {dataBlog && dataBlog.length > 0
+          ? dataBlog.map((blog) => (
+              <Link
+                to={`/Blog/${blog.id}`}
+                className={styles["blog__Featured-content"]}
+              >
+                <img
+                  src={blog.avatar}
+                  alt={blog.name}
+                  className={styles["featured-img"]}
+                />
+                <p className={styles["blog_name"]}>{blog.name}</p>
+              </Link>
+            ))
+          : ""}
         {/* Item 1 */}
-        <div className={styles["blog__Featured-content"]}>
-          <img
-            src="Images/wallpaperflare-com-wallpaper-4-1.webp"
-            alt=""
-            className={styles["featured-img"]}
-          />
-          <Link to={""}>
-            <p>Nguyên nhân khiến chó trở nên hung dữ</p>
-          </Link>
-        </div>
-
-        {/* Item 2 */}
-        <div className={styles["blog__Featured-content"]}>
-          <img
-            src="Images/wallpaperflare-com-wallpaper-3.webp"
-            alt=""
-            className={styles["featured-img"]}
-          />
-          <Link to={""}>
-            <p>Huấn luyện chó mèo ngủ đúng chỗ hiệu quả nhất!</p>
-          </Link>
-        </div>
-
-        {/* Item 3 */}
-        <div className={styles["blog__Featured-content"]}>
-          <img
-            src="Images/wallpaperflare-com-wallpaper-4.webp"
-            alt=""
-            className={styles["featured-img"]}
-          />
-          <Link to={""}>
-            <p>Cách để giao tiếp với mèo</p>
-          </Link>
-        </div>
-
-        {/* Item 4 */}
-        <div className={styles["blog__Featured-content"]}>
-          <img
-            src="Images/wallpaperflare-com-wallpaper-1-1.webp"
-            alt=""
-            className={styles["featured-img"]}
-          />
-          <Link to={""}>
-            <p>Cách tính tuổi mèo chính xác nhất</p>
-          </Link>
-        </div>
 
         <div className={styles["blog__Featured-content-more"]}>
           <img
-            src="Images/p.fix.png"
+            src="https://i.ibb.co/J7Mp05d/banner-blog.webp"
             alt="Banner"
             className={styles["blog_img"]}
           />

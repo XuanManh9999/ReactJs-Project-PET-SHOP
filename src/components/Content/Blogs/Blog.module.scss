@@ -25,7 +25,7 @@
 }
 .blog_ .blog__contents .blog--content span,
 .blog .blog__contents .blog--content span {
-  font-size: 14px;
+  font-size: 16px;
   color: #8b8b8b;
   display: flex;
   gap: 5px;
@@ -258,4 +258,13 @@
 
 .comment-input {
   font-family: inherit;
+}
+
+.content__blog {
+  p {
+    font-size: 18px;
+    line-height: 32px;
+    font-weight: 400;
+    text-align: justify;
+  }
 }
