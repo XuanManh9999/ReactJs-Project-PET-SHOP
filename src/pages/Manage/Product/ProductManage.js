@@ -1,5 +1,5 @@
-import HeaderAdmin from "../../../components/Manage/layout/Header";
-import ManageProduct from "../../../components/Manage/product/ProductManage";
+import HeaderAdmin from '../../../components/Manage/layout/Header';
+import ManageProduct from '../../../components/Manage/Product/ProductManage';
 
 function ProductManage() {
   return (

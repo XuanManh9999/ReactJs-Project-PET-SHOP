@@ -1,5 +1,5 @@
-import HeaderAdmin from "../../../components/Manage/layout/Header";
-import UpdateProduct from "../../../components/Manage/product/UpdateProduct";
+import HeaderAdmin from '../../../components/Manage/layout/Header';
+import UpdateProduct from '../../../components/Manage/Product/UpdateProduct';
 function UpdatePRD() {
   return (
     <>

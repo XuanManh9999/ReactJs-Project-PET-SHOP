@@ -1,22 +1,22 @@
-import "bootstrap/dist/css/bootstrap.min.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-import "animate.css/animate.min.css";
+import 'animate.css/animate.min.css';
 
-import "datatables.net-bs5/css/dataTables.bootstrap5.min.css";
-import "datatables.net-bs5/js/dataTables.bootstrap5.min.js";
+import 'datatables.net-bs5/css/dataTables.bootstrap5.min.css';
+import 'datatables.net-bs5/js/dataTables.bootstrap5.min.js';
 
-import "../assets/css/style.css";
-import "../assets/vendor/bootstrap/css/bootstrap.min.css";
-import "../assets/vendor/bootstrap-icons/bootstrap-icons.css";
-import "../assets/vendor/boxicons/css/boxicons.min.css";
-import "../assets/vendor/quill/quill.snow.css";
-import "../assets/vendor/quill/quill.bubble.css";
-import "../assets/vendor/remixicon/remixicon.css";
-import "../assets/vendor/simple-datatables/style.css";
+import '../assets/css/style.css';
+import '../assets/vendor/bootstrap/css/bootstrap.min.css';
+import '../assets/vendor/bootstrap-icons/bootstrap-icons.css';
+import '../assets/vendor/boxicons/css/boxicons.min.css';
+import '../assets/vendor/quill/quill.snow.css';
+import '../assets/vendor/quill/quill.bubble.css';
+import '../assets/vendor/remixicon/remixicon.css';
+import '../assets/vendor/simple-datatables/style.css';
 
-import "bootstrap/dist/js/bootstrap.bundle.min";
-import "../layout/Header.module.scss";
-import { Link } from "react-router-dom";
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+import '../layout/Header.module.scss';
+import { Link } from 'react-router-dom';
 
 function ListOrder() {
   return (
@@ -31,13 +31,13 @@ function ListOrder() {
               <table
                 id="example"
                 className="table table-bordered table-striped"
-                style={{ width: "100%" }}
+                style={{ width: '100%' }}
               >
                 <thead
                   style={{
-                    fontWeight: "bold",
-                    fontFamily: "monospace",
-                    fontSize: "16px",
+                    fontWeight: 'bold',
+                    fontFamily: 'monospace',
+                    fontSize: '16px',
                   }}
                 >
                   <tr className="table-danger">

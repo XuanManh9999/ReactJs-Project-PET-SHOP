@@ -1,5 +1,5 @@
-import HeaderAdmin from "../../components/Manage/layout/Header";
-import ListOrder from "../../components/Manage/order/ListOrder";
+import HeaderAdmin from '../../components/Manage/layout/Header';
+import ListOrder from '../../components/Manage/Order/ListOrder';
 function OrderList() {
   return (
     <>

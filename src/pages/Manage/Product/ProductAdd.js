@@ -1,5 +1,5 @@
 import HeaderAdmin from "../../../components/Manage/layout/Header";
-import AddProduct from "../../../components/Manage/product/AddProduct";
+import AddProduct from "../../../components/Manage/Product/AddProduct";
 function ProductAdd() {
   return (
     <>
