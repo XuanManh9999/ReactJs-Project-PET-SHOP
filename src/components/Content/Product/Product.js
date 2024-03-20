@@ -40,7 +40,7 @@ function Product() {
             <h1 className={styles.title}>Sản phẩm shop đang bán</h1>
             <picture className={styles["img-hero"]}>
               <img
-                src="Images/hero_animal.png"
+                src="https://i.ibb.co/Q6v08xN/hero-animal.png"
                 alt="Chào mừng bạn đến với Catchy Pet"
               />
             </picture>

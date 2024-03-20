@@ -1,24 +1,24 @@
-import React from "react";
-import { useState, useRef } from "react";
-import Slider from "react-slick";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import clsx from "clsx";
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from 'react';
+import { useState, useRef } from 'react';
+import Slider from 'react-slick';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import clsx from 'clsx';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faDongSign,
   faMagnifyingGlassPlus,
   faCartPlus,
-} from "@fortawesome/free-solid-svg-icons";
-import styles from "./Slide.module.scss";
-import "./overwrite.scss";
-import QuickProducts from "../QuickProducts/QuickProducts";
-import { connect } from "react-redux";
-import { useData } from "../../Common/DataContext";
-function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
+} from '@fortawesome/free-solid-svg-icons';
+import styles from './Slide.module.scss';
+import './overwrite.scss';
+import QuickProducts from '../QuickProducts/QuickProducts';
+import { connect } from 'react-redux';
+import { useData } from '../../Common/DataContext';
+function Slide({ data = [], title = 'Sản phẩm nổi bật' }) {
   const [quickView, setQuickView] = useState(false);
   const { updateData, yourData } = useData();
   const getIdProduct = useRef();
@@ -30,7 +30,7 @@ function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
     autoplay: false,
     speed: 800,
     autoplaySpeed: 4000,
-    cssEase: "ease",
+    cssEase: 'ease',
   };
 
   const hendleQuickView = (id) => {
@@ -42,7 +42,7 @@ function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
     const existingProductIndex = yourData.findIndex((item) => item.id === id);
 
     if (existingProductIndex !== -1) {
-      toast.warn("Sản phẩm đã tồn tài trong giỏ hàng");
+      toast.warn('Sản phẩm đã tồn tài trong giỏ hàng');
     } else {
       updateData([
         ...yourData,
@@ -51,12 +51,12 @@ function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
           quantity: 1,
         },
       ]);
-      toast.success("Thêm sản phẩm thành công");
+      toast.success('Thêm sản phẩm thành công');
     }
   };
   const formatCurrency = (amount) => {
     amount = parseFloat(amount);
-    return amount.toLocaleString("vi-VN");
+    return amount.toLocaleString('vi-VN');
   };
   return (
     <>
@@ -68,8 +68,7 @@ function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
           <div className={clsx(styles.list_item)}>
             <Slider className="slide_main" {...settings}>
               {/* Item 1 */}
-              {data &&
-                data.length > 0 &&
+              {data && data.length > 0 ? (
                 data.map((item, index) => {
                   return (
                     <div key={index} className={clsx(styles.item)}>
@@ -82,7 +81,7 @@ function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
                           />
                         </figure>
                         <div className={clsx(styles.content)}>
-                          <p className={clsx(styles.desc, "line-clamp-2")}>
+                          <p className={clsx(styles.desc, 'line-clamp-2')}>
                             {item.name}
                           </p>
                           <div className={clsx(styles.price)}>
@@ -131,7 +130,10 @@ function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
                       </div>
                     </div>
                   );
-                })}
+                })
+              ) : (
+                <p className={clsx(styles.empty_card)}>Loadding...</p>
+              )}
             </Slider>
           </div>
         </div>
@@ -142,7 +144,7 @@ function Slide({ data = [], title = "Sản phẩm nổi bật" }) {
           hendleQuickViewProduct={hendleQuickView}
         />
       ) : (
-        ""
+        ''
       )}
       <ToastContainer
         position="top-right"

@@ -52,8 +52,8 @@ function Accessoire({ data = [] }) {
             <h1 className={styles.title}>Phụ kiện cho thú cưng</h1>
             <picture className={styles['img-hero']}>
               <img
-                src="Images/hero_animal.png"
-                alt="Chào mừng bạn đến với Catchy Pet logo"
+                src="https://i.ibb.co/Q6v08xN/hero-animal.png"
+                alt="Chào mừng bạn đến với Catchy Pet"
               />
             </picture>
           </div>

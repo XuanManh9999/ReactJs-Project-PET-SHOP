@@ -1,22 +1,22 @@
-import "bootstrap/dist/css/bootstrap.min.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-import "animate.css/animate.min.css";
+import 'animate.css/animate.min.css';
 
-import "datatables.net-bs5/css/dataTables.bootstrap5.min.css";
-import "datatables.net-bs5/js/dataTables.bootstrap5.min.js";
+import 'datatables.net-bs5/css/dataTables.bootstrap5.min.css';
+import 'datatables.net-bs5/js/dataTables.bootstrap5.min.js';
 
-import "../assets/css/style.css";
-import "../assets/vendor/bootstrap/css/bootstrap.min.css";
-import "../assets/vendor/bootstrap-icons/bootstrap-icons.css";
-import "../assets/vendor/boxicons/css/boxicons.min.css";
-import "../assets/vendor/quill/quill.snow.css";
-import "../assets/vendor/quill/quill.bubble.css";
-import "../assets/vendor/remixicon/remixicon.css";
-import "../assets/vendor/simple-datatables/style.css";
+import '../assets/css/style.css';
+import '../assets/vendor/bootstrap/css/bootstrap.min.css';
+import '../assets/vendor/bootstrap-icons/bootstrap-icons.css';
+import '../assets/vendor/boxicons/css/boxicons.min.css';
+import '../assets/vendor/quill/quill.snow.css';
+import '../assets/vendor/quill/quill.bubble.css';
+import '../assets/vendor/remixicon/remixicon.css';
+import '../assets/vendor/simple-datatables/style.css';
 
-import "bootstrap/dist/js/bootstrap.bundle.min";
-import "../layout/Header.module.scss";
-import { Link } from "react-router-dom";
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+import '../layout/Header.module.scss';
+import { Link } from 'react-router-dom';
 
 function HeaderAdmin() {
   return (
@@ -28,10 +28,10 @@ function HeaderAdmin() {
         <div className="d-flex align-items-center justify-content-between">
           <Link href="" className="logo d-flex align-items-center">
             <img
-              src="Images/logo (2).png"
-              width={"60px"}
-              height={"60px"}
-              alt=""
+              src="https://i.ibb.co/3pCnKn8/logo-2.png"
+              width={'60px'}
+              height={'60px'}
+              alt="Logo"
             />
             <span className="d-none d-lg-block">PetShop</span>
           </Link>
@@ -242,18 +242,18 @@ function HeaderAdmin() {
                 data-bs-toggle="dropdown"
               >
                 <img
-                  src="Images/logo (2).png"
+                  src="https://i.ibb.co/Jx2trJF/default-user-1.png"
                   alt="Profile"
                   className="rounded-circle"
                 />
                 <span className="d-none d-md-block dropdown-toggle ps-2">
-                  Mr.Duy
+                  Admin
                 </span>
               </Link>
 
               <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                 <li className="dropdown-header">
-                  <h6>Mr.Duy</h6>
+                  <h6>Admin</h6>
                   <span>Quản trị viên </span>
                 </li>
                 <li>
