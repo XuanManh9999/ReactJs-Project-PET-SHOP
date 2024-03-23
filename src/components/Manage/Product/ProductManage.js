@@ -31,6 +31,7 @@ function ManageProduct() {
     };
     callAPIGetALLData();
   }, [isCHeckDelete]);
+  
   const hendleDeleteProduct = async (id) => {
     try {
       const res = await deleteProductById(id);

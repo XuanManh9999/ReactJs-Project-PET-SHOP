@@ -1,34 +1,34 @@
-import { useState, useRef, useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "animate.css/animate.min.css";
-import "datatables.net-bs5/css/dataTables.bootstrap5.min.css";
-import "datatables.net-bs5/js/dataTables.bootstrap5.min.js";
-import "../assets/css/style.css";
-import "../assets/vendor/bootstrap/css/bootstrap.min.css";
-import "../assets/vendor/bootstrap-icons/bootstrap-icons.css";
-import "../assets/vendor/boxicons/css/boxicons.min.css";
-import "../assets/vendor/quill/quill.snow.css";
-import "../assets/vendor/quill/quill.bubble.css";
-import "../assets/vendor/remixicon/remixicon.css";
-import "../assets/vendor/simple-datatables/style.css";
-import "bootstrap/dist/js/bootstrap.bundle.min";
-import "../layout/Header.module.scss";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { PhotoProvider, PhotoView } from "react-photo-view";
-import "react-photo-view/dist/react-photo-view.css";
+import { useState, useRef, useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'animate.css/animate.min.css';
+import 'datatables.net-bs5/css/dataTables.bootstrap5.min.css';
+import 'datatables.net-bs5/js/dataTables.bootstrap5.min.js';
+import '../assets/css/style.css';
+import '../assets/vendor/bootstrap/css/bootstrap.min.css';
+import '../assets/vendor/bootstrap-icons/bootstrap-icons.css';
+import '../assets/vendor/boxicons/css/boxicons.min.css';
+import '../assets/vendor/quill/quill.snow.css';
+import '../assets/vendor/quill/quill.bubble.css';
+import '../assets/vendor/remixicon/remixicon.css';
+import '../assets/vendor/simple-datatables/style.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+import '../layout/Header.module.scss';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { PhotoProvider, PhotoView } from 'react-photo-view';
+import 'react-photo-view/dist/react-photo-view.css';
 // markdown
-import MarkdownIt from "markdown-it";
-import MdEditor from "react-markdown-editor-lite";
+import MarkdownIt from 'markdown-it';
+import MdEditor from 'react-markdown-editor-lite';
 // import style manually
-import "react-markdown-editor-lite/lib/index.css";
+import 'react-markdown-editor-lite/lib/index.css';
 
 import {
   getDataProducts,
   getDataProductsEqualId,
   updateProductById,
-} from "../../../services/client/hendleProducts";
-import styles from "./UpdateProduct.module.scss";
+} from '../../../services/client/hendleProducts';
+import styles from './UpdateProduct.module.scss';
 // Register plugins if required
 // MdEditor.use(YOUR_PLUGINS_HERE);
 
@@ -41,27 +41,27 @@ function UpdateProduct() {
   const editorRef = useRef();
 
   const [productData, setProductData] = useState({
-    name: "",
-    desc: "",
-    descHTML: "",
-    avatar: "",
+    name: '',
+    desc: '',
+    descHTML: '',
+    avatar: '',
     price: 0,
     salePrice: 0,
     manyProducts: 0,
-    comment: "",
-    trademark: "",
+    comment: '',
+    trademark: '',
     detailImages: [],
     sizes: [],
     colors: [],
   });
-  // data
   const [idSelected, setIdSelect] = useState(null);
+
   const [dataProducts, setDataProducts] = useState([]);
-  const [detailImages, setDetailImage] = useState("");
+  const [detailImages, setDetailImage] = useState('');
   const [saveImages, setSaveImages] = useState([]);
-  const [detailColor, setDetailColor] = useState("");
+  const [detailColor, setDetailColor] = useState('');
   const [saveColor, setSaveColor] = useState([]);
-  const [detailSize, setDetailSize] = useState("");
+  const [detailSize, setDetailSize] = useState('');
   const [saveSize, setSaveSize] = useState([]);
 
   useEffect(() => {
@@ -88,14 +88,14 @@ function UpdateProduct() {
   }
 
   let hendleImageDetail = () => {
-    if (detailImages !== "") {
+    if (detailImages !== '') {
       setSaveImages((prev) => [...prev, { hrefImage: detailImages }]);
-      setDetailImage("");
+      setDetailImage('');
       toast.success(
-        "Thêm dữ liệu thành công. Sau khi thêm đủ đừng quên lưu nhé"
+        'Thêm dữ liệu thành công. Sau khi thêm đủ đừng quên lưu nhé'
       );
     } else {
-      toast.warn("Không thể thêm urlImage rỗng. Vui lòng thao tác lại");
+      toast.warn('Không thể thêm urlImage rỗng. Vui lòng thao tác lại');
     }
   };
 
@@ -106,105 +106,117 @@ function UpdateProduct() {
         detailImages: saveImages,
       }));
       setSaveImages([]);
-      toast.success("Lưu thành công");
+      toast.success('Lưu thành công');
     } else {
-      toast.warn("Không thể lưu dữ liệu rỗng");
+      toast.warn('Không thể lưu dữ liệu rỗng');
     }
   };
 
   let hendleColorDetail = () => {
-    if (detailColor !== "") {
+    if (detailColor !== '') {
       setSaveColor((prev) => [...prev, { color: detailColor }]);
-      setDetailColor("");
+      setDetailColor('');
       toast.success(
-        "Thêm dữ liệu thành công. Sau khi thêm đủ đừng quên lưu nhé"
+        'Thêm dữ liệu thành công. Sau khi thêm đủ đừng quên lưu nhé'
       );
     } else {
-      toast.warn("Không thể thêm trường rỗng. Vui lòng thao tác lại");
+      toast.warn('Không thể thêm trường rỗng. Vui lòng thao tác lại');
     }
   };
 
   let hendleSaveColor = () => {
-    if (saveColor && saveColor.length > 0) {
-      setProductData((prev) => ({
-        ...prev,
-        colors: saveColor,
-      }));
-      setSaveColor([]);
-      toast.success("Lưu thành công");
-    } else {
-      toast.warn("Không thể lưu dữ liệu rỗng");
+    try {
+      if (saveColor && saveColor.length > 0) {
+        setProductData((prev) => ({
+          ...prev,
+          colors: saveColor,
+        }));
+        setSaveColor([]);
+        toast.success('Lưu màu sắc sản phẩm thành công');
+      } else {
+        toast.warn('Không thể lưu dữ liệu không hợp lệ');
+      }
+    } catch (err) {
+      toast.err(`Đã xảy ra lỗi bất ngờ từ hệ thống ${err}`);
     }
   };
 
   let hendleSizesProduct = () => {
-    if (detailSize !== "") {
+    if (detailSize !== '') {
       setSaveSize((prev) => [...prev, { size: detailSize }]);
-      setDetailSize("");
+      setDetailSize('');
       toast.success(
-        "Thêm dữ liệu thành công. Sau khi thêm đủ đừng quên lưu nhé"
+        'Thêm dữ liệu thành công. Sau khi thêm đủ đừng quên lưu nhé'
       );
     } else {
-      toast.warn("Không thể thêm trường rỗng. Vui lòng thao tác lại");
+      toast.warn('Không thể thêm trường rỗng. Vui lòng thao tác lại');
     }
   };
+
   let hendleSaveSize = () => {
-    if (saveSize && saveSize.length > 0) {
-      setProductData((prev) => ({
-        ...prev,
-        sizes: saveSize,
-      }));
-      toast.success("Lưu thành công");
-      setSaveSize([]);
-    } else {
-      toast.warn("Không thể lưu dữ liệu rỗng");
+    try {
+      if (saveSize && saveSize.length > 0) {
+        setProductData((prev) => ({
+          ...prev,
+          sizes: saveSize,
+        }));
+        toast.success('Lưu thành kích thước sản phẩm thành công công');
+        setSaveSize([]);
+      } else {
+        toast.warn('Không thể lưu dữ liệu không hợp lệ');
+      }
+    } catch (err) {
+      toast.warn(`Đã xảy ra lỗi bất ngờ trong hệ thống ${err} `);
     }
   };
+
   // Hàm để xóa toàn bộ dữ liệu
   const clearData = () => {
     setProductData({
-      name: "",
-      desc: "",
-      descHTML: "",
-      avatar: "",
+      name: '',
+      desc: '',
+      descHTML: '',
+      avatar: '',
       price: 0,
       salePrice: 0,
       manyProducts: 0,
-      comment: "",
-      trademark: "",
+      comment: '',
+      trademark: '',
       detailImages: [],
       sizes: [],
       colors: [],
     });
   };
-  const hendleUpdateProduct = async () => {
+
+  const hendleUpdateProduct = async (idSelected, productData) => {
     try {
-      if (idSelected !== null) {
+      if (idSelected !== null && productData) {
         const response = await updateProductById({
           ...productData,
           id: idSelected,
         });
         if (response && response.status === 200) {
-          toast.success("Cập nhật sản phẩm thành công");
+          toast.success('Cập nhật sản phẩm thành công');
           if (editorRef.current) {
-            editorRef.current.setText("");
+            editorRef.current.setText('');
           }
           clearData();
         } else {
           toast.warn(
-            "Cập nhật sản phẩm không thành công vui lòng kiểm tra lại dữ liệu"
+            'Cập nhật sản phẩm không thành công vui lòng kiểm tra lại dữ liệu'
           );
         }
       } else {
-        toast.warn("Không tìm thấy id sản phẩm");
+        toast.warn('Không tìm thấy id sản phẩm');
       }
     } catch (e) {
-      toast.error("Cập nhật sản phẩm không thành công. Đã xảy ra lỗi");
+      toast.error('Cập nhật sản phẩm không thành công. Đã xảy ra lỗi');
     }
   };
+
   const hendleSelectedId = async (event) => {
     const value = event.target.value;
-    if (value !== "" && value !== "Chọn sản phẩm") {
+    if (value !== '' && value !== 'Chọn sản phẩm') {
       setIdSelect(value);
       const res = await getDataProductsEqualId(value);
       setProductData(res.data[0]);
@@ -215,13 +227,13 @@ function UpdateProduct() {
 
   const hendleBtn = (event) => {
     const { name } = event.target;
-    const res = window.confirm("Bạn có chắc chắn muốn clear dữ liệu không?");
+    const res = window.confirm('Bạn có chắc chắn muốn clear dữ liệu không?');
     if (res) {
-      if (name === "btnImages") {
+      if (name === 'btnImages') {
         setProductData({ ...productData, detailImages: [] });
-      } else if (name === "btnColor") {
+      } else if (name === 'btnColor') {
         setProductData({ ...productData, colors: [] });
-      } else if (name === "btnSizes") {
+      } else if (name === 'btnSizes') {
         setProductData({ ...productData, sizes: [] });
       }
     }
@@ -266,7 +278,7 @@ function UpdateProduct() {
                                   {item.name}
                                 </option>
                               ))
-                            : ""}
+                            : ''}
                         </select>
                       </div>
                       <div className="form-group">
@@ -335,19 +347,19 @@ function UpdateProduct() {
                         <div className="d-flex gap-3 align-items-center">
                           <label htmlFor="exampleInputName1">Avatar</label>
 
-                          {productData.avatar !== "" ? (
+                          {productData.avatar !== '' ? (
                             <PhotoProvider>
                               <PhotoView src={productData.avatar}>
                                 <img
                                   className={styles.avatarImg}
                                   src={productData.avatar}
                                   alt={productData.name}
-                                  style={{ marginBottom: "5px" }}
+                                  style={{ marginBottom: '5px' }}
                                 />
                               </PhotoView>
                             </PhotoProvider>
                           ) : (
-                            ""
+                            ''
                           )}
                         </div>
 
@@ -373,7 +385,7 @@ function UpdateProduct() {
                                     className={styles.avatarImg}
                                     src={item.hrefImage}
                                     alt={productData.name}
-                                    style={{ marginBottom: "5px" }}
+                                    style={{ marginBottom: '5px' }}
                                   />
                                 </PhotoView>
                               </PhotoProvider>
@@ -509,7 +521,7 @@ function UpdateProduct() {
                       <div className="form-group">
                         <label>Content Detail</label>
                         <MdEditor
-                          style={{ height: "500px" }}
+                          style={{ height: '500px' }}
                           renderHTML={(text) => mdParser.render(text)}
                           onChange={handleEditorChange}
                           value={productData.desc}
@@ -601,7 +613,9 @@ function UpdateProduct() {
                       <button
                         type="reset"
                         className="btn btn-primary me-2"
-                        onClick={hendleUpdateProduct}
+                        onClick={() => {
+                          hendleUpdateProduct(idSelected, productData);
+                        }}
                       >
                         Save
                       </button>
@@ -609,7 +623,7 @@ function UpdateProduct() {
                         type="reset"
                         className="btn btn-gradient-primary me-2"
                         onClick={() => {
-                          toast.success("Reset thành công");
+                          toast.success('Reset thành công');
                           clearData();
                         }}
                       >

@@ -1,42 +1,42 @@
-import styles from "./Pay.module.scss";
-import React, { useEffect, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import styles from './Pay.module.scss';
+import React, { useEffect, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   FaTruck,
   FaMoneyBill,
   FaBuilding,
   FaAngleRight,
   FaAngleDown,
-} from "react-icons/fa";
-import { Link } from "react-router-dom";
+} from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import {
   fetchCity,
   getDataCardProducts,
   fetchProvince,
   fetchWards,
   hendleDiscountProducts,
-} from "../../../services/client/hendleProducts";
+} from '../../../services/client/hendleProducts';
 function Pay() {
   const [showBankImage, setShowBankImage] = useState(false);
   const [cartItems, setCartItems] = useState(
-    () => JSON.parse(localStorage.getItem("cart")) || []
+    () => JSON.parse(localStorage.getItem('cart')) || []
   );
   const [dataCity, setDataCity] = useState([]);
   const [provinces, setProvinces] = useState([]);
   const [wards, setWards] = useState([]);
   const [data, setData] = useState([]);
-  const [discount, setDiscount] = useState("");
+  const [discount, setDiscount] = useState('');
   const [reduceAmount, setReduceAmount] = useState(0);
   const [state, setState] = useState({
-    email: "",
-    name: "",
-    phone: "",
-    address: "",
-    city: "",
-    provice: "",
-    ward: "",
-    note: "",
+    email: '',
+    name: '',
+    phone: '',
+    address: '',
+    city: '',
+    provice: '',
+    ward: '',
+    note: '',
   });
 
   const hendleOnchangeInput = (event) => {
@@ -56,7 +56,7 @@ function Pay() {
           const dl = await getDataCardProducts(getIds(cartItems));
           setData(dl.data);
         } catch (error) {
-          console.error("Error fetching data:", error);
+          console.error('Error fetching data:', error);
         }
       };
 
@@ -71,7 +71,7 @@ function Pay() {
         const response = await fetchCity();
         setDataCity(response);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error('Error fetching data:', error);
       }
     };
     fetchData();
@@ -89,9 +89,9 @@ function Pay() {
     return cartItems.reduce((bag, total) => (bag += total.quantity), 0);
   };
   const formatCurrency = (amount) => {
-    return new Intl.NumberFormat("vi-VN", {
-      style: "currency",
-      currency: "VND",
+    return new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND',
     }).format(amount);
   };
 
@@ -108,7 +108,7 @@ function Pay() {
 
         setProvinces(response.districts);
       } catch (error) {
-        console.error("Error fetching data: ", error);
+        console.error('Error fetching data: ', error);
       }
     };
     fetchData();
@@ -127,7 +127,7 @@ function Pay() {
 
         setWards(response.wards);
       } catch (error) {
-        console.error("Error fetching data: ", error);
+        console.error('Error fetching data: ', error);
       }
     };
     fetchData();
@@ -143,29 +143,29 @@ function Pay() {
   };
 
   const hendleApplyDiscount = async () => {
-    if (discount && discount !== "") {
+    if (discount && discount !== '') {
       const filteredArray = cartItems.map((item) => item.id);
       try {
         const response = await hendleDiscountProducts(discount, filteredArray);
         if (response && response?.reduceAmount !== 0) {
           const { reduceAmount } = response;
           setReduceAmount(reduceAmount);
-          setDiscount("");
-          toast.success("Áp dụng mã giảm giá thành công.");
+          setDiscount('');
+          toast.success('Áp dụng mã giảm giá thành công.');
         } else if (response && response?.reduceAmount === -1) {
           toast.warning(
-            "Có một số sản phẩm không không thể áp dụng mã giảm giá này."
+            'Có một số sản phẩm không không thể áp dụng mã giảm giá này.'
           );
         } else {
           toast.warning(
-            "Mã giảm giá đã hết hạn. Vui lòng nhập mã giảm giá khác nếu có."
+            'Mã giảm giá đã hết hạn. Vui lòng nhập mã giảm giá khác nếu có.'
           );
         }
       } catch (error) {
-        console.error("Error fetching data: ", error);
+        console.error('Error fetching data: ', error);
       }
     } else {
-      toast.warning("Mã giám giá không được rỗng");
+      toast.warning('Mã giám giá không được rỗng');
     }
   };
 
@@ -192,43 +192,43 @@ function Pay() {
 
     // Kiểm tra và cập nhật lỗi cho từng trường
     if (!state.email || !validateEmail(state.email)) {
-      toast.warning("Email is invalid");
+      toast.warning('Email is invalid');
       isValid = false;
       return;
     }
 
     if (!state.name) {
-      toast.warning("Name is required");
+      toast.warning('Name is required');
       isValid = false;
       return;
     }
 
     if (!state.phone || !validatePhoneNumber(state.phone)) {
-      toast.warning("Phone is invalid");
+      toast.warning('Phone is invalid');
       isValid = false;
       return;
     }
 
     if (!state.address) {
-      toast.warning("Address is required");
+      toast.warning('Address is required');
       isValid = false;
       return;
     }
 
     if (!state.city) {
-      toast.warning("City is required");
+      toast.warning('City is required');
       isValid = false;
       return;
     }
 
     if (!state.provice) {
-      toast.warning("Province is required");
+      toast.warning('Province is required');
       isValid = false;
       return;
     }
 
     if (!state.ward) {
-      toast.warning("Ward is required");
+      toast.warning('Ward is required');
       isValid = false;
       return;
     }
@@ -238,19 +238,19 @@ function Pay() {
 
   const hendlePay = () => {
     if (validateForm()) {
-      toast.success("Đặt hàng thành công");
+      toast.success('Đặt hàng thành công');
     }
   };
-  console.log("Xuan manh check state. ", state);
+  console.log('Xuan manh check state. ', state);
   return (
     <>
       <section>
-        <div className={styles["pay"]}>
-          <div className={styles["container"]}>
+        <div className={styles['pay']}>
+          <div className={styles['container']}>
             {/* form_container */}
-            <div className={styles["send_products"]}>
-              <h1 className={styles["title"]}>PET SHOP</h1>
-              <div className={styles["send_products__main"]}>
+            <div className={styles['send_products']}>
+              <h1 className={styles['title']}>PET SHOP</h1>
+              <div className={styles['send_products__main']}>
                 {/* form_container */}
                 <div className={styles.form_container}>
                   <h2 className={styles.title}>Thông tin nhận hàng</h2>
@@ -303,7 +303,7 @@ function Pay() {
                       name="city"
                       id="city"
                       onChange={hendleOnchangeProvince}
-                      defaultValue={dataCity.length > 0 ? dataCity[0].code : ""}
+                      defaultValue={dataCity.length > 0 ? dataCity[0].code : ''}
                     >
                       <option key={0}>---</option>
                       {dataCity &&
@@ -358,7 +358,7 @@ function Pay() {
                     <button
                       type="submit"
                       className={styles.pay_sub_mid}
-                      style={{ display: "none" }}
+                      style={{ display: 'none' }}
                     ></button>
                   </form>
                 </div>
@@ -420,48 +420,51 @@ function Pay() {
                     <div
                       className={styles.bank_img}
                       style={{
-                        display: showBankImage ? "block" : "none",
+                        display: showBankImage ? 'block' : 'none',
                       }}
                     >
-                      <img src="Images/ngan_hang.jpg" alt="Ảnh ngân hàng" />
+                      <img
+                        src="https://i.ibb.co/tm3j5PS/ngan-hang.jpg"
+                        alt="Ảnh ngân hàng"
+                      />
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             {/* form_container */}
-            <div className={styles["products_pay"]}>
-              <h1 className={styles["title"]}>
+            <div className={styles['products_pay']}>
+              <h1 className={styles['title']}>
                 Đơn hàng ({getManyTotalProducts()} sản phẩm)
               </h1>
 
-              <div className={styles["products_pay_list_products"]}>
+              <div className={styles['products_pay_list_products']}>
                 {data && data.length > 0
                   ? data.map((item, index) => (
                       <div
-                        className={styles["products_pay_list_item"]}
+                        className={styles['products_pay_list_item']}
                         key={index}
                       >
                         <div
-                          className={styles["products_pay_list_item--img_pay"]}
+                          className={styles['products_pay_list_item--img_pay']}
                         >
                           <img src={item.avatar} />
                           <span>{hendleGetManyProduct(item.id)}</span>
                         </div>
-                        <p className={styles["products_pay_list_item--desc"]}>
+                        <p className={styles['products_pay_list_item--desc']}>
                           {item.name}
                         </p>
-                        <span className={styles["price"]}>
+                        <span className={styles['price']}>
                           {formatCurrency(
                             item.salePrice * hendleGetManyProduct(item.id)
                           )}
                         </span>
                       </div>
                     ))
-                  : "Không có sản phẩm trong giỏ hàng"}
+                  : 'Không có sản phẩm trong giỏ hàng'}
               </div>
 
-              <div className={styles["products_pay_list_products"]}></div>
+              <div className={styles['products_pay_list_products']}></div>
               {/* form_container */}
               <div className={styles.products_pay_list_products_discount}>
                 <div className={styles.discount_pay_products}>
@@ -504,7 +507,7 @@ function Pay() {
                       </span>
                     </>
                   ) : (
-                    ""
+                    ''
                   )}
                 </div>
                 <div className={styles.products_pay_list_products_item}>
@@ -522,7 +525,7 @@ function Pay() {
                   </span>
                 </div>
                 <div className={styles.products_pay_list_products_item}>
-                  <Link to={"/"} className={styles.back_home_pay}>
+                  <Link to={'/'} className={styles.back_home_pay}>
                     <i className="fa-solid fa-chevron-left"></i>
                     Quay về trang chủ
                   </Link>

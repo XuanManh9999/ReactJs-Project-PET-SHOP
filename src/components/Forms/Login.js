@@ -1,27 +1,27 @@
-import { useEffect, useState, useRef } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { jwtDecode } from "jwt-decode";
-import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate, Link } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import Cookies from "js-cookie";
-import { hendleLogin as postLogin } from "../../services/client/hendleLogin";
-import styles from "./Login.module.scss";
+import { useEffect, useState, useRef } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { jwtDecode } from 'jwt-decode';
+import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate, Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Cookies from 'js-cookie';
+import { hendleLogin as postLogin } from '../../services/client/hendleLogin';
+import styles from './Login.module.scss';
 function Login() {
   const [isShowPassWord, setIsShowPassWord] = useState(faEyeSlash);
   const [stateShow, SetStateShow] = useState(false);
   const input_password = useRef();
   const navigate = useNavigate();
   useEffect(() => {
-    const check = Cookies.get("refreshToken") || "";
+    const check = Cookies.get('refreshToken') || '';
     if (check) {
-      navigate("/");
+      navigate('/');
     }
   }, [navigate]);
   const [inputValues, setInputValues] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -33,10 +33,10 @@ function Login() {
   let validateForm = (email, password) => {
     var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email || !emailRegex.test(email)) {
-      return "Email không hợp lệ.";
+      return 'Email không hợp lệ.';
     }
     if (!password || password.length < 6) {
-      return "Mật khẩu phải có ít nhất 6 kí tự.";
+      return 'Mật khẩu phải có ít nhất 6 kí tự.';
     }
 
     return null;
@@ -46,34 +46,35 @@ function Login() {
     if (check === null) {
       try {
         let data = await postLogin(inputValues);
-        const decodeToken = jwtDecode(data?.data?.access_token);
+
         if (data && data.status === 200) {
-          Cookies.set("access_token", data.data.access_token, {
+          const decodeToken = jwtDecode(data?.data?.access_token);
+          Cookies.set('access_token', data.data.access_token, {
             expires: 1,
           });
-          Cookies.set("refreshToken", data.data.refresh_token, {
+          Cookies.set('refreshToken', data.data.refresh_token, {
             expires: 30,
           });
-          if (decodeToken?.role === "R0") {
-            toast.success("Đăng nhập thành công");
+          if (decodeToken && decodeToken?.role === 'R1') {
+            toast.success('Đăng nhập thành công');
             setTimeout(() => {
-              navigate("/");
+              navigate('/');
             }, 1500);
-          } else if (decodeToken?.role === "R1") {
-            toast.success("Đăng nhập thành công");
+          } else if (decodeToken && decodeToken?.role === 'R0') {
+            toast.success('Đăng nhập thành công');
             setTimeout(() => {
-              navigate("/manage");
+              navigate('/manage');
             }, 1500);
           }
         } else if (data.status === 404) {
           toast.warning(
-            "Tên tài khoản hoặc mật khẩu chưa đúng, vui lòng thử lại"
+            'Email tài khoản hoặc mật khẩu chưa đúng, vui lòng thử lại.'
           );
         } else {
-          toast.error("Đăng nhập thất bại, vui lòng kiểm tra và thử lại.");
+          toast.error('Đăng nhập thất bại, vui lòng kiểm tra và thử lại.');
         }
       } catch (e) {
-        toast.error("Đã xảy ra lỗi phía server.");
+        toast.error('Đã xảy ra lỗi phía server.');
       }
     } else {
       toast.warning(`${check}`);
@@ -83,39 +84,39 @@ function Login() {
   const hendleEyeInput = () => {
     if (!stateShow) {
       setIsShowPassWord(faEye);
-      input_password.current.type = "text";
+      input_password.current.type = 'text';
       SetStateShow(true);
     } else {
       setIsShowPassWord(faEyeSlash);
-      input_password.current.type = "password";
+      input_password.current.type = 'password';
       SetStateShow(false);
     }
   };
   return (
     <>
-      <div id="form_2" className={styles["log_in"]}>
-        <div className={styles["container_log_in"]}>
-          <h1 className={styles["title"]}>Đăng nhập</h1>
-          <p className={styles["desc"]}>
+      <div id="form_2" className={styles['log_in']}>
+        <div className={styles['container_log_in']}>
+          <h1 className={styles['title']}>Đăng nhập</h1>
+          <p className={styles['desc']}>
             Nếu bạn có một tài khoản, xin vui lòng đăng nhập
           </p>
-          <div className={styles["form_group"]}>
-            <span className={styles["title_form_group"]}>Email:</span>
+          <div className={styles['form_group']}>
+            <span className={styles['title_form_group']}>Email:</span>
             <input
               type="email"
-              className={styles["email"]}
+              className={styles['email']}
               placeholder="Email:"
               name="email"
               value={inputValues.email}
               onChange={handleInputChange}
             />
-            <span className={styles["form-message"]}></span>
+            <span className={styles['form-message']}></span>
           </div>
-          <div className={`${styles["form_group"]} ${styles["eye"]}`}>
-            <span className={styles["title_form_group"]}>Mật Khẩu:</span>
+          <div className={`${styles['form_group']} ${styles['eye']}`}>
+            <span className={styles['title_form_group']}>Mật Khẩu:</span>
             <input
               type="password"
-              className={styles["password"]}
+              className={styles['password']}
               placeholder="Mật khẩu:"
               name="password"
               value={inputValues.password}
@@ -126,38 +127,38 @@ function Login() {
               onClick={() => {
                 hendleEyeInput();
               }}
-              className={`fa-solid fa-eye-slash ${styles["eye_close"]}`}
+              className={`fa-solid fa-eye-slash ${styles['eye_close']}`}
             >
               <FontAwesomeIcon icon={isShowPassWord} />
             </i>
 
-            <span className={styles["form-message"]}></span>
+            <span className={styles['form-message']}></span>
           </div>
           <button
             onClick={(e) => {
               hendleLogin(e);
             }}
-            className={styles["btn_log_in"]}
+            className={styles['btn_log_in']}
           >
             Đăng nhập
           </button>
-          <p className={styles["registet_log_in"]}>
+          <p className={styles['registet_log_in']}>
             Bạn chưa có tài khoản
-            <Link to={"/Register"}>Đăng ký tại đây</Link>
+            <Link to={'/Register'}>Đăng ký tại đây</Link>
           </p>
-          <p className={styles["forget_login_password"]}>
+          <p className={styles['forget_login_password']}>
             Bạn quên mật khẩu lấy lại tại đây
-            <Link to={"/ForgotPass"}>Lấy lại tại đây</Link>
+            <Link to={'/ForgotPass'}>Lấy lại tại đây</Link>
           </p>
         </div>
-        <div className={styles["application"]}>
-          <p className={styles["application__desc"]}>Hoặc đăng nhập bằng</p>
-          <div className={styles["application_element"]}>
-            <Link target="_blank" to={""} className={styles["face_book"]}>
-              <img src="Images/fb-btn.svg" alt="facebook" />
+        <div className={styles['application']}>
+          <p className={styles['application__desc']}>Hoặc đăng nhập bằng</p>
+          <div className={styles['application_element']}>
+            <Link target="_blank" to={''} className={styles['face_book']}>
+              <img src="https://i.ibb.co/vZw8DRx/fb-btn.webp" alt="facebook" />
             </Link>
-            <Link target="_blank" to={""} className={styles["google_login"]}>
-              <img src="Images/gp-btn.svg" alt="google" />
+            <Link target="_blank" to={''} className={styles['google_login']}>
+              <img src="https://i.ibb.co/N1bJdbb/gp-btn.webp" alt="google" />
             </Link>
           </div>
         </div>
