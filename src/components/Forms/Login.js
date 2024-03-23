@@ -81,6 +81,11 @@ function Login() {
     }
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      hendleLogin();
+    }
+  };
   const hendleEyeInput = () => {
     if (!stateShow) {
       setIsShowPassWord(faEye);
@@ -109,6 +114,7 @@ function Login() {
               name="email"
               value={inputValues.email}
               onChange={handleInputChange}
+              onKeyPress={handleKeyPress}
             />
             <span className={styles['form-message']}></span>
           </div>
@@ -122,6 +128,7 @@ function Login() {
               value={inputValues.password}
               onChange={handleInputChange}
               ref={input_password}
+              onKeyPress={handleKeyPress}
             />
             <i
               onClick={() => {

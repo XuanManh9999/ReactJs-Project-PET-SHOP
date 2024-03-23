@@ -1,38 +1,38 @@
-import { useState, useRef, useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "animate.css/animate.min.css";
-import "datatables.net-bs5/css/dataTables.bootstrap5.min.css";
-import "datatables.net-bs5/js/dataTables.bootstrap5.min.js";
-import "../assets/css/style.css";
-import "../assets/vendor/bootstrap/css/bootstrap.min.css";
-import "../assets/vendor/bootstrap-icons/bootstrap-icons.css";
-import "../assets/vendor/boxicons/css/boxicons.min.css";
-import "../assets/vendor/quill/quill.snow.css";
-import "../assets/vendor/quill/quill.bubble.css";
-import "../assets/vendor/remixicon/remixicon.css";
-import "../assets/vendor/simple-datatables/style.css";
-import "bootstrap/dist/js/bootstrap.bundle.min";
-import "../layout/Header.module.scss";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useState, useRef } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'animate.css/animate.min.css';
+import 'datatables.net-bs5/css/dataTables.bootstrap5.min.css';
+import 'datatables.net-bs5/js/dataTables.bootstrap5.min.js';
+import '../assets/css/style.css';
+import '../assets/vendor/bootstrap/css/bootstrap.min.css';
+import '../assets/vendor/bootstrap-icons/bootstrap-icons.css';
+import '../assets/vendor/boxicons/css/boxicons.min.css';
+import '../assets/vendor/quill/quill.snow.css';
+import '../assets/vendor/quill/quill.bubble.css';
+import '../assets/vendor/remixicon/remixicon.css';
+import '../assets/vendor/simple-datatables/style.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+import '../layout/Header.module.scss';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // markdown
-import MarkdownIt from "markdown-it";
-import MdEditor from "react-markdown-editor-lite";
+import MarkdownIt from 'markdown-it';
+import MdEditor from 'react-markdown-editor-lite';
 // import style manually
-import "react-markdown-editor-lite/lib/index.css";
-import { APIBlogs } from "../../../services/admin/blog";
-import Cookies from "js-cookie";
+import 'react-markdown-editor-lite/lib/index.css';
+import { APIBlogs } from '../../../services/admin/blog';
+import Cookies from 'js-cookie';
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 function AddBlog() {
   const editorRef = useRef();
   const [blogData, setBlogData] = useState({
-    name: "",
-    avatar: "",
-    content: "",
-    contentHTML: "",
-    author: "",
-    category: "",
+    name: '',
+    avatar: '',
+    content: '',
+    contentHTML: '',
+    author: '',
+    category: '',
   });
   function handleEditorChange({ html, text }) {
     setBlogData((prevBlog) => ({
@@ -61,42 +61,42 @@ function AddBlog() {
     if (name && avatar && content && contentHTML && author && category) {
       return true;
     }
-    toast.warning("Các thông tin không được rỗng");
+    toast.warning('Các thông tin không được rỗng');
     return false;
   };
 
   const hendleAddBlog = async () => {
     if (validateData(blogData)) {
-      const token = Cookies.get("access_token");
+      const token = Cookies.get('access_token');
       const response = await APIBlogs.addBlog(token, blogData);
       if (response?.status === 200) {
-        toast.success("Thêm Blog thành công");
+        toast.success('Thêm Blog thành công');
         setBlogData({
-          name: "",
-          avatar: "",
-          content: "",
-          contentHTML: "",
-          author: "",
-          category: "",
+          name: '',
+          avatar: '',
+          content: '',
+          contentHTML: '',
+          author: '',
+          category: '',
         });
-        editorRef.value = "";
+        editorRef.value = '';
       } else {
-        toast.error("Thêm Blog không thành công");
+        toast.error('Thêm Blog không thành công');
       }
     }
   };
 
   const hendleReset = () => {
     setBlogData({
-      name: "",
-      avatar: "",
-      content: "",
-      contentHTML: "",
-      author: "",
-      category: "",
+      name: '',
+      avatar: '',
+      content: '',
+      contentHTML: '',
+      author: '',
+      category: '',
     });
-    editorRef.value = "";
-    toast.success("Retset data thành công");
+    editorRef.value = '';
+    toast.success('Retset data thành công');
   };
   return (
     <main id="main" className="main">
@@ -169,7 +169,7 @@ function AddBlog() {
                       <div className="form-group">
                         <label>Content Detail</label>
                         <MdEditor
-                          style={{ height: "500px" }}
+                          style={{ height: '500px' }}
                           renderHTML={(text) => mdParser.render(text)}
                           onChange={handleEditorChange}
                           value={blogData.content}

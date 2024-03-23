@@ -88,7 +88,7 @@ function Rigister() {
         );
       }
     } else {
-      toast.error(`${check}`);
+      toast.warn(`${check}`);
     }
   };
 
@@ -101,6 +101,11 @@ function Rigister() {
       setIsShowPassWord(faEyeSlash);
       input_password.current.type = 'password';
       SetStateShow(false);
+    }
+  };
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSubmit();
     }
   };
   return (
@@ -117,6 +122,7 @@ function Rigister() {
               value={inputValues.firstName}
               name="firstName"
               onChange={handleInputChange}
+              onKeyPress={handleKeyPress}
             />
             <span className={styles['form-message']}></span>
           </div>
@@ -129,6 +135,7 @@ function Rigister() {
               value={inputValues.lastName}
               name="lastName"
               onChange={handleInputChange}
+              onKeyPress={handleKeyPress}
             />
             <span className={styles['form-message']}></span>
           </div>
@@ -141,6 +148,7 @@ function Rigister() {
               value={inputValues.phone}
               name="phone"
               onChange={handleInputChange}
+              onKeyPress={handleKeyPress}
             />
             <span className={styles['form-message']}></span>
           </div>
@@ -153,6 +161,7 @@ function Rigister() {
               value={inputValues.email}
               name="email"
               onChange={handleInputChange}
+              onKeyPress={handleKeyPress}
             />
             <span className={styles['form-message']}></span>
           </div>
@@ -166,6 +175,7 @@ function Rigister() {
               name="password"
               onChange={handleInputChange}
               ref={input_password}
+              onKeyPress={handleKeyPress}
             />
             <i
               onClick={() => {

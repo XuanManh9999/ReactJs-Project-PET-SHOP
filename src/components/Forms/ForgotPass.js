@@ -36,6 +36,12 @@ function ForgotPass() {
     }
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      hendleSend();
+    }
+  };
+
   let hendleExit = async () => {
     navigate('/Login');
   };
@@ -59,6 +65,7 @@ function ForgotPass() {
               onChange={(event) => {
                 setEmail(event.target.value);
               }}
+              onKeyPress={handleKeyPress}
             />
             <span className={styles['form-message']}></span>
           </div>
